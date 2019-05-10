@@ -1,0 +1,83 @@
+#!/usr/bin/env python
+
+import argparse
+import json
+
+from datetime import datetime
+from collections import OrderedDict
+from vmware.vapi.vmc.client import create_vmc_client
+from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+
+
+class ListSDDCs(object):
+    def __init__(self):
+        f = json.load(open('s3config.json', 'r'))
+        j = read_json_from_s3(f["bucket"], f["file"])
+
+        self.refresh_token = j["account"]["token"]
+        self.org_id = j["org"]["id"]
+
+        # Login to VMware Cloud on AWS
+        self.vmc_client = create_vmc_client(self.refresh_token)
+
+    def setup(self):
+        # Check if the organization exists
+        orgs = self.vmc_client.Orgs.list()
+        if self.org_id not in [org.id for org in orgs]:
+            raise ValueError("Org with ID {} doesn't exist".format(
+                self.org_id))
+
+        self.sddc_config = OrderedDict()
+        self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
+
+    def list_sddc(self):
+        self.sddcs = self.vmc_client.orgs.Sddcs
+        if not self.sddcs.list(self.org_id):
+            raise ValueError('require at least one SDDC associated'
+                             'with the calling user')
+
+        a = []
+        for sddc in self.sddcs.list(self.org_id):
+          if not len(sddc.resource_config.esx_hosts) == 1:
+            a.append({"id": sddc.id, "name": sddc.name, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
+        self.sddc_config["sddcs"] = a
+
+    def list_vcenter(self):
+        a = []
+        for sddc in self.sddcs.list(self.org_id):
+          if not len(sddc.resource_config.esx_hosts) == 1:
+#            print(sddc.resource_config.vc_url)
+#            print(sddc.resource_config.cloud_username)
+#            print(sddc.resource_config.cloud_password)
+            a.append({"vc_url": sddc.resource_config.vc_url})
+        self.sddc_config["vcenters"] = a
+
+    def connect_vcenter(self):
+        sddc = self.sddcs.get(self.org_id, self.sddc_config["sddcs"]["id"][0])
+        vc = parse.urlparse(sddc.resource_config.vc_url).hostname
+        vsphere_client = create_vsphere_client(vc, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
+
+    def list_user_resourcepools(self):
+        self.connect_vcenter()
+
+#    def list_user_folders(self):
+
+    def output_to_s3(self):
+        write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
+
+def lambda_handler(event, context):
+    sddc_operations = ListSDDCs()
+    sddc_operations.setup()
+    sddc_operations.list_sddc()
+    sddc_operations.output_to_s3()
+
+def main():
+    sddc_operations = ListSDDCs()
+    sddc_operations.setup()
+    sddc_operations.list_sddc()
+    sddc_operations.list_vcenter()
+    sddc_operations.list_user_resourcepools()
+    sddc_operations.output_to_s3()
+
+if __name__ == '__main__':
+    main()
