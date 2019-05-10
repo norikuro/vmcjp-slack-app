@@ -49,9 +49,6 @@ class ListSDDCs(object):
         a = []
         for sddc in self.sddcs:
           if not len(sddc.resource_config.esx_hosts) == 1:
-#            print(sddc.resource_config.vc_url)
-#            print(sddc.resource_config.cloud_username)
-#            print(sddc.resource_config.cloud_password)
             a.append({"vc_url": sddc.resource_config.vc_url})
         self.sddc_config["vcenters"] = a
 
@@ -59,13 +56,16 @@ class ListSDDCs(object):
         sddc = self.sddcs[0]
         vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
 #        vc_host = sddc.resource_config.vc_management_ip
-        vsphere_client = create_vsphere_client(vc_host, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
-        self.vc = vsphere_client.vcenter
-        print(self.vc.__dict__.items())
-        print(self.vc.ResourcePool.__dict__.items())
+        self.vsphere = create_vsphere_client(vc_host, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
 
     def list_user_resourcepools(self):
         self.connect_vcenter()
+        rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
+        a = []
+        for rp in rps:
+          if rp.name != "Resources" and rp.name != "Mgmt-ResourcePool" and rp.name != "Compute-ResourcePool":
+            a.append({"name": rp.name})
+        self.sddc_config["resourcepools"] = a
 
 #    def list_user_folders(self):
 
