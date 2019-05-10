@@ -5,7 +5,9 @@ import json
 
 from datetime import datetime
 from collections import OrderedDict
+from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
+from vmware.vapi.vsphere.client import create_vsphere_client
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 
 
@@ -31,20 +33,20 @@ class ListSDDCs(object):
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
 
     def list_sddc(self):
-        self.sddcs = self.vmc_client.orgs.Sddcs
-        if not self.sddcs.list(self.org_id):
+        self.sddcs = self.vmc_client.orgs.Sddcs.list(self.org_id)
+        if not self.sddcs:
             raise ValueError('require at least one SDDC associated'
                              'with the calling user')
 
         a = []
-        for sddc in self.sddcs.list(self.org_id):
+        for sddc in self.sddcs:
           if not len(sddc.resource_config.esx_hosts) == 1:
             a.append({"id": sddc.id, "name": sddc.name, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
         self.sddc_config["sddcs"] = a
 
     def list_vcenter(self):
         a = []
-        for sddc in self.sddcs.list(self.org_id):
+        for sddc in self.sddcs:
           if not len(sddc.resource_config.esx_hosts) == 1:
 #            print(sddc.resource_config.vc_url)
 #            print(sddc.resource_config.cloud_username)
@@ -53,8 +55,9 @@ class ListSDDCs(object):
         self.sddc_config["vcenters"] = a
 
     def connect_vcenter(self):
-        sddc = self.sddcs.get(self.org_id, self.sddc_config["sddcs"]["id"][0])
+        sddc = self.sddcs[0]
         vc = parse.urlparse(sddc.resource_config.vc_url).hostname
+#        vc = sddc.resource_config.vc_management_ip
         vsphere_client = create_vsphere_client(vc, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
 
     def list_user_resourcepools(self):
