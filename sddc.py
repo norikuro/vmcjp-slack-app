@@ -19,6 +19,9 @@ class ListSDDCs(object):
         self.refresh_token = j["account"]["token"]
         self.org_id = j["org"]["id"]
 
+        self.sddc_config = OrderedDict()
+        self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
+
         # Login to VMware Cloud on AWS
         self.vmc_client = create_vmc_client(self.refresh_token)
 
@@ -29,11 +32,9 @@ class ListSDDCs(object):
             raise ValueError("Org with ID {} doesn't exist".format(
                 self.org_id))
 
-        self.sddc_config = OrderedDict()
-        self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
+        self.sddcs = self.vmc_client.orgs.Sddcs.list(self.org_id)
 
     def list_sddc(self):
-        self.sddcs = self.vmc_client.orgs.Sddcs.list(self.org_id)
         if not self.sddcs:
             raise ValueError('require at least one SDDC associated'
                              'with the calling user')
@@ -56,9 +57,12 @@ class ListSDDCs(object):
 
     def connect_vcenter(self):
         sddc = self.sddcs[0]
-        vc = parse.urlparse(sddc.resource_config.vc_url).hostname
-#        vc = sddc.resource_config.vc_management_ip
-        vsphere_client = create_vsphere_client(vc, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
+        vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
+#        vc_host = sddc.resource_config.vc_management_ip
+        vsphere_client = create_vsphere_client(vc_host, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
+        self.vc = vsphere_client.vcenter
+        print(self.vc.__dict__.items())
+        print(self.vc.ResourcePool.__dict__.items())
 
     def list_user_resourcepools(self):
         self.connect_vcenter()
