@@ -11,7 +11,7 @@ from vmware.vapi.vsphere.client import create_vsphere_client
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 
 
-class ListSDDCs(object):
+class SDDCConfig(object):
     def __init__(self):
         f = json.load(open('s3config.json', 'r'))
         j = read_json_from_s3(f["bucket"], f["file"])
@@ -73,7 +73,7 @@ class ListSDDCs(object):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
 
 def lambda_handler(event, context):
-    sddc_operations = ListSDDCs()
+    sddc_operations = SDDCConfig()
     sddc_operations.setup()
     sddc_operations.list_sddc()
     sddc_operations.list_vcenter()
