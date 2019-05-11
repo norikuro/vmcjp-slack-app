@@ -8,6 +8,7 @@ from collections import OrderedDict
 from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
+from com.vmware.vcenter_client import ResourcePool, Folder
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 
 
@@ -59,15 +60,24 @@ class SDDCConfig(object):
         self.vsphere = create_vsphere_client(vc_host, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
 
     def list_user_resourcepools(self):
+        management_pools = ["Resources", "Mgmt-ResourcePool", "Compute-ResourcePool"]
         self.connect_vcenter()
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
         a = []
         for rp in rps:
-          if rp.name != "Resources" and rp.name != "Mgmt-ResourcePool" and rp.name != "Compute-ResourcePool":
+          if not rp.name in management_pools:
             a.append({"name": rp.name})
         self.sddc_config["resourcepools"] = a
 
-#    def list_user_folders(self):
+    def list_user_folders(self):
+        management_folders = ["Discovered virtual machine", "VMs migrated to cloud", "ClonePrepInternalTemplateFolder", "ClonePrepReplicaVmFolder", "ClonePrepParentVmFolder", "ClonePrepResyncVmFolder", "vm", "Management VMs", "Workloads", "Templates"]
+        if not self.sddcs:
+          self.connect_vcenter()
+        folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
+        folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
+        for folder in folders:
+          if not folder.name in management_folders:
+            print(folder)
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
@@ -86,6 +96,7 @@ def main():
     sddc_operations.list_sddc()
     sddc_operations.list_vcenter()
     sddc_operations.list_user_resourcepools()
+    sddc_operations.list_user_folders()
     sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
