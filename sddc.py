@@ -9,6 +9,8 @@ from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
+from com.vmware.content_client import Library
+from com.vmware.content.library_client import SubscribedItem
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 
 
@@ -81,6 +83,12 @@ class SDDCConfig(object):
             a.append({"name": folder.name})
         self.sddc_config["folders"] = a
 
+    def list_contentlibrary(self):
+        contentlib_ids = self.vsphere.content.Library.list()
+        for id in contentlib_ids:
+          model = self.vsphere.content.Library.get(id)
+          print(model)
+
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
 
@@ -100,7 +108,8 @@ def main():
     sddc_operations.list_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
-    sddc_operations.output_to_s3()
+    sddc_operations.list_contentlibrary()
+#    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
