@@ -75,9 +75,11 @@ class SDDCConfig(object):
           self.connect_vcenter()
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
+        a = []
         for folder in folders:
           if not folder.name in management_folders:
-            print(folder)
+            a.append({"name": folder.name})
+        self.sddc_config["folders"] = a
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
@@ -88,6 +90,7 @@ def lambda_handler(event, context):
     sddc_operations.list_sddc()
     sddc_operations.list_vcenter()
     sddc_operations.list_user_resourcepools()
+    sddc_operations.list_user_folders()
     sddc_operations.output_to_s3()
 
 def main():
