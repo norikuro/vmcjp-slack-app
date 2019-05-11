@@ -42,7 +42,7 @@ class SDDCConfig(object):
         a = []
         for sddc in self.sddcs:
           if not len(sddc.resource_config.esx_hosts) == 1:
-            a.append({"id": sddc.id, "name": sddc.name, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
+            a.append({"id": sddc.id, "name": sddc.name, "num_hosts": len(sddc.resource_config.esx_hosts), "vpc_cidr": sddc.resource_config.vpc_info.vpc_cidr, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
         self.sddc_config["sddcs"] = a
 
     def list_vcenter(self):
@@ -81,7 +81,7 @@ def lambda_handler(event, context):
     sddc_operations.output_to_s3()
 
 def main():
-    sddc_operations = ListSDDCs()
+    sddc_operations = SDDCConfig()
     sddc_operations.setup()
     sddc_operations.list_sddc()
     sddc_operations.list_vcenter()
