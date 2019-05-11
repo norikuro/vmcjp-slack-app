@@ -28,6 +28,8 @@ class SDDCConfig(object):
         # Login to VMware Cloud on AWS
         self.vmc_client = create_vmc_client(self.refresh_token)
 
+        self.vsphere = ""
+
     def setup(self):
         # Check if the organization exists
         orgs = self.vmc_client.Orgs.list()
@@ -63,7 +65,10 @@ class SDDCConfig(object):
 
     def list_user_resourcepools(self):
         management_pools = ["Resources", "Mgmt-ResourcePool", "Compute-ResourcePool"]
-        self.connect_vcenter()
+
+        if not self.vsphere:
+          self.connect_vcenter()
+
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
         a = []
         for rp in rps:
@@ -73,8 +78,10 @@ class SDDCConfig(object):
 
     def list_user_folders(self):
         management_folders = ["Discovered virtual machine", "VMs migrated to cloud", "ClonePrepInternalTemplateFolder", "ClonePrepReplicaVmFolder", "ClonePrepParentVmFolder", "ClonePrepResyncVmFolder", "vm", "Management VMs", "Workloads", "Templates"]
-        if not self.sddcs:
+
+        if not self.vsphere:
           self.connect_vcenter()
+
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
         a = []
@@ -84,6 +91,9 @@ class SDDCConfig(object):
         self.sddc_config["folders"] = a
 
     def list_contentlibrary(self):
+        if not self.vsphere:
+          self.connect_vcenter()
+
         contentlib_ids = self.vsphere.content.Library.list()
         a = []
         for id in contentlib_ids:
