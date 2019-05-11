@@ -85,9 +85,16 @@ class SDDCConfig(object):
 
     def list_contentlibrary(self):
         contentlib_ids = self.vsphere.content.Library.list()
+        a = []
         for id in contentlib_ids:
           model = self.vsphere.content.Library.get(id)
-          print(model)
+          t = str(model.type)
+          if t == "LOCAL":
+            a.append({"name": model.name, "type": t})
+          elif t == "SUBSCRIBED":
+            a.append({"name": model.name, "type": t, "subscription_url": model.subscription_info.subscription_url, "on_demand": model.subscription_info.on_demand, "automatic_sync_enabled": model.subscription_info.automatic_sync_enabled})
+        self.sddc_config["contentlibrary"] = a
+        print(a)
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
