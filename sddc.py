@@ -17,9 +17,10 @@ from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 class SDDCConfig(object):
     def __init__(self):
         f = json.load(open('s3config.json', 'r'))
-        j = read_json_from_s3(f["bucket"], f["file"])
+        t = read_json_from_s3(f["bucket"], f["token"])
+        j = read_json_from_s3(f["bucket"], f["config"])
 
-        self.refresh_token = j["account"]["token"]
+        self.refresh_token = t["token"]
         self.org_id = j["org"]["id"]
         self.sddc_id = j["sddc"]["id"]
         self.customer_aws_account_number = j["sddc"]["customer_aws"]["account_number"]

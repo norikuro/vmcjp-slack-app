@@ -1,4 +1,5 @@
 {
   "bucket": "vmc-env",
-  "file": "config.json"
+  "token": "token.json",
+  "config": "config.json"
 }
