@@ -21,7 +21,9 @@ class SDDCConfig(object):
 
         self.refresh_token = j["account"]["token"]
         self.org_id = j["org"]["id"]
-        self.customer_aws_account_number = j["customer_aws"]["account_number"]
+        self.sddc_id = j["sddc"]["id"]
+        self.customer_aws_account_number = j["sddc"]["customer_aws"]["account_number"]
+        self.customer_aws_subnet_id = j["sddc"]["customer_aws"]["subnet_id"]
 
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
@@ -38,45 +40,29 @@ class SDDCConfig(object):
             raise ValueError("Org with ID {} doesn't exist".format(
                 self.org_id))
 
-        self.sddcs = self.vmc_client.orgs.Sddcs.list(self.org_id)
-
-    def list_sddc(self):
-        if not self.sddcs:
+        sddcs = self.vmc_client.orgs.Sddcs.list(self.org_id)
+        if not sddcs:
             raise ValueError('require at least one SDDC associated'
                              'with the calling user')
 
-        a = []
-        for sddc in self.sddcs:
-          if not len(sddc.resource_config.esx_hosts) == 1:
-            a.append({"id": sddc.id, "name": sddc.name, "num_hosts": len(sddc.resource_config.esx_hosts), "vpc_cidr": sddc.resource_config.vpc_info.vpc_cidr, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
-        account_id = self.get_connected_customer_aws_id(self.vmc_client.orgs.account_link.ConnectedAccounts.get(self.org_id))
-        self.get_connected_customer_aws_subnet(account_id)
-#        print(self.vmc_client.orgs.account_link.CompatibleSubnets.get(org=self.org_id, linked_account_id=account_id).vpc_map.values()[0].subnets[0].name)
+        for sddc in sddcs:
+          if sddc.id == self.sddc_id:
+            self.sddc = sddc
 
+    def get_sddc(self):
+        a = []
+        a.append({"id": self.sddc.id, "name": self.sddc.name, "num_hosts": len(self.sddc.resource_config.esx_hosts), "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr, "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version})
         self.sddc_config["sddcs"] = a
 
-    def get_connected_customer_aws_id(self, connectedaccounts):
-        for connectedaccount in connectedaccounts:
-          if connectedaccount.account_number == self.customer_aws_account_number:
-            return connectedaccount.id
-
-    def get_connected_customer_aws_subnet(self, account_id):
-       for v in self.vmc_client.orgs.account_link.CompatibleSubnets.get(org=self.org_id, linked_account_id=account_id).vpc_map.values():
-         for s in v.subnets:
-           print(s.name)
-
-    def list_vcenter(self):
+    def get_vcenter(self):
         a = []
-        for sddc in self.sddcs:
-          if not len(sddc.resource_config.esx_hosts) == 1:
-            a.append({"vc_url": sddc.resource_config.vc_url})
+        a.append({"vc_url": self.sddc.resource_config.vc_url})
         self.sddc_config["vcenters"] = a
 
     def connect_vcenter(self):
-        sddc = self.sddcs[0]
-        vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
+        vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
 #        vc_host = sddc.resource_config.vc_management_ip
-        self.vsphere = create_vsphere_client(vc_host, username=sddc.resource_config.cloud_username, password=sddc.resource_config.cloud_password)
+        self.vsphere = create_vsphere_client(vc_host, username=self.sddc.resource_config.cloud_username, password=self.sddc.resource_config.cloud_password)
 
     def list_user_resourcepools(self):
         management_pools = ["Resources", "Mgmt-ResourcePool", "Compute-ResourcePool"]
@@ -127,8 +113,8 @@ class SDDCConfig(object):
 def lambda_handler(event, context):
     sddc_operations = SDDCConfig()
     sddc_operations.setup()
-    sddc_operations.list_sddc()
-    sddc_operations.list_vcenter()
+    sddc_operations.get_sddc()
+    sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
     sddc_operations.output_to_s3()
@@ -136,12 +122,12 @@ def lambda_handler(event, context):
 def main():
     sddc_operations = SDDCConfig()
     sddc_operations.setup()
-    sddc_operations.list_sddc()
-    sddc_operations.list_vcenter()
+    sddc_operations.get_sddc()
+    sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
     sddc_operations.list_contentlibrary()
-#    sddc_operations.output_to_s3()
+    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
