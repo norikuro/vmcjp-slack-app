@@ -21,6 +21,7 @@ class SDDCConfig(object):
 
         self.refresh_token = j["account"]["token"]
         self.org_id = j["org"]["id"]
+        self.customer_aws_account_number = j["customer_aws"]["account_number"]
 
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
@@ -48,11 +49,21 @@ class SDDCConfig(object):
         for sddc in self.sddcs:
           if not len(sddc.resource_config.esx_hosts) == 1:
             a.append({"id": sddc.id, "name": sddc.name, "num_hosts": len(sddc.resource_config.esx_hosts), "vpc_cidr": sddc.resource_config.vpc_info.vpc_cidr, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
-#            a.append({
-        account_id = self.vmc_client.orgs.account_link.ConnectedAccounts.get(self.org_id)[0].id
-        print(self.vmc_client.orgs.account_link.CompatibleSubnets.get(org=self.org_id, linked_account_id=account_id).vpc_map)
+        account_id = self.get_connected_customer_aws_id(self.vmc_client.orgs.account_link.ConnectedAccounts.get(self.org_id))
+        self.get_connected_customer_aws_subnet(account_id)
+#        print(self.vmc_client.orgs.account_link.CompatibleSubnets.get(org=self.org_id, linked_account_id=account_id).vpc_map.values()[0].subnets[0].name)
 
         self.sddc_config["sddcs"] = a
+
+    def get_connected_customer_aws_id(self, connectedaccounts):
+        for connectedaccount in connectedaccounts:
+          if connectedaccount.account_number == self.customer_aws_account_number:
+            return connectedaccount.id
+
+    def get_connected_customer_aws_subnet(self, account_id):
+       for v in self.vmc_client.orgs.account_link.CompatibleSubnets.get(org=self.org_id, linked_account_id=account_id).vpc_map.values():
+         for s in v.subnets:
+           print(s.name)
 
     def list_vcenter(self):
         a = []
