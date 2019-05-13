@@ -45,8 +45,7 @@ class SDDCConfig(object):
             raise ValueError('require at least one SDDC associated'
                              'with the calling user')
 
-        for sddc in sddcs:
-          if sddc.id == self.sddc_id:
+        if self.sddc_id in [sddc.id for sddc in sddcs]:
             self.sddc = sddc
 
     def get_sddc(self):
@@ -105,7 +104,6 @@ class SDDCConfig(object):
           elif t == "SUBSCRIBED":
             a.append({"name": model.name, "type": t, "subscription_url": model.subscription_info.subscription_url, "on_demand": model.subscription_info.on_demand, "automatic_sync_enabled": model.subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
-#        print(a)
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
