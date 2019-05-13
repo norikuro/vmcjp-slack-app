@@ -20,44 +20,41 @@ class SDDCConfig(object):
         t = read_json_from_s3(f["bucket"], f["token"])
         j = read_json_from_s3(f["bucket"], f["config"])
 
-        self.refresh_token = t["token"]
-        self.org_id = j["org"]["id"]
-        self.sddc_id = j["sddc"]["id"]
-        self.customer_aws_account_number = j["sddc"]["customer_aws"]["account_number"]
-        self.customer_aws_subnet_id = j["sddc"]["customer_aws"]["subnet_id"]
+        refresh_token = t["token"]
+        org_id = j["org"]["id"]
+        sddc_id = j["sddc"]["id"]
 
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
+        self.vsphere = None
 
         # Login to VMware Cloud on AWS
-        self.vmc_client = create_vmc_client(self.refresh_token)
+        vmc_client = create_vmc_client(refresh_token)
 
-        self.vsphere = ""
-
-    def setup(self):
         # Check if the organization exists
-        orgs = self.vmc_client.Orgs.list()
-        if self.org_id not in [org.id for org in orgs]:
-            raise ValueError("Org with ID {} doesn't exist".format(
-                self.org_id))
+        orgs = vmc_client.Orgs.list()
+        if org_id not in [org.id for org in orgs]:
+            raise ValueError("Org with ID {} doesn't exist".format(org_id))
 
-        sddcs = self.vmc_client.orgs.Sddcs.list(self.org_id)
+        # Check if the sddc exists
+        sddcs = vmc_client.orgs.Sddcs.list(org_id)
         if not sddcs:
             raise ValueError('require at least one SDDC associated'
                              'with the calling user')
 
-        if self.sddc_id in [sddc.id for sddc in sddcs]:
+        if sddc_id in [sddc.id for sddc in sddcs]:
             self.sddc = sddc
 
     def get_sddc(self):
-        a = []
-        a.append({"id": self.sddc.id, "name": self.sddc.name, "num_hosts": len(self.sddc.resource_config.esx_hosts), "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr, "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version})
-        self.sddc_config["sddcs"] = a
+        a = {"id": self.sddc.id, 
+             "name": self.sddc.name, 
+             "num_hosts": len(self.sddc.resource_config.esx_hosts), 
+             "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr, 
+             "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version}
+        self.sddc_config["sddc"] = a
 
     def get_vcenter(self):
-        a = []
-        a.append({"vc_url": self.sddc.resource_config.vc_url})
-        self.sddc_config["vcenters"] = a
+        self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
 
     def connect_vcenter(self):
         vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
@@ -109,7 +106,6 @@ class SDDCConfig(object):
 
 def lambda_handler(event, context):
     sddc_operations = SDDCConfig()
-    sddc_operations.setup()
     sddc_operations.get_sddc()
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
@@ -118,7 +114,6 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.setup()
     sddc_operations.get_sddc()
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
