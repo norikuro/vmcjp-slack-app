@@ -46,12 +46,12 @@ class SDDCConfig(object):
             self.sddc = sddc
 
     def get_sddc(self):
-        a = {"id": self.sddc.id, 
-             "name": self.sddc.name, 
-             "num_hosts": len(self.sddc.resource_config.esx_hosts), 
-             "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr, 
-             "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version}
-        self.sddc_config["sddc"] = a
+        self.sddc_config["sddc"] = {"id": self.sddc.id,
+                                    "name": self.sddc.name,
+                                    "num_hosts": len(self.sddc.resource_config.esx_hosts),
+                                    "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr,
+                                    "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version}
+
 
     def get_vcenter(self):
         self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
@@ -62,7 +62,9 @@ class SDDCConfig(object):
         self.vsphere = create_vsphere_client(vc_host, username=self.sddc.resource_config.cloud_username, password=self.sddc.resource_config.cloud_password)
 
     def list_user_resourcepools(self):
-        management_pools = ["Resources", "Mgmt-ResourcePool", "Compute-ResourcePool"]
+        management_pools = ["Resources", 
+                            "Mgmt-ResourcePool", 
+                            "Compute-ResourcePool"]
 
         if not self.vsphere:
           self.connect_vcenter()
@@ -74,7 +76,15 @@ class SDDCConfig(object):
         self.sddc_config["resourcepools"] = a
 
     def list_user_folders(self):
-        management_folders = ["Discovered virtual machine", "VMs migrated to cloud", "ClonePrepInternalTemplateFolder", "ClonePrepReplicaVmFolder", "ClonePrepParentVmFolder", "ClonePrepResyncVmFolder", "vm", "Management VMs", "Workloads", "Templates"]
+        management_folders = ["Discovered virtual machine", 
+                              "VMs migrated to cloud", 
+                              "ClonePrepInternalTemplateFolder", 
+                              "ClonePrepReplicaVmFolder", 
+                              "ClonePrepParentVmFolder", 
+                              "ClonePrepResyncVmFolder", 
+                              "vm", 
+                              "Management VMs", 
+                              "Workloads", "Templates"]
 
         if not self.vsphere:
           self.connect_vcenter()
@@ -98,7 +108,11 @@ class SDDCConfig(object):
           if t == "LOCAL":
             a.append({"name": model.name, "type": t})
           elif t == "SUBSCRIBED":
-            a.append({"name": model.name, "type": t, "subscription_url": model.subscription_info.subscription_url, "on_demand": model.subscription_info.on_demand, "automatic_sync_enabled": model.subscription_info.automatic_sync_enabled})
+            a.append({"name": model.name, 
+                      "type": t, 
+                      "subscription_url": model.subscription_info.subscription_url, 
+                      "on_demand": model.subscription_info.on_demand,
+                      "automatic_sync_enabled": model.subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
 
     def output_to_s3(self):
