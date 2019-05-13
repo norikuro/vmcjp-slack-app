@@ -48,6 +48,10 @@ class SDDCConfig(object):
         for sddc in self.sddcs:
           if not len(sddc.resource_config.esx_hosts) == 1:
             a.append({"id": sddc.id, "name": sddc.name, "num_hosts": len(sddc.resource_config.esx_hosts), "vpc_cidr": sddc.resource_config.vpc_info.vpc_cidr, "vmc_version": sddc.resource_config.sddc_manifest.vmc_version})
+#            a.append({
+        account_id = self.vmc_client.orgs.account_link.ConnectedAccounts.get(self.org_id)[0].id
+        print(self.vmc_client.orgs.account_link.CompatibleSubnets.get(org=self.org_id, linked_account_id=account_id).vpc_map)
+
         self.sddc_config["sddcs"] = a
 
     def list_vcenter(self):
@@ -104,7 +108,7 @@ class SDDCConfig(object):
           elif t == "SUBSCRIBED":
             a.append({"name": model.name, "type": t, "subscription_url": model.subscription_info.subscription_url, "on_demand": model.subscription_info.on_demand, "automatic_sync_enabled": model.subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
-        print(a)
+#        print(a)
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
