@@ -110,6 +110,7 @@ def lambda_handler(event, context):
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
+    sddc_operations.list_contentlibrary()
     sddc_operations.output_to_s3()
 
 def main():
