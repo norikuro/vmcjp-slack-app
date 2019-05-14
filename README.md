@@ -29,7 +29,15 @@ We need following JSON files to run this script.
 | token.json | S3 | This file contains VMC's refresh token. |
 | config.json | S3 | This file contains VMC's org id, SDDC's name, id, connected customer AWS account id and subnet id. |
 
-
+### config file exsample
+- s3config.json
+```cmd
+{
+  "bucket": "vmc-env", #S3 bucket name
+  "token": "token.json", #VMC's refresh token file name
+  "config": "config.json" #config file name 
+}
+```
 
 ## Run scripts
 
