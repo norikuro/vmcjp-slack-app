@@ -21,7 +21,7 @@ class NetworkConfig(object):
         sddc_id=sddc_id)
 
 
-  def list_security_group(self):
+  def list_security_group(self, gateway_type):
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     print(security_groups)
 
@@ -31,7 +31,7 @@ def lambda_handler(event, context):
 
 def main():
   network_operations = NetworkConfig()
-  network_operations.list_security_group()
+  network_operations.list_security_group("mgw")
 
 if __name__ == '__main__':
   main()
