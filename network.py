@@ -22,17 +22,26 @@ class NetworkConfig(object):
 
 
   def list_security_group(self, gateway_type):
+    sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
+                 "ESXi",
+                 "HCX",
+                 "NSX Manager",
+                 "vCenter"]
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     a = {}
     for sg in security_groups:
-      a = {"display_name": sg.display_name}
-#      for ex in list(sg.expression):
-#         print(ex)
+      if sg.display_name not in sg_system and "HCX-IX-vm-" not in sg.display_name and "HCX-GRP-" not in sg.display_name:
+        a = {"display_name": sg.display_name}
+        print(sg.display_name)
+        if sg.expression != None:
+          for ex in sg.expression:
+            print(ex.get_struct_value().get_field("resource_type").value)
 
+#
 #    print(security_groups[0].display_name)
 #    print(list(security_groups[0].expression[0].get_struct_value().get_field("ip_addresses"))[0].value)
 #    print(security_groups[0].expression[0].get_struct_value().get_field("resource_type").value)
-    print(security_groups[0].expression.get_struct_value())
+#    print(security_groups[1].expression[0].get_struct_value())
 #    print(security_groups[0].expression[0].get_struct_value().get_field_names())
 
 def lambda_handler(event, context):
