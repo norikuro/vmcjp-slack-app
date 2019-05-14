@@ -20,7 +20,7 @@ git clone https://github.com/norikuro/vmc-demo.git
 export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
 
-##Prepare config files
+## Prepare config files
 We need following JSON files to run this script.
 
 ## Run scripts
