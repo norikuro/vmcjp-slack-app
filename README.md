@@ -30,8 +30,8 @@ We need following JSON files to run this script.
 | config.json | S3 | This file contains VMC's org id, SDDC's name, id, connected customer AWS account id and subnet id. |
 
 ### config file exsample
-- s3config.json
--- location: vmc-demo/s3config.json
+* s3config.json
+  * location: vmc-demo/s3config.json
 ```cmd
 {
   "bucket": "vmc-env", #S3 bucket name
@@ -40,15 +40,15 @@ We need following JSON files to run this script.
 }
 ```
 
-- token.json
--- location: S3/vmc-env/token.json
+* token.json
+  * location: S3/vmc-env/token.json
 vmc-env is bucket name, specified in s3config.json
 ```cmd
 {"token": "Refresh token number"}
 ```
 
-- config.json
--- location: S3/vmc-env/config.json
+* config.json
+  * location: S3/vmc-env/config.json
 vmc-env is bucket name, specified in s3config.json
 ```cmd
 {
