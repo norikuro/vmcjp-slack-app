@@ -23,7 +23,7 @@ class NetworkConfig(object):
 
   def list_security_group(self, gateway_type):
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
-    print(security_groups)
+    print(security_groups[0].Group.expression)
 
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
