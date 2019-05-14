@@ -2,6 +2,8 @@
 
 import json
 
+from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+
 class NetworkConfig(object):
   def __init__(self):
     f = json.load(open('s3config.json', 'r'))
