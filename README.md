@@ -1,7 +1,7 @@
 # vmc-demo
 
 ## Abstract
-SDDC.py can back up VMware Cloud on AWS configurations like following.
+SDDC.py will back up VMware Cloud on AWS configurations to AWS S3 like following information.
 * VMware Cloud on AWS SDDC's id and name.
 * Number of hosts
 * Management CIDR block
