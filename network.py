@@ -16,9 +16,9 @@ class NetworkConfig(object):
     sddc_id = j["sddc"]["id"]
     
     self.nsx_client = create_nsx_policy_client_for_vmc(
-        refresh_token=args.refresh_token,
-        org_id=args.org_id,
-        sddc_id=args.sddc_id)
+        refresh_token=refresh_token,
+        org_id=org_id,
+        sddc_id=sddc_id)
 
 
   def list_security_group(self):
