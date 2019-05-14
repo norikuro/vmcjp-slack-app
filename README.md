@@ -22,8 +22,13 @@ export PYTHONPATH=${PWD}:$PYTHONPATH
 
 ## Prepare config files
 We need following JSON files to run this script.  
+| a | b |
+|---|---|
+| a | b |
+
+
 | file          | description                                                  |
-----------------|---------------------------------------------------------------
+|---------------|--------------------------------------------------------------|
 | s3cinfig.json | This file contains S3 information like bucket and file name. |
 
 
