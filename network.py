@@ -1,13 +1,23 @@
 #!/usr/bin/env python
 
 class NetworkConfig(Object):
-  def list_security_group(self):
-    nsx_client = create_nsx_policy_client_for_vmc(
-          refresh_token=args.refresh_token,
-          org_id=args.org_id,
-          sddc_id=args.sddc_id)
+  def __init__(self):
+    f = json.load(open('s3config.json', 'r'))
+    t = read_json_from_s3(f["bucket"], f["token"])
+    j = read_json_from_s3(f["bucket"], f["config"])
 
-    security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
+    refresh_token = t["token"]
+    org_id = j["org"]["id"]
+    sddc_id = j["sddc"]["id"]
+    
+    self.nsx_client = create_nsx_policy_client_for_vmc(
+        refresh_token=args.refresh_token,
+        org_id=args.org_id,
+        sddc_id=args.sddc_id)
+
+
+  def list_security_group(self):
+    security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     print(security_groups)
 
 def lambda_handler(event, context):
