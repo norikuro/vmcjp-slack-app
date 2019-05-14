@@ -28,26 +28,26 @@ class NetworkConfig(object):
                  "NSX Manager",
                  "vCenter"]
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
-    a = {}
+    d = {}
+    c = []
     for sg in security_groups:
-      if sg.display_name not in sg_system and "HCX-IX-vm-" not in sg.display_name and "HCX-GRP-" not in sg.display_name:
-        a = {"display_name": sg.display_name}
-        print(sg.display_name)
+      dn = sg.display_name
+      if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn:
+        a = {}
+        a["display_name"] = dn
         if sg.expression != None:
           for ex in sg.expression:
-            rs_type = ex.get_struct_value().get_field("resource_type").value
-            print(rs_type)
-            if rs_type == "IPAddressExpression":
+            rt = ex.get_struct_value().get_field("resource_type").value
+            a["resource_type"] = rt
+            b = []
+            if rt == "IPAddressExpression":
               ips = list(ex.get_struct_value().get_field("ip_addresses"))
               for ip in ips:
-                print(ip.value)
-
-#
-#    print(security_groups[0].display_name)
-#    print(list(security_groups[0].expression[0].get_struct_value().get_field("ip_addresses"))[0].value)
-#    print(security_groups[0].expression[0].get_struct_value().get_field("resource_type").value)
-#    print(security_groups[1].expression[0].get_struct_value())
-#    print(security_groups[0].expression[0].get_struct_value().get_field_names())
+                b.append(ip.value)
+              a["ip_addresses"] = b
+        c.append(a)
+    d["security_groups"] = c
+    print(d)
 
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
