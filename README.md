@@ -1,11 +1,11 @@
 # vmc-demo
 
 ## Abstract
-This document describes the vSphere Automation Python SDK samples that use the vSphere Automation
-python client library. Additionally, some of the samples demonstrate the combined use of the
-vSphere Automation and vSphere APIs. To support this combined use, the vSphere Automation Python SDK
-samples require the vSphere Management SDK packages (pyVmomi) to be installed on the client.
-The samples have been developed to work with python 2.7.x and 3.3+
+SDDC.py can back up VMware Cloud on AWS configurations like following.
+  VMware Cloud on AWS SDDC's id and name.
+  Number of hosts
+  Management CIDR block
+  SDDC version
 
 
 ## Installing vmc-demo to local
