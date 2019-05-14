@@ -41,14 +41,14 @@ We need following JSON files to run this script.
 ```
 
 * token.json
-  * location: S3/vmc-env/token.json  
+  * location: s3://vmc-env/token.json  
 vmc-env is bucket name, specified in s3config.json
 ```cmd
 {"token": "Refresh token number"}
 ```
 
 * config.json
-  * location: S3/vmc-env/config.json  
+  * location: s3://vmc-env/config.json  
 vmc-env is bucket name, specified in s3config.json
 ```cmd
 {
