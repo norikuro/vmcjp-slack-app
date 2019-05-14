@@ -13,7 +13,7 @@ SDDC.py can back up VMware Cloud on AWS configurations like following.
 See example below for specifying the --extra-index-url parameter.
 
 ```cmd
-git clone https://github.com/norikuro/vmc-demo/
+git clone https://github.com/norikuro/vmc-demo.git
 ```
 
 ## First, set PYTHONPATH to use this  
