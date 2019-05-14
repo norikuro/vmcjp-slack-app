@@ -19,7 +19,7 @@ git clone https://github.com/norikuro/vmc-demo.git
 export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
 
-### Run scripts
+## Run scripts
 
 ```cmd
 $ python sddc.py
