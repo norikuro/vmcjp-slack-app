@@ -101,8 +101,7 @@ class SDDCConfig(object):
         contentlib_ids = self.vsphere.content.Library.list()
         a = []
         for id in contentlib_ids:
-          model = self.vsphere.content.Library.get(id)
-          t = str(model.type)
+          t = str(self.vsphere.content.Library.get(id).type)
           if t == "LOCAL":
             a.append({"name": model.name, "type": t})
           elif t == "SUBSCRIBED":
