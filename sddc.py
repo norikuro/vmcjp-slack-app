@@ -105,13 +105,13 @@ class SDDCConfig(object):
         for id in contentlib_ids:
           t = str(self.vsphere.content.Library.get(id).type)
           if t == "LOCAL":
-            a.append({"name": model.name, "type": t})
+            a.append({"name": self.vsphere.content.Library.get(id).name, "type": t})
           elif t == "SUBSCRIBED":
-            a.append({"name": model.name, 
+            a.append({"name": self.vsphere.content.Library.get(id).name, 
                       "type": t, 
-                      "subscription_url": model.subscription_info.subscription_url, 
-                      "on_demand": model.subscription_info.on_demand,
-                      "automatic_sync_enabled": model.subscription_info.automatic_sync_enabled})
+                      "subscription_url": self.vsphere.content.Library.get(id).subscription_info.subscription_url, 
+                      "on_demand": self.vsphere.content.Library.get(id).subscription_info.on_demand,
+                      "automatic_sync_enabled": self.vsphere.content.Library.get(id).subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
 
     def output_to_s3(self):
