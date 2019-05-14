@@ -6,6 +6,7 @@ SDDC.py will back up VMware Cloud on AWS configurations like following informati
 * Number of hosts
 * Management CIDR block
 * SDDC version
+You can run this script on AWS EC2 or AWS Lambda.
 
 
 ## Clone vmc-demo to local
@@ -18,6 +19,9 @@ git clone https://github.com/norikuro/vmc-demo.git
 ```cmd
 export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
+
+##Prepare config files
+We need following JSON files to run this script.
 
 ## Run scripts
 
