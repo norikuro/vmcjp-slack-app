@@ -35,7 +35,12 @@ class NetworkConfig(object):
         print(sg.display_name)
         if sg.expression != None:
           for ex in sg.expression:
-            print(ex.get_struct_value().get_field("resource_type").value)
+            rs_type = ex.get_struct_value().get_field("resource_type").value
+            print(rs_type)
+            if rs_type == "IPAddressExpression":
+              ips = list(ex.get_struct_value().get_field("ip_addresses"))
+              for ip in ips:
+                print(ip.value)
 
 #
 #    print(security_groups[0].display_name)
