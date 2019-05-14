@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import json
+
 class NetworkConfig(object):
   def __init__(self):
     f = json.load(open('s3config.json', 'r'))
