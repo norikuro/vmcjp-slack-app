@@ -8,23 +8,16 @@ SDDC.py can back up VMware Cloud on AWS configurations like following.
 * SDDC version
 
 
-## Installing vmc-demo to local
-
-See example below for specifying the --extra-index-url parameter.
+## Clone vmc-demo to local
 
 ```cmd
 git clone https://github.com/norikuro/vmc-demo.git
 ```
 
 ## First, set PYTHONPATH to use this  
-
-* Linux/Mac:
-
-    export PYTHONPATH=${PWD}:$PYTHONPATH
-
-* Windows:
-
-    set PYTHONPATH=%cd%;%PYTHONPATH%
+```cmd
+export PYTHONPATH=${PWD}:$PYTHONPATH
+```
 
 ### Run scripts
 
