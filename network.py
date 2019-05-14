@@ -25,12 +25,15 @@ class NetworkConfig(object):
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     a = {}
     for sg in security_groups:
-      a.append({"display_name": sg.display_name})
+      a = {"display_name": sg.display_name}
+#      for ex in list(sg.expression):
+#         print(ex)
 
-    print(security_groups[0].display_name)
-    print(list(security_groups[0].expression[0].get_struct_value().get_field("ip_addresses"))[0].value)
-    print(security_groups[0].expression[0].get_struct_value().get_field_names())
-#    print(security_groups[0].expression[0])
+#    print(security_groups[0].display_name)
+#    print(list(security_groups[0].expression[0].get_struct_value().get_field("ip_addresses"))[0].value)
+#    print(security_groups[0].expression[0].get_struct_value().get_field("resource_type").value)
+    print(security_groups[0].expression.get_struct_value())
+#    print(security_groups[0].expression[0].get_struct_value().get_field_names())
 
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
