@@ -22,10 +22,6 @@ export PYTHONPATH=${PWD}:$PYTHONPATH
 
 ## Prepare config files
 We need following JSON files to run this script.  
-| a | b |
-|---|---|
-| a | b |
-
 
 | file          | description                                                  |
 |---------------|--------------------------------------------------------------|
