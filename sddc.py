@@ -72,7 +72,7 @@ class SDDCConfig(object):
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
 
         a = {}
-        a["name"] = [i.name for i in filter(lambda x: not x.name in management_pools, rps)]}
+        a["name"] = [i.name for i in filter(lambda x: not x.name in management_pools, rps)]
         self.sddc_config["resourcepools"] = a
 
     def list_user_folders(self):
@@ -93,7 +93,7 @@ class SDDCConfig(object):
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
 
         a = {}
-        a["name"] = [i.name for i in filter(lambda x: not x.name in management_folders, folders)]}
+        a["name"] = [i.name for i in filter(lambda x: not x.name in management_folders, folders)]
         self.sddc_config["folders"] = a
 
     def list_contentlibrary(self):
