@@ -39,6 +39,31 @@ We need following JSON files to run this script.
 }
 ```
 
+- token.json
+```cmd
+{"token": "Refresh token number"}
+```
+
+- config.json
+```cmd
+{
+  "org":
+  {
+    "id": "VMC's Organization ID"
+  },
+  "sddc": 
+  {
+    "name": "VMC SDDC name",
+    "id": "SDDC ID",
+    "customer_aws": 
+    {
+      "account_number": "Customer AWS Account ID",
+      "subnet_id": "Customer AWS Subnet ID"
+    }
+  }
+}
+```
+
 ## Run scripts
 
 ```cmd
