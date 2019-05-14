@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-class NetworkConfig(Object):
+class NetworkConfig(object):
   def __init__(self):
     f = json.load(open('s3config.json', 'r'))
     t = read_json_from_s3(f["bucket"], f["token"])
