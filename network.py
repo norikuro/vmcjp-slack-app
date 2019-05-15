@@ -41,7 +41,7 @@ class NetworkConfig(object):
 #        a["display_name"] = dn
 #        for ex in sg.expression:
 #          a.update(self.get_expressions(ex))
-        print(self.get_expressions(sg)[0])
+        self.get_expressions(sg)
 #        c.append([self.get_expressions(ex, dn) for ex in sg.expression])
 #        print(c)
 #    self.network_config["security_groups"] = c
@@ -57,6 +57,7 @@ class NetworkConfig(object):
       a["display_name"] = sg.display_name
       a["resource_type"] = rt
       a["expressions"] = self.get_fields(sv, rt)
+      print(a)
       b.append(a)
 #    print(b[0])
     return b
