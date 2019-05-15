@@ -66,6 +66,7 @@ class NetworkConfig(object):
     elif rt == "Condition":
       print("here----")
       print("member_type: ", struct_value.get_field("member_type").value)
+      print("key: ", struct_value.get_field("key").value)
       print("operator: ", struct_value.get_field("operator").value)
       print("value: ", struct_value.get_field("value").value)
       print("resource_type: ", struct_value.get_field("resource_type").value)
