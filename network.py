@@ -41,7 +41,7 @@ class NetworkConfig(object):
         a["display_name"] = dn
 #        for ex in sg.expression:
 #          a.update(self.get_expressions(ex))
-        a.update([self.get_expressions(ex) for ex in sg.expression])
+        a.update({self.get_expressions(ex) for ex in sg.expression})
         print(a)
         c.append(a)
     self.network_config["security_groups"] = c
