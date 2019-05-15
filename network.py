@@ -66,6 +66,7 @@ class NetworkConfig(object):
     elif rt == "Condition":
       print(list(struct_value.get_field_names()))
       print(list(struct_value.get_fields()))
+      print(struct_value.__dict__.keys())
 #      print(struct_value.__dict__.items())
     return None
     
