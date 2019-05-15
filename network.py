@@ -30,7 +30,7 @@ class NetworkConfig(object):
     sg_list.append(self.get_security_group("mgw"))
     sg_list.append(self.get_security_group("cgw"))
     self.network_config["security_groups"] = sg_list
-    print(dict(self.network_config))
+#    print(dict(self.network_config))
     
   def get_security_group(self, gateway_type):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
@@ -61,7 +61,8 @@ class NetworkConfig(object):
     if rt == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     elif rt == "Condition":
-      return [ip.value for ip in list(struct_value.get_field("condition"))]
+#      return [ip.value for ip in list(struct_value.get_field("condition"))]
+      print(struct_value.__dict__.items())
     return None
     
 def lambda_handler(event, context):
