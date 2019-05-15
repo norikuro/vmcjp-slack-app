@@ -48,7 +48,13 @@ def get_fields(struct_value):
       print("resource_type: ", struct_value.get_field("resource_type").value)
       print("end----")
     elif rt == "ConjunctionOperator":
-      print("ConjunctionOperator")
+      print("here----")
+      print("member_type: ", struct_value.get_field("member_type").value)
+      print("key: ", struct_value.get_field("key").value)
+      print("operator: ", struct_value.get_field("operator").value)
+      print("value: ", struct_value.get_field("value").value)
+      print("resource_type: ", struct_value.get_field("resource_type").value)
+      print("end----")
     elif rt == "NestedExpression":
       print("NestedExpression")
     else:
