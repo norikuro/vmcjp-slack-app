@@ -41,10 +41,11 @@ class NetworkConfig(object):
 #        a = {}
         a["display_name"] = dn
         for ex in sg.expression:
-          sv = ex.get_struct_value()
-          rt = sv.get_field("resource_type").value
-          a["resource_type"] = rt
-          a["expressions"] = self.get_fields(sv, rt)
+          a.update(self.get_expressions(ex))
+#          sv = ex.get_struct_value()
+#          rt = sv.get_field("resource_type").value
+#          a["resource_type"] = rt
+#          a["expressions"] = self.get_fields(sv, rt)
         c.append(a)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
@@ -52,6 +53,10 @@ class NetworkConfig(object):
   def get_expressions(self, expression):
     sv = expression.get_struct_value()
     rt = sv.get_field("resource_type").value
+    a = {}
+    a["resource_type"] = rt
+    a["expressions"] = self.get_fields(sv, rt)
+    return a
 
   def get_fields(self, struct_value, resource_type):
     if resource_type == "IPAddressExpression":
