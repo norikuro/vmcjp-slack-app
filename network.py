@@ -44,8 +44,6 @@ class NetworkConfig(object):
           rt = sv.get_field("resource_type").value
           a["resource_type"] = rt
           a["expressions"] = self.get_fields(sv, rt)
-#          if rt == "IPAddressExpression":
-#            a["ip_addresses"] = [ip.value for ip in list(sv.get_field("ip_addresses"))]
         c.append(a)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
