@@ -50,7 +50,7 @@ class NetworkConfig(object):
     print(dict(self.network_config))
 
   def get_expressions(self, expression):
-    sv = ex.get_struct_value()
+    sv = expression.get_struct_value()
     rt = sv.get_field("resource_type").value
 
   def get_fields(self, struct_value, resource_type):
