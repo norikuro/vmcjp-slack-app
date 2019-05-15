@@ -7,7 +7,7 @@ class SecurityGroup(object):
                  "vCenter"]
     group_list = []
     
-    security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
+    security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
 #    print(security_groups[0].expression[0].__dict__.items())
 
     for sg in security_groups:
