@@ -26,7 +26,6 @@ class NetworkConfig(object):
         org_id=org_id,
         sddc_id=sddc_id)
 
-
   def list_security_group(self, gateway_type):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
                  "ESXi",
@@ -44,12 +43,18 @@ class NetworkConfig(object):
           sv = ex.get_struct_value()
           rt = sv.get_field("resource_type").value
           a["resource_type"] = rt
-          if rt == "IPAddressExpression":
-            a["ip_addresses"] = [ip.value for ip in list(sv.get_field("ip_addresses"))]
+          a["expression"] = self.get_field(sv, rt)
+#          if rt == "IPAddressExpression":
+#            a["ip_addresses"] = [ip.value for ip in list(sv.get_field("ip_addresses"))]
         c.append(a)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
 
+  def get_field(struct_value, resource_type):
+    if resource_type == "IPAddressExpression":
+      return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
+    retrun None
+    
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
   network_operations.list_security_group()
