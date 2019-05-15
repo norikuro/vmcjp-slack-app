@@ -1,0 +1,3 @@
+class SecurityGroup(object):
+  get_security_group(self, gateway_type, nsx_client):
+    print("aaa")
