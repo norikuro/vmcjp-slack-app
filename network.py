@@ -43,14 +43,14 @@ class NetworkConfig(object):
           sv = ex.get_struct_value()
           rt = sv.get_field("resource_type").value
           a["resource_type"] = rt
-          a["expression"] = self.get_field(sv, rt)
+          a["expressions"] = self.get_fields(sv, rt)
 #          if rt == "IPAddressExpression":
 #            a["ip_addresses"] = [ip.value for ip in list(sv.get_field("ip_addresses"))]
         c.append(a)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
 
-  def get_field(self, struct_value, resource_type):
+  def get_fields(self, struct_value, resource_type):
     if resource_type == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     return None
