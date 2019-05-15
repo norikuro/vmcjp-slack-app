@@ -1,4 +1,7 @@
 class SecurityGroup(object):
+  def __init__(self):
+    test
+    
   def get_security_group(self, gateway_type, nsx_client):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
                  "ESXi",
