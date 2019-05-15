@@ -50,7 +50,7 @@ class NetworkConfig(object):
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
 
-  def get_field(struct_value, resource_type):
+  def get_field(self, struct_value, resource_type):
     if resource_type == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     return None
