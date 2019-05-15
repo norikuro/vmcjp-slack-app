@@ -39,8 +39,9 @@ class NetworkConfig(object):
       a = {}
       if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
         a["display_name"] = dn
-        for ex in sg.expression:
-          a.update(self.get_expressions(ex))
+#        for ex in sg.expression:
+#          a.update(self.get_expressions(ex))
+        a.update([self.get_expressions(ex) for ex in sg.expression])
         c.append(a)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
