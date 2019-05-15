@@ -45,7 +45,7 @@ class NetworkConfig(object):
 #        c.append([self.get_expressions(ex, dn) for ex in sg.expression])
 #        print(c)
     self.network_config["security_groups"] = c
-    print(self.network_config)
+    print(dict(self.network_config))
 
 #  def get_expressions(self, expression):
   def get_expressions(self, sg):
