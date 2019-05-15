@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-def get_security_group(gateway_type, nsx_client):
+def get_security_groups(gateway_type, nsx_client):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
                  "ESXi",
                  "HCX",
