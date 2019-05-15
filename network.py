@@ -42,7 +42,6 @@ class NetworkConfig(object):
     print(dict(self.network_config))
 
   def get_expressions(self, sg):
-  #  b = []
     dn = sg.display_name
     
     for ex in sg.expression:
