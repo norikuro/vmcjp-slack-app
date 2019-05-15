@@ -51,13 +51,18 @@ class NetworkConfig(object):
     return {"gateway_type": gateway_type, "groups": group_list}
 
   def get_expressions(self, sg):
+    ex_list = []
+    ex_dict = {}
     dn = sg.display_name
-#    print(len(sg.expression))
+    ex_dict = {"display_name": dn}
+    a = []
     for ex in sg.expression:
       sv = ex.get_struct_value()
-#      print(sv)
       rt = sv.get_field("resource_type").value
-    return {"display_name": dn, "resource_type": rt, "expressions": self.get_fields(sv)}
+      a.append({"resource_type": rt, "fields": self.get_fields(sv)})
+    ex_dict["expressions"] = a
+    ex_list.append(ex_dict)
+    return ex_list
 
   def get_fields(self, struct_value):
     rt = struct_value.get_field("resource_type").value
