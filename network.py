@@ -64,7 +64,7 @@ class NetworkConfig(object):
     if rt == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     elif rt == "Condition":
-      print(list(struct_value.get_fields())[0])
+      print(dict(struct_value.get_fields()))
     return None
     
 def lambda_handler(event, context):
