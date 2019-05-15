@@ -64,10 +64,12 @@ class NetworkConfig(object):
     if rt == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     elif rt == "Condition":
+      print("here----"))
       print("member_type: ", struct_value.get_field("member_type"))
       print("operator: ", struct_value.get_field("operator"))
       print("value: ", struct_value.get_field("value"))
       print("resource_type: ", struct_value.get_field("resource_type"))
+      print("end----"))
     return None
     
 def lambda_handler(event, context):
