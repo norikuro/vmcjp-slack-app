@@ -32,18 +32,16 @@ class NetworkConfig(object):
     c = []
     for sg in security_groups:
       dn = sg.display_name
-      if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn:
+      if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
         a = {}
         a["display_name"] = dn
-        if sg.expression != None:
-          for ex in sg.expression:
-            rt = ex.get_struct_value().get_field("resource_type").value
-            a["resource_type"] = rt
-            b = []
-            if rt == "IPAddressExpression":
-              ips = list(ex.get_struct_value().get_field("ip_addresses"))
-              b = [ip.value for ip in ips]
-              a["ip_addresses"] = b
+        for ex in sg.expression:
+          sv = ex.get_struct_value()
+          rt = sv.get_field("resource_type").value
+          a["resource_type"] = rt
+          b = []
+          if rt == "IPAddressExpression":
+            a["ip_addresses"] = [ip.value for ip in list(sv.get_field("ip_addresses"))]
         c.append(a)
     d["security_groups"] = c
     print(d)
