@@ -36,17 +36,22 @@ class NetworkConfig(object):
     c = []
     for sg in security_groups:
       dn = sg.display_name
+      a = {}
       if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
-        a = {}
+#        a = {}
         a["display_name"] = dn
         for ex in sg.expression:
-          sv = ex.get_struct_value()
-          rt = sv.get_field("resource_type").value
+#          sv = ex.get_struct_value()
+#          rt = sv.get_field("resource_type").value
           a["resource_type"] = rt
           a["expressions"] = self.get_fields(sv, rt)
         c.append(a)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
+
+  def get_expressions(self, expression):
+    sv = ex.get_struct_value()
+    rt = sv.get_field("resource_type").value
 
   def get_fields(self, struct_value, resource_type):
     if resource_type == "IPAddressExpression":
