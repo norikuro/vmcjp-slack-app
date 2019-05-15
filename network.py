@@ -30,7 +30,7 @@ class NetworkConfig(object):
     sg_list.append(self.get_security_group("mgw"))
     sg_list.append(self.get_security_group("cgw"))
     self.network_config["security_groups"] = sg_list
-#    print(dict(self.network_config))
+    print(dict(self.network_config))
     
   def get_security_group(self, gateway_type):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
@@ -52,7 +52,7 @@ class NetworkConfig(object):
 #    print(len(sg.expression))
     for ex in sg.expression:
       sv = ex.get_struct_value()
-      print(sv)
+#      print(sv)
       rt = sv.get_field("resource_type").value
     return {"display_name": dn, "resource_type": rt, "expressions": self.get_fields(sv)}
 
