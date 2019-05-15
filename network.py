@@ -53,7 +53,7 @@ class NetworkConfig(object):
   def get_field(struct_value, resource_type):
     if resource_type == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
-    retrun None
+    return None
     
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
