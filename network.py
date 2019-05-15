@@ -52,8 +52,7 @@ class NetworkConfig(object):
     for ex in sg.expression:
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
-      a = {"display_name": dn, "resource_type": rt, "expressions": self.get_fields(sv, rt)}
-    return a
+    return {"display_name": dn, "resource_type": rt, "expressions": self.get_fields(sv, rt)}
 
   def get_fields(self, struct_value, resource_type):
     if resource_type == "IPAddressExpression":
