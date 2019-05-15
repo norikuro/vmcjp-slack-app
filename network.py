@@ -50,17 +50,16 @@ class NetworkConfig(object):
 #  def get_expressions(self, expression):
   def get_expressions(self, sg):
     b = []
-    c = []
+    a = {}
+    dn = sg.display_name
+#    a["display_name"] = 
+#    a["resource_type"] = rt
+    
     for ex in sg.expression:
-      a = {}
-      sv = ex.get_struct_value()
-      rt = sv.get_field("resource_type").value
-      a["display_name"] = sg.display_name
-      a["resource_type"] = rt
-      a["expressions"] = self.get_fields(sv, rt)
-      c.append(rt)
-      b.append(a)
-    print(list(c))
+      rt = ex.get_struct_value().get_field("resource_type").value
+      print("display_name", dn, "resource_type", rt)
+#      a["expressions"] = self.get_fields(sv, rt)
+#      b.append(a)
     return b
 
   def get_fields(self, struct_value, resource_type):
