@@ -58,9 +58,9 @@ class NetworkConfig(object):
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
       a = {"display_name": dn, "resource_type": rt, "expressions": self.get_fields(sv, rt)}
-      print(a)
 #      a["expressions"] = self.get_fields(sv, rt)
       b.append(a)
+    print(b)
     return b
 
   def get_fields(self, struct_value, resource_type):
