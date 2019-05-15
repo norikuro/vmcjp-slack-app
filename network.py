@@ -71,6 +71,10 @@ class NetworkConfig(object):
       print("value: ", struct_value.get_field("value").value)
       print("resource_type: ", struct_value.get_field("resource_type").value)
       print("end----")
+    elif rt == "ConjunctionOperator":
+      print("ConjunctionOperator")
+    elif rt == "NestedExpression":
+      print("NestedExpression")
     return None
     
 def lambda_handler(event, context):
