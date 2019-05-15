@@ -26,7 +26,7 @@ class NetworkConfig(object):
         org_id=org_id,
         sddc_id=sddc_id)
 
-  def list_security_group(self):
+  def list_security_groups(self):
     sg_list = []
     sg_list.append(get_security_group("mgw", self.nsx_client))
     sg_list.append(get_security_group("cgw", self.nsx_client))
@@ -35,11 +35,11 @@ class NetworkConfig(object):
     
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
-  network_operations.list_security_group()
+  network_operations.list_security_groups()
 
 def main():
   network_operations = NetworkConfig()
-  network_operations.list_security_group()
+  network_operations.list_security_groups()
 
 if __name__ == '__main__':
   main()
