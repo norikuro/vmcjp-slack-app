@@ -40,6 +40,9 @@ class NetworkConfig(object):
                  "vCenter"]
     
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
+    
+    print(security_groups[0].expression.__dict__.items())
+    
     group_list = []
     for sg in security_groups:
       dn = sg.display_name
@@ -62,7 +65,7 @@ class NetworkConfig(object):
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     elif rt == "Condition":
       return [ip.value for ip in list(struct_value.get_field("conditions"))]
-      print(struct_value.__dict__.items())
+#      print(struct_value.__dict__.items())
     return None
     
 def lambda_handler(event, context):
