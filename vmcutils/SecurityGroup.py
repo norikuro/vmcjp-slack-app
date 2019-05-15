@@ -19,9 +19,7 @@ def get_security_groups(gateway_type, nsx_client):
     return {"gateway_type": gateway_type, "groups": group_list}
 
 def get_expressions(sg):
-    ex_list = []
-    field_list = []    
-#    dn = sg.display_name
+    field_list = []
     ex_dict = {"display_name": sg.display_name}
 
     i = 0
@@ -33,8 +31,6 @@ def get_expressions(sg):
       i+=1
 
     ex_dict["expressions"] = field_list
-#    ex_list.append(ex_dict)
-
     return ex_dict
 
 def get_fields(struct_value):
