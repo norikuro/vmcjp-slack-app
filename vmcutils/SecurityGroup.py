@@ -24,10 +24,13 @@ def get_expressions(sg):
 #    dn = sg.display_name
     ex_dict = {"display_name": sg.display_name}
 
+    i = 0
     for ex in sg.expression:
+      print(i)
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
       field_list.append({"resource_type": rt, "fields": get_fields(sv)})
+      i++
 
     ex_dict["expressions"] = field_list
     ex_list.append(ex_dict)
