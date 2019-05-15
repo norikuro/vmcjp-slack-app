@@ -19,7 +19,6 @@ class NetworkConfig(object):
 
     self.network_config = OrderedDict()
     self.network_config["updated"] = datetime.now().strftime("%Y/%m/%d")
-
     
     self.nsx_client = create_nsx_policy_client_for_vmc(
         refresh_token=refresh_token,
@@ -31,7 +30,7 @@ class NetworkConfig(object):
     sg_list.append(self.get_security_group("mgw"))
     sg_list.append(self.get_security_group("cgw"))
     self.network_config["security_groups"] = sg_list
-    print(dict(self.network_config))
+#    print(dict(self.network_config))
     
   def get_security_group(self, gateway_type):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
@@ -39,6 +38,7 @@ class NetworkConfig(object):
                  "HCX",
                  "NSX Manager",
                  "vCenter"]
+    
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     group_list = []
     for sg in security_groups:
@@ -49,7 +49,7 @@ class NetworkConfig(object):
 
   def get_expressions(self, sg):
     dn = sg.display_name
-    print(len(sg.expression))
+#    print(len(sg.expression))
     for ex in sg.expression:
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
