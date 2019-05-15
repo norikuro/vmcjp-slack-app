@@ -57,6 +57,7 @@ class NetworkConfig(object):
 
   def get_fields(self, struct_value):
     rt = struct_value.get_field("resource_type").value
+    print(struct_value.get_field_names())
     if rt == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     return None
