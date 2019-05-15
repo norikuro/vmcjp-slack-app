@@ -41,8 +41,8 @@ class NetworkConfig(object):
         a["display_name"] = dn
 #        for ex in sg.expression:
 #          a.update(self.get_expressions(ex))
-#        print([self.get_expressions(ex) for ex in sg.expression])
-        a.update([self.get_expressions(ex) for ex in sg.expression])
+        print({self.get_expressions(ex) for ex in sg.expression})
+        a.update({self.get_expressions(ex) for ex in sg.expression})
         c.append(a)
     self.network_config["security_groups"] = c
 #    print(dict(self.network_config))
@@ -53,7 +53,7 @@ class NetworkConfig(object):
     a = {}
     a["resource_type"] = rt
     a["expressions"] = self.get_fields(sv, rt)
-    print(a)
+#    print(a)
     return a
 
   def get_fields(self, struct_value, resource_type):
