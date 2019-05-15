@@ -36,31 +36,19 @@ class NetworkConfig(object):
     c = []
     for sg in security_groups:
       dn = sg.display_name
-#      a = {}
       if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
-#        a["display_name"] = dn
-#        for ex in sg.expression:
-#          a.update(self.get_expressions(ex))
         c.append(self.get_expressions(sg))
-#        c.append([self.get_expressions(ex, dn) for ex in sg.expression])
-#        print(c)
     self.network_config["security_groups"] = c
     print(dict(self.network_config))
 
-#  def get_expressions(self, expression):
   def get_expressions(self, sg):
     b = []
     dn = sg.display_name
-#    a["display_name"] = 
-#    a["resource_type"] = rt
     
     for ex in sg.expression:
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
       a = {"display_name": dn, "resource_type": rt, "expressions": self.get_fields(sv, rt)}
-#      a["expressions"] = self.get_fields(sv, rt)
-#      b.append(a)
-#    print(b)
     return a
 
   def get_fields(self, struct_value, resource_type):
