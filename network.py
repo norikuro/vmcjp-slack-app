@@ -57,7 +57,7 @@ class NetworkConfig(object):
     
     for ex in sg.expression:
       rt = ex.get_struct_value().get_field("resource_type").value
-      print("display_name", dn, "resource_type", rt)
+      print("display_name", dn, "resource_type", rt, "expressions", self.get_fields(sv, rt))
 #      a["expressions"] = self.get_fields(sv, rt)
 #      b.append(a)
     return b
