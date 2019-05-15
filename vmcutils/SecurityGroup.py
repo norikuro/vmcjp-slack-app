@@ -30,7 +30,7 @@ def get_expressions(sg):
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
       field_list.append({"resource_type": rt, "fields": get_fields(sv)})
-      i++
+      i+=1
 
     ex_dict["expressions"] = field_list
     ex_list.append(ex_dict)
