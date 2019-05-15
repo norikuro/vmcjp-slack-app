@@ -39,7 +39,6 @@ class NetworkConfig(object):
           sv = ex.get_struct_value()
           rt = sv.get_field("resource_type").value
           a["resource_type"] = rt
-          b = []
           if rt == "IPAddressExpression":
             a["ip_addresses"] = [ip.value for ip in list(sv.get_field("ip_addresses"))]
         c.append(a)
