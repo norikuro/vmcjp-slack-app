@@ -52,20 +52,22 @@ class NetworkConfig(object):
 
   def get_expressions(self, sg):
     ex_list = []
-    ex_dict = {}
-    dn = sg.display_name
-    ex_dict = {"display_name": dn}
-    a = []
+    field_list = []    
+#    dn = sg.display_name
+    ex_dict = {"display_name": sg.display_name}
+  
     for ex in sg.expression:
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
-      a.append({"resource_type": rt, "fields": self.get_fields(sv)})
-    ex_dict["expressions"] = a
+      field_list.append({"resource_type": rt, "fields": self.get_fields(sv)})
+      
+    ex_dict["expressions"] = field_list
     ex_list.append(ex_dict)
     return ex_list
 
   def get_fields(self, struct_value):
     rt = struct_value.get_field("resource_type").value
+    
     if rt == "IPAddressExpression":
       return [ip.value for ip in list(struct_value.get_field("ip_addresses"))]
     elif rt == "Condition":
@@ -80,7 +82,8 @@ class NetworkConfig(object):
       print("ConjunctionOperator")
     elif rt == "NestedExpression":
       print("NestedExpression")
-    return None
+    else:
+      print("aaa")
     
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
