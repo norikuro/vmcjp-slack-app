@@ -31,7 +31,7 @@ class NetworkConfig(object):
     sg_list.append(get_security_group("mgw", self.nsx_client))
     sg_list.append(get_security_group("cgw", self.nsx_client))
     self.network_config["security_groups"] = sg_list
-#    print(dict(self.network_config))
+    print(dict(self.network_config))
     
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
