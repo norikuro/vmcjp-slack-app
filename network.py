@@ -34,11 +34,13 @@ class NetworkConfig(object):
                  "vCenter"]
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     c = []
+    d = {}
     for sg in security_groups:
       dn = sg.display_name
       if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
         c.append(self.get_expressions(sg))
-    self.network_config["security_groups"] = c
+    d = {"gateway_type": gateway_type, "groups": c}
+    self.network_config["security_groups"] = d
     print(dict(self.network_config))
 
   def get_expressions(self, sg):
