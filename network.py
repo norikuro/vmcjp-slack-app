@@ -41,7 +41,7 @@ class NetworkConfig(object):
     
     security_groups = self.nsx_client.infra.domains.Groups.list(gateway_type).results
     
-    print(security_groups[0].expression.__dict__.items())
+    print(security_groups[0].expression[0].__dict__.items())
     
     group_list = []
     for sg in security_groups:
