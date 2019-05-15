@@ -43,8 +43,6 @@ class NetworkConfig(object):
             if rt == "IPAddressExpression":
               ips = list(ex.get_struct_value().get_field("ip_addresses"))
               b = [ip.value for ip in ips]
-#              for ip in ips:
-#                b.append(ip.value)
               a["ip_addresses"] = b
         c.append(a)
     d["security_groups"] = c
