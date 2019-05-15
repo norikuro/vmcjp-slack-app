@@ -43,7 +43,6 @@ class NetworkConfig(object):
 
   def get_expressions(self, sg):
     dn = sg.display_name
-    
     for ex in sg.expression:
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
