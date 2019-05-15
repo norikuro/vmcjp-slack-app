@@ -26,7 +26,14 @@ class NetworkConfig(object):
         org_id=org_id,
         sddc_id=sddc_id)
 
-  def list_security_group(self, gateway_type):
+  def list_security_group(self):
+    sg_list = []
+    sg_list.append(get_security_group("mgw"))
+#    sg_list.append(get_security_group("cgw"))
+    self.network_config["security_groups"] = sg_list
+    print(dict(self.network_config))
+    
+  def get_security_group(self, gateway_type):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
                  "ESXi",
                  "HCX",
@@ -42,8 +49,7 @@ class NetworkConfig(object):
         c.append(self.get_expressions(sg))
     d = {"gateway_type": gateway_type, "groups": c}
     e.append(d)
-    self.network_config["security_groups"] = e
-    print(dict(self.network_config))
+    return e
 
   def get_expressions(self, sg):
     dn = sg.display_name
@@ -64,7 +70,7 @@ def lambda_handler(event, context):
 
 def main():
   network_operations = NetworkConfig()
-  network_operations.list_security_group("mgw")
+  network_operations.list_security_group()
 
 if __name__ == '__main__':
   main()
