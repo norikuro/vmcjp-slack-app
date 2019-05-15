@@ -29,7 +29,7 @@ class NetworkConfig(object):
   def list_security_group(self):
     sg_list = []
     sg_list.append(self.get_security_group("mgw"))
-#    sg_list.append(self.get_security_group("cgw"))
+    sg_list.append(self.get_security_group("cgw"))
     self.network_config["security_groups"] = sg_list
     print(dict(self.network_config))
     
