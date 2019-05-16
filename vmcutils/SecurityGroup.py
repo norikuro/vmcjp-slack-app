@@ -40,6 +40,12 @@ def get_fields(struct_value):
       return {"resource_type": rt, 
               "ip_addresses": [ip.value for ip in list(struct_value.get_field("ip_addresses"))]}
     elif rt == "Condition":
+      a = {"resource_type": rt,
+           "member_type": struct_value.get_field("member_type").value,
+           "key": struct_value.get_field("key").value,
+           "operator": struct_value.get_field("operator").value,
+           "value": struct_value.get_field("value").value}
+
       print("here----")
       print("member_type: ", struct_value.get_field("member_type").value)
       print("key: ", struct_value.get_field("key").value)
@@ -47,6 +53,8 @@ def get_fields(struct_value):
       print("value: ", struct_value.get_field("value").value)
       print("resource_type: ", struct_value.get_field("resource_type").value)
       print("end----")
+      
+      return a
     elif rt == "ConjunctionOperator":
       print("here----")
       print(struct_value)
