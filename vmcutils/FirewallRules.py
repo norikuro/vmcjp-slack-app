@@ -10,8 +10,8 @@ def get_firewall_rules(gateway_type, nsx_client):
   rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule", "Default VTI Rule"]
   rules_list = []
   
-  sg_dict = get_security_group_ids_and_names(gateway_type, nsx_client)
-#  print(sg_dict.keys())
+  security_groups = get_security_group_ids_and_names(gateway_type, nsx_client)
+#  print(security_groups.keys())
   
 #  print(nsx_client.Infra.get())
 #  print(nsx_client.infra.Tier1s.list())
@@ -26,7 +26,7 @@ def get_firewall_rules(gateway_type, nsx_client):
     if dn not in rule_system:
       sn = rule.get_field("sequence_number")
       sg = replace_strings_in_list(rule.get_field("source_groups"), "/infra/domains/mgw/groups/")
-      sg_names = compare_list_and_dict(sg, sg_dict)
+      sg_names = compare_list_and_dict(sg, security_groups)
 #      print(sg_names)
       dg = rule.get_field("destination_groups")
       a = {"create_user": rule.get_field("create_user"),
