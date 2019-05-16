@@ -21,12 +21,12 @@ def get_firewall_rules(gateway_type, nsx_client):
       sn = rule.get_field("sequence_number")
       a = {"create_user": rule.get_field("create_user"),
            "display_name": rule.get_field("display_name"),
+           "logged": rule.get_field("logged"),
            "destination_groups": rule.get_field("destination_groups"),
            "services": rule.get_field("services"),
            "sequence_number": sn,
            "action": rule.get_field("action"),
-           "source_groups": rule.get_field("source_groups"),
-           "logged": rule.get_field("logged")}
+           "source_groups": rule.get_field("source_groups")}
       print(rule)
       rules_list.insert(sn, a)
 #  print(rules)
