@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import json
+import time
 
 from datetime import datetime
 from collections import OrderedDict
@@ -29,21 +30,30 @@ class NetworkConfig(object):
           sddc_id=sddc_id)
 
     def list_security_groups(self):
+        start = time.time()
         sg_list = []
         sg_list.append(get_security_groups("mgw", self.nsx_client))
         sg_list.append(get_security_groups("cgw", self.nsx_client))
         self.network_config["security_groups"] = sg_list
 #        print(dict(self.network_config))
+        elapsed_time = time.time() - start
+        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_firewall_rules(self):
+        start = time.time()
         fw_list = []
         fw_list.append(get_firewall_rules("mgw", self.nsx_client))
         fw_list.append(get_firewall_rules("cgw", self.nsx_client))
         self.network_config["firewall_rules"] = fw_list
 #        print(dict(self.network_config))
+        elapsed_time = time.time() - start
+        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
     
     def list_segments(self):
+        start = time.time()
         get_segments("cgw", self.nsx_client)
+        elapsed_time = time.time() - start
+        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
