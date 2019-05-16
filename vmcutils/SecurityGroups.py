@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from vmcutils.Metadata import get_members
+
 def get_security_groups(gateway_type, nsx_client):
     sg_system = ["/infra/domains/mgw/groups/hcx-ix-ips-public",
                  "ESXi",
@@ -12,6 +14,7 @@ def get_security_groups(gateway_type, nsx_client):
 
     for sg in security_groups:
       dn = sg.display_name
+      get_members(sg)
       if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
         group_list.append(get_expressions(sg))
 
