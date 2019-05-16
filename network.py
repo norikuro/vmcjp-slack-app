@@ -48,7 +48,7 @@ def lambda_handler(event, context):
 
 def main():
     network_operations = NetworkConfig()
-    network_operations.list_security_groups()
+#    network_operations.list_security_groups()
     network_operations.list_firewall_rules()
 #    network_operations.output_to_s3()
 
