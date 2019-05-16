@@ -9,6 +9,7 @@ def get_firewall_rules(gateway_type, nsx_client):
   rules_list = []
   
   sg_dict = get_security_group_ids_and_names(gateway_type, nsx_client)
+  print(sg_dict)
   
 #  print(nsx_client.Infra.get())
 #  print(nsx_client.infra.Tier1s.list())
@@ -47,5 +48,5 @@ def compare_list_dict(ls, dic):
   and_list = set(key_list) & set(ls)
   for id in and_list:
     value_list.append(dic[id])
-  print(value_list)
+#  print(value_list)
     
