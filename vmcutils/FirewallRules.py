@@ -41,6 +41,6 @@ def get_firewall_rules(gateway_type, nsx_client):
            "source_group_names": sg_names}
 #      print(rule)
       rules_list.insert(sn, a)
-  print(rules_list)
+#  print(rules_list)
 #  get_members(rule)
   return {"display_name": gw_dn, "rules": rules_list}
