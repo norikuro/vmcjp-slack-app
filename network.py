@@ -7,6 +7,7 @@ from collections import OrderedDict
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from vmcutils.S3 import write_json_to_s3, read_json_from_s3
 from vmcutils.SecurityGroup import get_security_groups
+from vmcutils.FirewallRule import get_firewall_rules
 
 class NetworkConfig(object):
     def __init__(self):
@@ -34,7 +35,7 @@ class NetworkConfig(object):
 #        print(dict(self.network_config))
 
     def list_firewall_rules(self):
-        test
+        get_firewall_rules(self.nsx_client)
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
