@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import inspect
 
 def get_firewall_rules(nsx_client):
 #  print(nsx_client.Infra.get())
