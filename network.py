@@ -43,7 +43,7 @@ class NetworkConfig(object):
 #        print(dict(self.network_config))
     
     def list_segments(self):
-        get_segments("cgw", self.nsx_client)):
+        get_segments("cgw", self.nsx_client)
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
