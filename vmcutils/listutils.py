@@ -7,3 +7,4 @@ def compare_list_and_dict(ls, dic):
   for id in and_list:
     value_list.append(dic[id])
 #  print(value_list)
+  return value_list
