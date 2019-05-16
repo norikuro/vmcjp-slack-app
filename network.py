@@ -36,10 +36,10 @@ class NetworkConfig(object):
 
     def list_firewall_rules(self):
         fw_list = []
-#        fw_list.append(get_firewall_rules("mgw", self.nsx_client))
+        fw_list.append(get_firewall_rules("mgw", self.nsx_client))
         fw_list.append(get_firewall_rules("cgw", self.nsx_client))
         self.network_config["firewall_rules"] = fw_list
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
@@ -52,8 +52,8 @@ def lambda_handler(event, context):
 
 def main():
     network_operations = NetworkConfig()
-#    network_operations.list_security_groups()
-    network_operations.list_firewall_rules()
+    network_operations.list_security_groups()
+#    network_operations.list_firewall_rules()
 #    network_operations.output_to_s3()
 
 if __name__ == '__main__':
