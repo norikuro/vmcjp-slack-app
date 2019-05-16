@@ -35,13 +35,13 @@ def get_rules(rule, gateway_type, security_groups):
   dg_names = compare_list_and_dict(dg, security_groups)
 
   return {"create_user": rule.get_field("create_user"),
-       "display_name": rule.get_field("display_name"),
-       "logged": rule.get_field("logged"),
-       "destination_groups": dest_groups,
-       "destination_groups_names": dg_names,
-       "scope": rule.get_field("scope"),
-       "services": rule.get_field("services"),
-       "sequence_number": sn,
-       "action": rule.get_field("action"),
-       "source_groups": source_groups,
-       "source_group_names": sg_names}
+          "display_name": rule.get_field("display_name"),
+          "logged": rule.get_field("logged"),
+          "destination_groups": dest_groups,
+          "destination_groups_names": dg_names,
+          "scope": rule.get_field("scope"),
+          "services": rule.get_field("services"),
+          "sequence_number": sn,
+          "action": rule.get_field("action"),
+          "source_groups": source_groups,
+          "source_group_names": sg_names}
