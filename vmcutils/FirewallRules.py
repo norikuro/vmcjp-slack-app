@@ -14,7 +14,7 @@ def get_firewall_rules(nsx_client):
   rules = policies.get_field("rules")
   for rule in rules:
 #    get_members(rule)
-    print("here----)
+    print("here----")
     print(rule.get_field("create_user"))
     print(rule.get_field("display_name"))
     print(rule.get_field("destination_groups"))
@@ -22,5 +22,5 @@ def get_firewall_rules(nsx_client):
     print(rule.get_field("sequence_number"))
     print(rule.get_field("action"))
     print(rule.get_field("source_groups"))
-    print("end----)
+    print("end----")
 #  print(rules)
