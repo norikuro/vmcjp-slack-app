@@ -29,14 +29,14 @@ def get_firewall_rules(gateway_type, nsx_client):
     if dn not in rule_system:
       sn = rule.get_field("sequence_number")
       source_groups = rule.get_field("source_groups")
-      print("source:")
-      print(source_groups)
       sg = replace_strings_in_list(source_groups, "/infra/domains/" + gateway_type + "/groups/")
+      print("source:")
+      print(sg)
       sg_names = compare_list_and_dict(sg, security_groups)
       dest_groups = rule.get_field("destination_groups")
-      print("dest:")
-      print(dest_groups)
       dg = replace_strings_in_list(dest_groups, "/infra/domains/" + gateway_type + "/groups/")
+      print("dest:")
+      print(dg)
       dg_names = compare_list_and_dict(dg, security_groups)
       a = {"create_user": rule.get_field("create_user"),
            "display_name": rule.get_field("display_name"),
