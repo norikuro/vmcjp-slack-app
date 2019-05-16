@@ -11,7 +11,7 @@ def get_firewall_rules(gateway_type, nsx_client):
   rules_list = []
   
   sg_dict = get_security_group_ids_and_names(gateway_type, nsx_client)
-  print(sg_dict.keys())
+#  print(sg_dict.keys())
   
 #  print(nsx_client.Infra.get())
 #  print(nsx_client.infra.Tier1s.list())
@@ -26,10 +26,9 @@ def get_firewall_rules(gateway_type, nsx_client):
     dn = rule.get_field("display_name")
     if dn not in rule_system:
       sn = rule.get_field("sequence_number")
-      sg = rule.get_field("source_groups")
+      sg = replace_strings_in_list(rule.get_field("source_groups"), "/infra/domains/mgw/groups/")
       dg = rule.get_field("destination_groups")
-      print(replace_strings_in_list(sg, "/infra/domains/mgw/groups/"))
-#      sg_names = compare_list_and_dict(sg, sg_dict)
+      sg_names = compare_list_and_dict(sg, sg_dict)
       a = {"create_user": rule.get_field("create_user"),
            "display_name": rule.get_field("display_name"),
            "logged": rule.get_field("logged"),
