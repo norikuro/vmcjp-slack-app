@@ -27,7 +27,6 @@ def get_firewall_rules(nsx_client):
            "action": rule.get_field("action"),
            "source_groups": rule.get_field("source_groups")}
       rules_list.insert(sn, a)
-  b = {"display_name": gw_dn, "rules": rules_list}
 #  print(rules)
 #  get_members(rule)
-  return b
+  return {"display_name": gw_dn, "rules": rules_list}
