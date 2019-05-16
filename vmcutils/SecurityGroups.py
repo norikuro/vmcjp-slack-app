@@ -35,7 +35,7 @@ def get_expressions(sg):
 #      print(ex.to_json())
       sv = ex.get_struct_value()
 #      rt = ex.get_field("resource_type")
-      rt = sv.get_field("resource_type")
+#      rt = sv.get_field("resource_type")
 #      get_members(sv)
       field_list.append(get_fields(sv))
 
