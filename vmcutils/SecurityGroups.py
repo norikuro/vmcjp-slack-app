@@ -14,8 +14,6 @@ def get_security_groups(gateway_type, nsx_client):
 
     for sg in security_groups:
       dn = sg.get_field("display_name")
-      print(sg.to_json())
-#      get_members(sg)
       if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
         group_list.append(get_expressions(sg))
 
@@ -29,6 +27,7 @@ def get_expressions(sg):
 #    get_members(sg.get_field("expression")[0].to_json())
 #    print(sg.get_field("expression")[0].to_json())
     for ex in sg.get_field("expression"):
+      print(ex.to_json())
       sv = ex.get_struct_value()
       rt = sv.get_field("resource_type").value
       field_list.append(get_fields(sv))
