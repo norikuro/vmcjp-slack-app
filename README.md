@@ -15,7 +15,7 @@ followings are main scripts
 
 followings are helper scripts
 * firewall_rules.py
-* security_groupes.py
+* security_groups.py
 * vmcutils/*.py
 
 ## Clone vmc-demo to local
