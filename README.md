@@ -18,18 +18,19 @@ followings are helper scripts
 * security_groups.py
 * vmcutils/*.py
 
-## Clone vmc-demo to local
+## How to...
+### Clone vmc-demo to local
 
 ```cmd
 git clone https://github.com/norikuro/vmc-demo.git
 ```
 
-## First, set PYTHONPATH to use this  
+### First, set PYTHONPATH to use this  
 ```cmd
 export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
 
-## Prepare config files
+### Prepare config files
 We need following JSON files to run this script.  
 
 | file          | file localtion | description |
@@ -38,7 +39,7 @@ We need following JSON files to run this script.
 | token.json | S3 | This file contains VMC's refresh token. |
 | config.json | S3 | This file contains VMC's org id, SDDC's name, id, connected customer AWS account id and subnet id. |
 
-### config file exsample
+#### config file exsample
 * s3config.json
   * location: vmc-demo/s3config.json
 ```cmd
