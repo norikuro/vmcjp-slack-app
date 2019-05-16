@@ -59,7 +59,7 @@ We need following JSON files to run this script.
 | token.json | S3 | This file contains VMC's refresh token. |
 | config.json | S3 | This file contains VMC's org id, SDDC's name, id, connected customer AWS account id and subnet id. |
 
-#### config file exsample
+#### config file example
 * s3config.json
   * location: vmc-demo/s3config.json
 ```cmd
