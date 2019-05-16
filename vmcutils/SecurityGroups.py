@@ -22,7 +22,7 @@ def get_security_groups(gateway_type, nsx_client):
 
 def get_expressions(sg):
     field_list = []
-    ex_dict = {"display_name": sg.display_name}
+    ex_dict = {"display_name": sg.get_field("display_name")}
 
     for ex in sg.expression:
       sv = ex.get_struct_value()
