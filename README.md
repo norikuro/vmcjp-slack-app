@@ -45,7 +45,7 @@ Default output format [None]: (Enter)
 # git clone https://github.com/norikuro/vmc-demo.git
 ```
 
-### Set PYTHONPATH to use this  
+### Set PYTHONPATH to be able to import librarys  
 ```cmd
 # export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
