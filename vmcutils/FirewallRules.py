@@ -2,6 +2,7 @@
 import inspect
 
 from vmcutils.Metadata import get_members
+from vmcutils.SecurityGroups import get_security_group_ids_and_names
 
 def get_firewall_rules(gateway_type, nsx_client):
   rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule", "Default VTI Rule"]
