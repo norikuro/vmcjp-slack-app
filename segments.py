@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 from vmcutils.metadata import get_members
+import time
 
 def get_segments(gateway_type, nsx_client):
-  result = nsx_client.infra.tier_1s.Segments.list(gateway_type).results[4]
-#  print(get_members(result))
+  start = time.time()
+  result = nsx_client.infra.tier_1s.Segments.list(gateway_type).results[11]
+#  print(result.to_dict())
   print("create_user ", result.get_field("create_user"))
   print("display_name ", result.get_field("display_name"))
   print("domain_name ", result.get_field("domain_name"))
@@ -27,3 +29,5 @@ def get_segments(gateway_type, nsx_client):
   print("dhcp_ranges ", subnet.get_field("dhcp_ranges"))
   print("gateway_address ", subnet.get_field("gateway_address"))
   print("network ", subnet.get_field("network"))
+  elapsed_time = time.time() - start
+  print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
