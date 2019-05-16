@@ -43,12 +43,14 @@ class NetworkConfig(object):
 def lambda_handler(event, context):
     network_operations = NetworkConfig()
     network_operations.list_security_groups()
+    network_operations.list_firewall_rules()
     network_operations.output_to_s3()
 
 def main():
     network_operations = NetworkConfig()
     network_operations.list_security_groups()
-    network_operations.output_to_s3()
+    network_operations.list_firewall_rules()
+#    network_operations.output_to_s3()
 
 
 if __name__ == '__main__':
