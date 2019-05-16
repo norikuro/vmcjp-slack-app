@@ -28,7 +28,7 @@ def get_firewall_rules(gateway_type, nsx_client):
       sn = rule.get_field("sequence_number")
       sg = rule.get_field("source_groups")
       dg = rule.get_field("destination_groups")
-      print(sg)
+      print(replace_strings_in_list(sg, "/infra/domains/mgw/groups/"))
 #      sg_names = compare_list_and_dict(sg, sg_dict)
       a = {"create_user": rule.get_field("create_user"),
            "display_name": rule.get_field("display_name"),
