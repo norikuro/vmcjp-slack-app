@@ -52,6 +52,5 @@ def main():
     network_operations.list_firewall_rules()
 #    network_operations.output_to_s3()
 
-
 if __name__ == '__main__':
     main()
