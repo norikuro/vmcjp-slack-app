@@ -40,7 +40,7 @@ def get_expressions(sg):
 
 def get_fields(struct_value):
     rt = struct_value.get_field("resource_type").value
-    print(struct_value.("resource_type"))
+    print(struct_value.get_field("resource_type"))
 
     if rt == "IPAddressExpression":
       return {"resource_type": rt, 
