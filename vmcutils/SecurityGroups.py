@@ -27,7 +27,7 @@ def get_expressions(sg):
 
 #    ex_dict["expressions"] = field_list
     ex_dict["expressions"] = [get_fields(ex.get_struct_value()) for ex in sg.get_field("expression")]
-    print(ex_dict)
+#    print(ex_dict)
     return ex_dict
 
 def get_fields(struct_value):
