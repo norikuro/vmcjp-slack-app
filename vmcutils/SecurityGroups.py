@@ -8,14 +8,17 @@ def get_security_groups(gateway_type, nsx_client):
                  "HCX",
                  "NSX Manager",
                  "vCenter"]
+    sys_usr = ["admin", "admin;admin"]
     group_list = []
 
     security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
 
     for sg in security_groups:
       dn = sg.get_field("display_name")
-      print(sg.get_field("_create_user"))
-      if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
+      usr = sg.get_field("_create_user")
+      print(usr)
+#      if dn not in sg_system and "HCX-IX-vm-" not in dn and "HCX-GRP-" not in dn and sg.expression != None:
+      if usr not in sys_usr:
         group_list.append(get_expressions(sg))
 
     return {"gateway_type": gateway_type, "groups": group_list}
