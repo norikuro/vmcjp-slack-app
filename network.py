@@ -32,7 +32,7 @@ class NetworkConfig(object):
         sg_list.append(get_security_groups("mgw", self.nsx_client))
         sg_list.append(get_security_groups("cgw", self.nsx_client))
         self.network_config["security_groups"] = sg_list
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
 
     def list_firewall_rules(self):
         fw_list = []
