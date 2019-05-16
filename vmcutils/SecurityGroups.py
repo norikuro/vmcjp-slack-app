@@ -21,10 +21,12 @@ def get_expressions(sg):
     ex_dict = {"display_name": sg.get_field("display_name"),
                "id": sg.get_field("id")}
 
-    for ex in sg.get_field("expression"):
-      field_list.append(get_fields(ex.get_struct_value()))
+#    for ex in sg.get_field("expression"):
+#      field_list.append(get_fields(ex.get_struct_value()))
+    field_list.append([get_fields(ex.get_struct_value()) for ex in sg.get_field("expression")])
 
     ex_dict["expressions"] = field_list
+    print(ex_dict)
     return ex_dict
 
 def get_fields(struct_value):
