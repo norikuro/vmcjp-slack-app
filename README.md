@@ -79,7 +79,7 @@ vmc-env is bucket name, specified in s3config.json
 }
 ```
 
-## Run scripts
+### Run scripts
 
 ```cmd
 $ python sddc.py
