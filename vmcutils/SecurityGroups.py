@@ -23,7 +23,8 @@ def get_security_groups(gateway_type, nsx_client):
 
 def get_expressions(sg):
     field_list = []
-    ex_dict = {"display_name": sg.get_field("display_name")}
+    ex_dict = {"display_name": sg.get_field("display_name"),
+               "id": sg.get_field("id")}
 
 #    get_members(sg.get_field("expression")[0].to_json())
 #    print(sg.get_field("expression")[0].to_json())
