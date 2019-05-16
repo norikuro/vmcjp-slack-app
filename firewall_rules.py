@@ -11,7 +11,7 @@ def get_firewall_rules(gateway_type, nsx_client):
   rules_list = []
   
   security_groups = get_security_group_ids_and_names(gateway_type, nsx_client)
-#  print(security_groups)
+  print(security_groups)
 
   policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default")
   gw_dn = policies.get_field("display_name")
@@ -21,7 +21,7 @@ def get_firewall_rules(gateway_type, nsx_client):
     if rule.get_field("display_name") not in rule_system:
       rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
   
-  print(rules_list)
+#  print(rules_list)
 #  get_members(rule)
   return {"display_name": gw_dn, "rules": rules_list}
 
