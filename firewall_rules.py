@@ -24,7 +24,7 @@ def get_firewall_rules(gateway_type, nsx_client):
     if rule.get_field("create_user") not in admin_user:
       rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
   
-#  print(rules_list)
+  print(rules_list)
 #  get_members(rule)
   return {"display_name": gw_dn, "rules": rules_list}
 
