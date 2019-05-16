@@ -9,6 +9,6 @@ def get_firewall_rules(nsx_client):
   obj = nsx_client.infra.domains.GatewayPolicies.get('mgw', 'default')
   field = obj.get_field("rules")
   print(nsx_client.infra.domains.GatewayPolicies)
-  print(field[0])
+#  print(field[0])
   for x in inspect.getmembers(field[0], inspect.ismethod):
     print x[0]
