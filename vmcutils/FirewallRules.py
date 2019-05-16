@@ -8,6 +8,6 @@ def get_firewall_rules(nsx_client):
 #  print(nsx_client.infra.Domains.list())
   obj = nsx_client.infra.domains.GatewayPolicies.get('mgw', 'default')
   struct_value = obj.get_struct_value()
-  print(obj.get_field("display_name"))
+  print(obj)
   for x in inspect.getmembers(obj, inspect.ismethod):
     print x[0]
