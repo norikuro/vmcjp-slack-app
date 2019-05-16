@@ -27,7 +27,7 @@ def get_firewall_rules(gateway_type, nsx_client):
 #    dn = rule.get_field("display_name")
     
 #    if dn not in rule_system:
-    if dn = rule.get_field("display_name") not in rule_system:
+    if rule.get_field("display_name") not in rule_system:
       rules_list = get_rules(rule, gateway_type)
 #      sn = rule.get_field("sequence_number")
 #      source_groups = rule.get_field("source_groups")
