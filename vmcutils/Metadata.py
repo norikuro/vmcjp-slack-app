@@ -2,5 +2,7 @@
 import inspect
 
 def get_members(obj):
-  for x in inspect.getmembers(obj, inspect.ismethod):
-    print x[0]
+  for x in dir(obj):
+    print x
+#  for x in inspect.getmembers(obj, inspect.ismethod):
+#    print x[0]
