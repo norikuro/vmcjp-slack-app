@@ -7,6 +7,9 @@ from vmcutils.SecurityGroups import get_security_group_ids_and_names
 def get_firewall_rules(gateway_type, nsx_client):
   rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule", "Default VTI Rule"]
   rules_list = []
+  
+  sg_lists = get_security_group_ids_and_names(gateway_type, nsx_client)
+  
 #  print(nsx_client.Infra.get())
 #  print(nsx_client.infra.Tier1s.list())
 #  print(nsx_client.infra.tier_1s.Segments.list('cgw'))
