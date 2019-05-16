@@ -7,6 +7,7 @@ def get_firewall_rules(nsx_client):
 #  print(nsx_client.infra.tier_1s.Segments.list('cgw'))
 #  print(nsx_client.infra.Domains.list())
   obj = nsx_client.infra.domains.GatewayPolicies.get('mgw', 'default')
-  print(obj)
+  struct_value = obj.get_struct_value()
+  print(struct_value)
   for x in inspect.getmembers(obj, inspect.ismethod):
     print x[0]
