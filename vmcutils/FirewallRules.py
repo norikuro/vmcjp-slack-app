@@ -37,3 +37,9 @@ def get_firewall_rules(gateway_type, nsx_client):
 #  print(rules)
 #  get_members(rule)
   return {"display_name": gw_dn, "rules": rules_list}
+
+  def compare_list_dict(ls, dic):
+    key_list = dic.keys()
+    and_list = set(key_list) & set(ls)
+    print(ls)
+    
