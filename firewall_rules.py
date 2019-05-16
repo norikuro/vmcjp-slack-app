@@ -33,7 +33,8 @@ def get_rules(rule, gateway_type, security_groups):
   dest_groups = rule.get_field("destination_groups")
   dg = replace_strings_in_list(dest_groups, "/infra/domains/" + gateway_type + "/groups/")
   dg_names = compare_list_and_dict(dg, security_groups)
-  a = {"create_user": rule.get_field("create_user"),
+
+  return {"create_user": rule.get_field("create_user"),
        "display_name": rule.get_field("display_name"),
        "logged": rule.get_field("logged"),
        "destination_groups": dest_groups,
@@ -44,6 +45,3 @@ def get_rules(rule, gateway_type, security_groups):
        "action": rule.get_field("action"),
        "source_groups": source_groups,
        "source_group_names": sg_names}
-#  rules_list.insert(sn, a)
-
-  return a
