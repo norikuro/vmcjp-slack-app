@@ -26,12 +26,13 @@ def get_expressions(sg):
 
 #    get_members(sg.get_field("expression")[0])
 #    print(sg.get_field("expression")[0].to_json())
+    print(sg.get_field("resource_type"))
     for ex in sg.get_field("expression"):
 #      print(ex.to_json())
-      get_members(ex)
       sv = ex.get_struct_value()
-      rt = ex.get_field("resource_type")
-#      rt = sv.get_field("resource_type")
+#      rt = ex.get_field("resource_type")
+      rt = sv.get_field("resource_type")
+      get_members(sv)
       field_list.append(get_fields(sv))
 
     ex_dict["expressions"] = field_list
