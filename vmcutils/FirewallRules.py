@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import inspect
 
+from vmcutils.Metadata import get_members
+
 def get_firewall_rules(nsx_client):
 #  print(nsx_client.Infra.get())
 #  print(nsx_client.infra.Tier1s.list())
@@ -11,5 +13,5 @@ def get_firewall_rules(nsx_client):
   dn = obj.get_field("display_name")
   print(obj)
 #  print(field[0])
-  for x in inspect.getmembers(field[0], inspect.ismethod):
-    print x[0]
+  get_members(obj)
+  
