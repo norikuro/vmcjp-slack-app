@@ -24,13 +24,26 @@ followings are helper scripts
 * vmcutils/*.py
 
 ## How to...
+### Configure AWS Endpoint and deploy EC2 instance
+First you need to configure AWS Endpoint to be able to access S3 from EC2.
+Deploy EC2 instance.
+Configure awscli on EC2 instance with following command.
+execute "aws s3 ls" command and check if the command was list your S3 buckes successfully.
+```cmd
+aws configure
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: (your region id, like us-west-2)
+Default output format [None]: (Enter)
+```
+
 ### Clone vmc-demo to local
 
 ```cmd
 git clone https://github.com/norikuro/vmc-demo.git
 ```
 
-### First, set PYTHONPATH to use this  
+### Set PYTHONPATH to use this  
 ```cmd
 export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
