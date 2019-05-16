@@ -4,7 +4,7 @@ import inspect
 from vmcutils.Metadata import get_members
 
 def get_firewall_rules(gateway_type, nsx_client):
-  rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule"]
+  rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule", "Default VTI Rule"]
   rules_list = []
 #  print(nsx_client.Infra.get())
 #  print(nsx_client.infra.Tier1s.list())
