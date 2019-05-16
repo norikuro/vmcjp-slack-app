@@ -30,24 +30,24 @@ Deploy EC2 instance.
 Configure awscli on EC2 instance with following command.
 execute "aws s3 ls" command and check if the command was list your S3 buckes successfully.
 ```cmd
-aws configure
+# aws configure
 AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
 AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 Default region name [None]: (your region id, like us-west-2)
 Default output format [None]: (Enter)
 
-aws s3 ls
+# aws s3 ls
 ```
 
 ### Clone vmc-demo to local
 
 ```cmd
-git clone https://github.com/norikuro/vmc-demo.git
+# git clone https://github.com/norikuro/vmc-demo.git
 ```
 
 ### Set PYTHONPATH to use this  
 ```cmd
-export PYTHONPATH=${PWD}:$PYTHONPATH
+# export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
 
 ### Prepare config files
