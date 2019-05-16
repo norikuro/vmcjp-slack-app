@@ -4,6 +4,7 @@ from vmcutils.metadata import get_members
 def get_segments(gateway_type, nsx_client):
   result = nsx_client.infra.tier_1s.Segments.list(gateway_type).results[0]
 #  print(get_members(result))
+  print(result.get_field("create_user"))
   print(result.get_field("display_name"))
   print(result.get_field("domain_name"))
   print(result.get_field("id"))
