@@ -37,7 +37,8 @@ def get_fields(struct_value):
     rt = struct_value.get_field("resource_type").value
 
     if rt == "IPAddressExpression":
-      return {"resource_type": rt, "ip_addresses": [ip.value for ip in list(struct_value.get_field("ip_addresses"))]}
+      return {"resource_type": rt, 
+              "ip_addresses": [ip.value for ip in list(struct_value.get_field("ip_addresses"))]}
     elif rt == "Condition":
       print("here----")
       print("member_type: ", struct_value.get_field("member_type").value)
