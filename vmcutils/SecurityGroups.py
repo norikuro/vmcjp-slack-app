@@ -30,7 +30,8 @@ def get_expressions(sg):
 #      print(ex.to_json())
       get_members(ex)
       sv = ex.get_struct_value()
-      rt = ex.get_field("resource_type")
+#      rt = ex.get_field("resource_type")
+      rt = sv.get_field("resource_type")
       field_list.append(get_fields(sv))
 
     ex_dict["expressions"] = field_list
