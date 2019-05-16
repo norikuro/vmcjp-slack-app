@@ -26,6 +26,7 @@ def get_firewall_rules(gateway_type, nsx_client):
            "sequence_number": sn,
            "action": rule.get_field("action"),
            "source_groups": rule.get_field("source_groups")}
+      print(rule)
       rules_list.insert(sn, a)
 #  print(rules)
 #  get_members(rule)
