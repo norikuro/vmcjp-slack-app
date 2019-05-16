@@ -22,4 +22,4 @@ def get_segments(gateway_type, nsx_client):
   print(result.get_field("system_owned"))
   print(result.get_field("tags"))
   print(result.get_field("type"))
-  print(type(result.get_field("subnets")))
+  print(get_members(result.get_field("subnets")[0]))
