@@ -18,10 +18,10 @@ def get_firewall_rules(gateway_type, nsx_client):
   rules = policies.get_field("rules")
 
   for rule in rules:
-    dn = rule.get_field("display_name")
+#    dn = rule.get_field("display_name")
     
-    if dn not in rule_system:
-#    if rule.get_field("display_name") not in rule_system:
+#    if dn not in rule_system:
+    if rule.get_field("display_name") not in rule_system:
       rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
   
   print(rules_list)
