@@ -6,6 +6,11 @@ SDDC.py will back up VMware Cloud on AWS configurations like following informati
 * Number of hosts
 * Management CIDR block
 * SDDC version
+
+network.py will back up VMware Cloud on AWS's network configurations like following information to S3.
+* Security Groups (user created groups)
+* Firewall Rules (user created fws)
+
 You can run this script on AWS EC2 or AWS Lambda.
 
 ## Scrips
