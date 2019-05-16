@@ -23,17 +23,17 @@ def get_firewall_rules(gateway_type, nsx_client):
   gw_dn = policies.get_field("display_name")
   rules = policies.get_field("rules")
 
-  rules_list.insert(
-    rule.get_field("sequence_number"),
-    [get_rules(rule, gateway_type, security_groups) for rule in rules 
-     if rule.get_field("display_name") not in rule_system]
-  )
-#  for rule in rules:
-#    dn = rule.get_field("display_name")
+#  rules_list.insert(
+#    rule.get_field("sequence_number"),
+#    [get_rules(rule, gateway_type, security_groups) for rule in rules 
+#     if rule.get_field("display_name") not in rule_system]
+#  )
+  for rule in rules:
+    dn = rule.get_field("display_name")
     
-#    if dn not in rule_system:
+    if dn not in rule_system:
 #    if rule.get_field("display_name") not in rule_system:
-#      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
+      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
 #      sn = rule.get_field("sequence_number")
 #      source_groups = rule.get_field("source_groups")
 #      sg = replace_strings_in_list(source_groups, "/infra/domains/" + gateway_type + "/groups/")
