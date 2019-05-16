@@ -3,6 +3,7 @@ import inspect
 
 from vmcutils.Metadata import get_members
 from vmcutils.SecurityGroups import get_security_group_ids_and_names
+from vmcutils.listutils import compare_list_and_dict
 
 def get_firewall_rules(gateway_type, nsx_client):
   rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule", "Default VTI Rule"]
@@ -27,7 +28,7 @@ def get_firewall_rules(gateway_type, nsx_client):
       sg = rule.get_field("source_groups")
       dg = rule.get_field("destination_groups")
       print(sg)
-#      sg_names = compare_list_dict(sg, sg_dict)
+#      sg_names = compare_list_and_dict(sg, sg_dict)
       a = {"create_user": rule.get_field("create_user"),
            "display_name": rule.get_field("display_name"),
            "logged": rule.get_field("logged"),
