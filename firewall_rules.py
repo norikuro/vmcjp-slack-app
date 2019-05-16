@@ -7,7 +7,6 @@ from vmcutils.listutils import compare_list_and_dict
 from vmcutils.stringutils import replace_strings_in_list
 
 def get_firewall_rules(gateway_type, nsx_client):
-#  rule_system = ["vCenter Outbound Rule", "ESXi Outbound Rule", "Default VTI Rule"]
   admin_user = ["admin", "admin;admin"]
   rules_list = []
   
@@ -20,7 +19,6 @@ def get_firewall_rules(gateway_type, nsx_client):
   rules = policies.get_field("rules")
 
   for rule in rules:
-#    if rule.get_field("display_name") not in rule_system:
     if rule.get_field("create_user") not in admin_user:
       rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
   
