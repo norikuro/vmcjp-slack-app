@@ -33,13 +33,19 @@ class NetworkConfig(object):
     self.network_config["security_groups"] = sg_list
     print(dict(self.network_config))
     
+  def output_to_s3(self):
+    write_json_to_s3("vmc-env", "network.json", self.network_config)
+
 def lambda_handler(event, context):
   network_operations = NetworkConfig()
   network_operations.list_security_groups()
+  network_operations.output_to_s3()
 
 def main():
   network_operations = NetworkConfig()
   network_operations.list_security_groups()
+  network_operations.output_to_s3()
+
 
 if __name__ == '__main__':
   main()
