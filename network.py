@@ -45,7 +45,7 @@ class NetworkConfig(object):
         fw_list.append(get_firewall_rules("mgw", self.nsx_client))
         fw_list.append(get_firewall_rules("cgw", self.nsx_client))
         self.network_config["firewall_rules"] = fw_list
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
     
