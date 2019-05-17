@@ -31,7 +31,7 @@ def get_l3vpns(nsx_client):
 #  print(get_members(obj))
 #  print(obj.__dict__.items())
 #  print(obj.to_dict())
-  return a
+  return {"l3vpn": a}
   
 def get_vpn_session(session):
   a = []
