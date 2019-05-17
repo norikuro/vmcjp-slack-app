@@ -11,6 +11,7 @@ network.py will back up VMware Cloud on AWS's network configurations like follow
 * Security Groups (user created groups)
 * Firewall Rules (user created fws)
 * Segments (user created routed and extended segments)
+* VPN (L3VPN and L2VPN) configuration
 
 You can run this script on AWS EC2 or AWS Lambda.
 
