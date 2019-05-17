@@ -4,15 +4,16 @@ from vmcutils.metadata import get_members
 
 def get_security_groups(gateway_type, nsx_client):
     sys_usr = ["admin", "admin;admin"]
-    group_list = []
+#    group_list = []
 
     security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
 
-    for sg in security_groups:
-      usr = sg.get_field("_create_user")
+#    for sg in security_groups:
+#      usr = sg.get_field("_create_user")
 #      print(usr)
-      if usr not in sys_usr:
-        group_list.append(get_expressions(sg))
+#      if usr not in sys_usr:
+#        group_list.append(get_expressions(sg))
+    group_list = [get_expressions(sg) for sg in security_groups if sg.get_field("_create_user") not in sys_usr]
 
     return {"gateway_type": gateway_type, "groups": group_list}
 
