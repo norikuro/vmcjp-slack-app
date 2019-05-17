@@ -54,7 +54,7 @@ def get_rules(rule, gateway_type, security_groups):
 #          "action": rule.get_field("action"),
 #          "source_groups": source_groups,
 #          "source_group_names": sg_names}
-  return {"create_user": rule["create_user"],
+  return {"create_user": rule["_create_user"],
           "display_name": rule["display_name"],
           "logged": rule["logged"],
           "destination_groups": dest_groups,
