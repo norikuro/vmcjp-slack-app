@@ -7,9 +7,17 @@ def get_security_groups(gateway_type, nsx_client):
 
     security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
 
-    group_list = [get_expressions(sg) for sg in security_groups if sg.get_field("_create_user") not in sys_usr]
+#    group_list = [get_expressions(sg) for sg in security_groups if sg.get_field("_create_user") not in sys_usr]
 
-    return {"gateway_type": gateway_type, "groups": group_list}
+#    return {"gateway_type": gateway_type, "groups": group_list}
+    return {
+        "gateway_type": gateway_type, 
+        "groups": [
+            get_expressions(sg) 
+            for sg in security_groups 
+            if sg.get_field("_create_user") not in sys_usr
+        ]
+    }
 
 def get_expressions(sg):
     ex_dict = {"display_name": sg.get_field("display_name"),
