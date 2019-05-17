@@ -23,13 +23,13 @@ class NetworkConfig(object):
         
         self.network_config = OrderedDict()
         self.network_config["updated"] = datetime.now().strftime("%Y/%m/%d")
-        start = time.time()
+#        start = time.time()
         self.nsx_client = create_nsx_policy_client_for_vmc(
           refresh_token=refresh_token,
           org_id=org_id,
           sddc_id=sddc_id)
-        elapsed_time = time.time() - start
-        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+#        elapsed_time = time.time() - start
+#        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_security_groups(self):
         start = time.time()
