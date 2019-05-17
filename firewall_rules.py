@@ -14,16 +14,23 @@ def get_firewall_rules(gateway_type, nsx_client):
 #  print(security_groups)
 
 #  policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default")
+
+# dict type
   policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default").to_dict()
+  
 #  print(policies.to_dict())
 #  gw_dn = policies.get_field("display_name")
 #  rules = policies.get_field("rules")
+
+#dict type
   gw_dn = policies["display_name"]
   rules = policies["rules"]
 
   for rule in rules:
 #    if rule.get_field("create_user") not in admin_user:
 #      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
+
+# dict type
     if rule["_create_user"] not in admin_user:
       rules_list.insert(rule["sequence_number"], get_rules(rule, gateway_type, security_groups))
   
@@ -34,8 +41,8 @@ def get_firewall_rules(gateway_type, nsx_client):
 def get_rules(rule, gateway_type, security_groups):
 #  sn = rule.get_field("sequence_number")
   sn = rule["sequence_number"]
-#  source_groups = rule.get_field("source_groups")
   source_groups = rule["source_groups"]
+#  source_groups = rule.get_field("source_groups")
   sg = replace_strings_in_list(source_groups, "/infra/domains/" + gateway_type + "/groups/")
   sg_names = compare_list_and_dict(sg, security_groups)
 #  dest_groups = rule.get_field("destination_groups")
@@ -54,6 +61,8 @@ def get_rules(rule, gateway_type, security_groups):
 #          "action": rule.get_field("action"),
 #          "source_groups": source_groups,
 #          "source_group_names": sg_names}
+
+# dict type
   return {"create_user": rule["_create_user"],
           "display_name": rule["display_name"],
           "logged": rule["logged"],
