@@ -11,7 +11,7 @@ from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
-from domains import get_domains
+from vpns import get_l3vpns
 
 class NetworkConfig(object):
     def __init__(self):
@@ -64,8 +64,8 @@ class NetworkConfig(object):
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
 
-    def list_domains(self):
-        get_domains(self.nsx_client)
+    def list_l3vpns(self):
+        get_l3vpns(self.nsx_client)
 #        get_domains(self.nsx_vpn_client)
     
     def output_to_s3(self):
@@ -83,7 +83,7 @@ def main():
 #    network_operations.list_security_groups()
 #    network_operations.list_firewall_rules()
 #    network_operations.list_segments()
-    network_operations.list_domains()
+    network_operations.list_l3vpns()
 #    network_operations.output_to_s3()
 
 if __name__ == '__main__':
