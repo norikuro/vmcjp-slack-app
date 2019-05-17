@@ -6,6 +6,7 @@ import time
 from datetime import datetime
 from collections import OrderedDict
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
+from com.vmware.nsx_client_for_vmc import create_nsx_client_for_vmc
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
