@@ -9,7 +9,7 @@ def get_l3vpns(nsx_client):
   vpns = nsx_client.infra.tier_0s.locale_services.L3vpns.list("vmc", "default").results
 
   for vpn in vpns:
-    {
+    a = {
       "enable_perfect_forward_secrecy": vpn.get_field("enable_perfect_forward_secrecy"),
       "ike_digest_algorithms": vpn.get_field("ike_digest_algorithms"),
       "dh_groups": vpn.get_field("dh_groups"),
@@ -30,7 +30,8 @@ def get_l3vpns(nsx_client):
 #  print(type(obj))
 #  print(get_members(obj))
 #  print(obj.__dict__.items())
-  print(obj.to_dict())
+#  print(obj.to_dict())
+  return a
   
 def get_vpn_session(session):
   a = []
