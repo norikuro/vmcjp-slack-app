@@ -33,9 +33,10 @@ class NetworkConfig(object):
 
     def list_security_groups(self):
         start = time.time()
-        sg_list = []
-        sg_list.append(get_security_groups("mgw", self.nsx_client))
-        sg_list.append(get_security_groups("cgw", self.nsx_client))
+        sg_list = [
+            get_security_groups("mgw", self.nsx_client),
+            get_security_groups("cgw", self.nsx_client)
+        ]
         self.network_config["security_groups"] = sg_list
 #        print(dict(self.network_config))
         elapsed_time = time.time() - start
