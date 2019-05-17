@@ -49,14 +49,14 @@ class NetworkConfig(object):
         ]
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
+        print(dict(self.network_config))
     
     def list_segments(self):
         start = time.time()
         self.network_config["segments"] = get_segments("cgw", self.nsx_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
