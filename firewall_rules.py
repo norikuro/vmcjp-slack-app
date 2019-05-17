@@ -7,7 +7,7 @@ from vmcutils.listutils import compare_list_and_dict
 from vmcutils.stringutils import replace_strings_in_list
 
 def get_firewall_rules(gateway_type, nsx_client):
-  admin_user = ["admin", "admin;admin"]
+  admin_user = set(["admin", "admin;admin"])
   rules_list = []
   
   security_groups = get_security_group_ids_and_names(gateway_type, nsx_client)
