@@ -29,6 +29,10 @@ class NetworkConfig(object):
           refresh_token=refresh_token,
           org_id=org_id,
           sddc_id=sddc_id)
+        self.nsx_vpn_client = create_nsx_client_for_vmc(
+          refresh_token=refresh_token,
+          org_id=org_id,
+          sddc_id=sddc_id)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
@@ -60,7 +64,7 @@ class NetworkConfig(object):
 #        print(dict(self.network_config))
 
     def list_domains(self):
-        get_domains(self.nsx_client)
+        get_domains(self.nsx_vpn_client)
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
