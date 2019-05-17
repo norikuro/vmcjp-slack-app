@@ -65,8 +65,8 @@ class NetworkConfig(object):
 #        print(dict(self.network_config))
 
     def list_domains(self):
-#        get_domains(self.nsx_client)
-        get_domains(self.nsx_vpn_client)
+        get_domains(self.nsx_client)
+#        get_domains(self.nsx_vpn_client)
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
