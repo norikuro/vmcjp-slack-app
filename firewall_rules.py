@@ -25,7 +25,8 @@ def get_firewall_rules(gateway_type, nsx_client):
 #  gw_dn = policies["display_name"]
 #  rules = policies["rules"]
 
-  a = [get_rules(rule, gateway_type, security_groups) for rule in rules if rule.get_field("create_user") not in admin_user]
+  rules_list = [get_rules(rule, gateway_type, security_groups) for rule in rules if rule.get_field("create_user") not in admin_user]
+  a = {"display_name": gw_dn, "rules": rules_list}
   print(a)
 #  for rule in rules:
 #    if rule.get_field("create_user") not in admin_user:
