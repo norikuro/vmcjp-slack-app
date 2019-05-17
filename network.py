@@ -43,9 +43,6 @@ class NetworkConfig(object):
 
     def list_firewall_rules(self):
         start = time.time()
-#        fw_list = []
-#        fw_list.append(get_firewall_rules("mgw", self.nsx_client))
-#        fw_list.append(get_firewall_rules("cgw", self.nsx_client))
         fw_list = [
             get_firewall_rules("mgw", self.nsx_client),
             get_firewall_rules("cgw", self.nsx_client)
@@ -53,7 +50,7 @@ class NetworkConfig(object):
         self.network_config["firewall_rules"] = fw_list
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
     
     def list_segments(self):
         start = time.time()
@@ -75,8 +72,8 @@ def lambda_handler(event, context):
 def main():
     network_operations = NetworkConfig()
 #    network_operations.list_security_groups()
-    network_operations.list_firewall_rules()
-#    network_operations.list_segments()
+#    network_operations.list_firewall_rules()
+    network_operations.list_segments()
 #    network_operations.output_to_s3()
 
 if __name__ == '__main__':
