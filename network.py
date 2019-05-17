@@ -33,22 +33,20 @@ class NetworkConfig(object):
 
     def list_security_groups(self):
         start = time.time()
-        sg_list = [
+        self.network_config["security_groups"] = [
             get_security_groups("mgw", self.nsx_client),
             get_security_groups("cgw", self.nsx_client)
         ]
-        self.network_config["security_groups"] = sg_list
 #        print(dict(self.network_config))
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_firewall_rules(self):
         start = time.time()
-        fw_list = [
+        self.network_config["firewall_rules"] = [
             get_firewall_rules("mgw", self.nsx_client),
             get_firewall_rules("cgw", self.nsx_client)
         ]
-        self.network_config["firewall_rules"] = fw_list
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
