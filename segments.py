@@ -12,5 +12,5 @@ def get_segments(gateway_type, nsx_client):
            "l2_extension": segment.get_field("l2_extension"),
            "subnet": segment.get_field("subnets")[0].to_dict(),
            "type": segment.get_field("type")})
-  print(b)
+#  print(b)
   return b
