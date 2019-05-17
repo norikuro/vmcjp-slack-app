@@ -45,7 +45,7 @@ def get_fields(struct_value):
       print("else expression")
 
 def get_security_group_ids_and_names(gateway_type, nsx_client):
-#  security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
-  security_groups = nsx_client.infra.domains.Groups.list(gateway_type).to_dict()["results"]
-#  return {sg.get_field("id"):sg.get_field("display_name") for sg in security_groups}
-  return {sg["id"]:sg["display_name"] for sg in security_groups}
+  security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
+#  security_groups = nsx_client.infra.domains.Groups.list(gateway_type).to_dict()["results"]
+  return {sg.get_field("id"):sg.get_field("display_name") for sg in security_groups}
+#  return {sg["id"]:sg["display_name"] for sg in security_groups}
