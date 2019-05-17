@@ -14,7 +14,7 @@ def get_firewall_rules(gateway_type, nsx_client):
 #  print(security_groups)
 
   policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default")
-  print(get_members(policies))
+  print(policies.to_dict())
   gw_dn = policies.get_field("display_name")
   rules = policies.get_field("rules")
 
