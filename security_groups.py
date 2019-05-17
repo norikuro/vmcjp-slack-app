@@ -17,12 +17,17 @@ def get_security_groups(gateway_type, nsx_client):
     }
 
 def get_expressions(sg):
-    ex_dict = {"display_name": sg.get_field("display_name"),
-               "id": sg.get_field("id")}
+#    ex_dict = {"display_name": sg.get_field("display_name"),
+#               "id": sg.get_field("id")}
     
-    ex_dict["expressions"] = [get_fields(ex.get_struct_value()) for ex in sg.get_field("expression")]
+#    ex_dict["expressions"] = [get_fields(ex.get_struct_value()) for ex in sg.get_field("expression")]
 
-    return ex_dict
+#    return ex_dict
+    return {
+        "display_name": sg.get_field("display_name"),
+        "id": sg.get_field("id"),
+        "expressions": [get_fields(ex.get_struct_value()) for ex in sg.get_field("expression")]
+    }
 
 def get_fields(struct_value):
     rt = struct_value.get_field("resource_type").value
