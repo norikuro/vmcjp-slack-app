@@ -2,5 +2,5 @@
 from vmcutils.metadata import get_members
 
 def get_domains(nsx_client):
-  print(get_members(nsx_client.configs))
-  print(nsx_client.configs[0])
+  print(get_members(nsx_client.infra))
+  print(nsx_client.infra)
