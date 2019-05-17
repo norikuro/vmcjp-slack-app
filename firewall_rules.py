@@ -13,14 +13,19 @@ def get_firewall_rules(gateway_type, nsx_client):
   security_groups = get_security_group_ids_and_names(gateway_type, nsx_client)
 #  print(security_groups)
 
-  policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default")
-  print(policies.to_dict())
-  gw_dn = policies.get_field("display_name")
-  rules = policies.get_field("rules")
+#  policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default")
+  policies = nsx_client.infra.domains.GatewayPolicies.get(gateway_type, "default").to_dict()
+#  print(policies.to_dict())
+#  gw_dn = policies.get_field("display_name")
+#  rules = policies.get_field("rules")
+  gw_dn = policies["display_name"]
+  rules = policies["rules"]
 
   for rule in rules:
-    if rule.get_field("create_user") not in admin_user:
-      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
+#    if rule.get_field("create_user") not in admin_user:
+#      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
+    if rule["create_user"] not in admin_user:
+      rules_list.insert(rule["sequence_number"], get_rules(rule, gateway_type, security_groups))
   
 #  print(rules_list)
 #  get_members(rule)
