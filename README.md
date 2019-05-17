@@ -23,6 +23,8 @@ followings are main scripts
 followings are helper scripts
 * firewall_rules.py
 * security_groups.py
+* segments.py
+* vpns.py
 * vmcutils/*.py
 
 ## How to...
