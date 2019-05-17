@@ -25,16 +25,19 @@ def get_firewall_rules(gateway_type, nsx_client):
 #  gw_dn = policies["display_name"]
 #  rules = policies["rules"]
 
-  for rule in rules:
-    if rule.get_field("create_user") not in admin_user:
-      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
+  a = {"display_name": gw_dn, "rules": rules_list[rule.get_field("sequence_number")]=get_rules(rule, gateway_type, security_groups) for rule in rules if rule.get_field("create_user") not in admin_user}
+  print(a)
+#  for rule in rules:
+#    if rule.get_field("create_user") not in admin_user:
+#      rules_list.insert(rule.get_field("sequence_number"), get_rules(rule, gateway_type, security_groups))
 # dict type
 #    if rule["_create_user"] not in admin_user:
 #      rules_list.insert(rule["sequence_number"], get_rules(rule, gateway_type, security_groups))
   
 #  print(rules_list)
 #  get_members(rule)
-  return {"display_name": gw_dn, "rules": rules_list}
+#  return {"display_name": gw_dn, "rules": rules_list}
+  return a
 
 def get_rules(rule, gateway_type, security_groups):
   sn = rule.get_field("sequence_number")
