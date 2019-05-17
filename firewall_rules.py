@@ -8,7 +8,7 @@ from vmcutils.stringutils import replace_strings_in_list
 
 def get_firewall_rules(gateway_type, nsx_client):
   admin_user = set(["admin", "admin;admin"])
-  rules_list = []
+#  rules_list = []
   
   security_groups = get_security_group_ids_and_names(gateway_type, nsx_client)
 #  print(security_groups)
