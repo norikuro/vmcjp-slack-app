@@ -10,6 +10,7 @@ from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
+from domain import get_domains
 
 class NetworkConfig(object):
     def __init__(self):
@@ -57,6 +58,9 @@ class NetworkConfig(object):
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
+
+    def list_domains(self):
+        get_domains(self.nsx_client)
     
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
