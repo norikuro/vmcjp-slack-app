@@ -26,18 +26,7 @@ def get_l3vpns(nsx_client):
     }
 
 def get_vpn_session(session):
-#  a = []
   rules = session["rules"]
-#  for rule in rules:
-#    a.append(
-#      {
-#        "sources": rule["sources"],
-#        "resource_type": rule["resource_type"],
-#        "id": rule["id"],
-#        "sequence_number": rule["sequence_number"],
-#        "destinations": rule["destinations"],
-#      }
-#    )
   a = [
     {
       "sources": rule["sources"],
