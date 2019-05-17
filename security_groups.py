@@ -17,6 +17,7 @@ def get_security_groups(gateway_type, nsx_client):
     }
 
 def get_expressions(sg):
+    
     return {
         "display_name": sg.get_field("display_name"),
         "id": sg.get_field("id"),
@@ -45,4 +46,5 @@ def get_fields(struct_value):
 
 def get_security_group_ids_and_names(gateway_type, nsx_client):
   security_groups = nsx_client.infra.domains.Groups.list(gateway_type).results
+
   return {sg.get_field("id"):sg.get_field("display_name") for sg in security_groups}
