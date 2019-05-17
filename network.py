@@ -51,9 +51,9 @@ class NetworkConfig(object):
             get_firewall_rules("cgw", self.nsx_client)
         ]
         self.network_config["firewall_rules"] = fw_list
-#        print(dict(self.network_config))
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+        print(dict(self.network_config))
     
     def list_segments(self):
         start = time.time()
