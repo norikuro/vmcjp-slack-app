@@ -7,7 +7,7 @@ def get_segments(gateway_type, nsx_client):
 #  print(result.to_dict())
   b = []
   for segment in segments:
-    if segment.get_field("type") != "DISCONNECTED":
+    if segment.get_field("type") != "DIS":
       b.append({"create_user": segment.get_field("create_user"),
            "display_name": segment.get_field("display_name"),
            "domain_name": segment.get_field("domain_name"),
