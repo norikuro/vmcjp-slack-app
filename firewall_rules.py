@@ -31,7 +31,6 @@ def get_rules(rule, gateway_type, security_groups):
   sn = rule.get_field("sequence_number")
   source_groups = rule.get_field("source_groups")
   sg = replace_strings_in_list(source_groups, "/infra/domains/" + gateway_type + "/groups/")
-  print(sg)
   sg_names = compare_list_and_dict(sg, security_groups)
   dest_groups = rule.get_field("destination_groups")
   dg = replace_strings_in_list(dest_groups, "/infra/domains/" + gateway_type + "/groups/")
