@@ -12,24 +12,26 @@ from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from com.vmware.content.library_client import SubscribedItem
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+from vmc_client import get_vmc_client
 
 
 class SDDCConfig(object):
     def __init__(self):
-        f = json.load(open('s3config.json', 'r'))
-        t = read_json_from_s3(f["bucket"], f["token"])
-        j = read_json_from_s3(f["bucket"], f["config"])
+#        f = json.load(open('s3config.json', 'r'))
+#        t = read_json_from_s3(f["bucket"], f["token"])
+#        j = read_json_from_s3(f["bucket"], f["config"])
 
-        refresh_token = t["token"]
+#        refresh_token = t["token"]
         org_id = j["org"]["id"]
         sddc_id = j["sddc"]["id"]
+
+        # Login to VMware Cloud on AWS
+        vmc_client = get_vmc_client("s3config.json")
 
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
         self.vsphere = None
 
-        # Login to VMware Cloud on AWS
-        vmc_client = create_vmc_client(refresh_token)
 
         # Check if the organization exists
         orgs = vmc_client.Orgs.list()
