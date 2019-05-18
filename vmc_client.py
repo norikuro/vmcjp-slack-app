@@ -41,6 +41,6 @@ def get_vsphere_client(sddc):
 #  vc_host = sddc.resource_config.vc_management_ip
   return create_vsphere_client(
     vc_host, 
-    username=self.sddc.resource_config.cloud_username, 
-    password=self.sddc.resource_config.cloud_password
+    username=sddc.resource_config.cloud_username, 
+    password=sddc.resource_config.cloud_password
   )
