@@ -28,7 +28,7 @@ def get_sddc(s3config):
   
 #  org_id = "1c8787fb-d284-4cbd-92d2-860ad7a826b"
 #  orgg = "1c8787fb-d284-4cbd-92d2-860ad7a826b0"
-  print(get_members(vmc_client.Orgs))
+  print(vmc_client.Orgs.get("1c8787fb-d284-4cbd-92d2-860ad7a826b0"))
   
   # Check if the sddc exists and return existing sddc
   try:
