@@ -44,7 +44,7 @@ def get_sddc(s3config):
     c = vmc_client.orgs.Sddcs.get(org_id, b)
   except NotFound:
     print("error")
-  print(c)
+#  print(c)
 
 #  for sddc in sddcs:
 #    if sddc_id == sddc.id:
