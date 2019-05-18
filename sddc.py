@@ -63,13 +63,14 @@ class SDDCConfig(object):
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
 
         self.sddc_config["folders"] = {"name": [i.name for i in filter(lambda x: not x.name in management_folders, folders)]}
-        print(dict(self.sddc_config))
+#        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
         if not self.vsphere:
           self.vsphere = get_vsphere(self.sddc)
 
         contentlib_ids = self.vsphere.content.Library.list()
+        
         a = []
         for id in contentlib_ids:
           t = str(self.vsphere.content.Library.get(id).type)
