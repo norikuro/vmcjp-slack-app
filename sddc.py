@@ -30,12 +30,6 @@ class SDDCConfig(object):
     def get_vcenter(self):
         self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
 
-#    def connect_vcenter(self):
-#        vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
-#        vc_host = sddc.resource_config.vc_management_ip
-#        self.vsphere = create_vsphere_client(vc_host, username=self.sddc.resource_config.cloud_username, password=self.sddc.resource_config.cloud_password)
-#        self.vsphere = get_vsphere_client(self.sddc)
-    
     def list_user_resourcepools(self):
         management_pools = ["Resources", 
                             "Mgmt-ResourcePool", 
