@@ -102,8 +102,8 @@ def main():
     sddc_operations = SDDCConfig()
 #    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
-#    sddc_operations.list_user_resourcepools()
-    sddc_operations.list_user_folders()
+    sddc_operations.list_user_resourcepools()
+#    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
 #    sddc_operations.output_to_s3()
 
