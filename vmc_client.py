@@ -7,3 +7,8 @@ def get_vmc_client():
   t = read_json_from_s3(f["bucket"], f["token"])
   j = read_json_from_s3(f["bucket"], f["config"])
   
+  refresh_token = t["token"]
+#  org_id = j["org"]["id"]
+#  sddc_id = j["sddc"]["id"]
+  
+  return create_vmc_client(refresh_token)
