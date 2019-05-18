@@ -30,7 +30,7 @@ def get_sddc(s3config):
   if not sddcs:
     raise ValueError("require at least one SDDC associated"
                      "with the calling user")
-    
-  if sddc_id == [sddc.id for sddc in sddcs]:
-    print(sddc.id)
-    return sddc
+  for sddc in sddcs:
+    if sddc_id == sddc.id:
+      print(sddc.id)
+      return sddc
