@@ -15,10 +15,6 @@ def get_sddc(s3config):
   org_id = j["org"]["id"]
   sddc_id = j["sddc"]["id"]
   
-#  print(refresh_token)
-#  print(org_id)
-#  print(sddc_id)
-  
   # Login to VMware Cloud on AWS
   vmc_client = create_vmc_client(refresh_token)
   
@@ -39,6 +35,8 @@ def get_sddc(s3config):
 def get_vsphere_client(sddc):
   vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
 #  vc_host = sddc.resource_config.vc_management_ip
+
+  # Login to vCenter Server
   return create_vsphere_client(
     vc_host, 
     username=sddc.resource_config.cloud_username, 
