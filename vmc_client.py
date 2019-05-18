@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import com.vmware.vapi.std.errors_client.NotFound
+
 from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
@@ -38,7 +40,10 @@ def get_sddc(s3config):
 
   a = "b9faab50-1f98-4fbd-9bf8-869b3df7fe34"
   b = "b9faab50-1f98-4fbd-9bf8-869b3df7fe3"
-  c = vmc_client.orgs.Sddcs.get(org_id, b)
+  try:
+    c = vmc_client.orgs.Sddcs.get(org_id, b)
+  except NotFound:
+    print("error")
   print(c)
 
 #  for sddc in sddcs:
