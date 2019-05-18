@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from vmcutils.fileutils import load_json
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 
 def get_config(filename):
