@@ -32,7 +32,7 @@ def get_sddc(s3config):
     if sddc_id == sddc.id:
       return sddc
 
-def get_vcenter(sddc):
+def get_vsphere(sddc):
   vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
 #  vc_host = sddc.resource_config.vc_management_ip
 
