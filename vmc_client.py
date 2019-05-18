@@ -5,6 +5,7 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from vmcutils.fileutils import load_json
 from vmcutils.s3 import read_json_from_s3
+from vmcutils.metadata import get_members
 
 def get_sddc(s3config):
   f = load_json(s3config)
