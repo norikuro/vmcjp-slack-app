@@ -33,3 +33,12 @@ def get_sddc(s3config):
   for sddc in sddcs:
     if sddc_id == sddc.id:
       return sddc
+
+def get_vsphere_client(sddc):
+  vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
+#  vc_host = sddc.resource_config.vc_management_ip
+  return create_vsphere_client(
+    vc_host, 
+    username=self.sddc.resource_config.cloud_username, 
+    password=self.sddc.resource_config.cloud_password
+  )
