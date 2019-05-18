@@ -26,9 +26,11 @@ class SDDCConfig(object):
                                     "num_hosts": len(self.sddc.resource_config.esx_hosts),
                                     "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr,
                                     "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version}
+        print(self.sddc_config)
 
     def get_vcenter(self):
         self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
+#        print(self.sddc_config)
 
     def list_user_resourcepools(self):
         management_pools = ["Resources", 
@@ -43,6 +45,7 @@ class SDDCConfig(object):
         a = {}
         a["name"] = [i.name for i in filter(lambda x: not x.name in management_pools, rps)]
         self.sddc_config["resourcepools"] = a
+#        print(self.sddc_config)
 
     def list_user_folders(self):
         management_folders = ["Discovered virtual machine", 
@@ -64,6 +67,7 @@ class SDDCConfig(object):
         a = {}
         a["name"] = [i.name for i in filter(lambda x: not x.name in management_folders, folders)]
         self.sddc_config["folders"] = a
+#        print(self.sddc_config)
 
     def list_contentlibrary(self):
         if not self.vsphere:
@@ -82,7 +86,7 @@ class SDDCConfig(object):
                       "on_demand": self.vsphere.content.Library.get(id).subscription_info.on_demand,
                       "automatic_sync_enabled": self.vsphere.content.Library.get(id).subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
-        print(self.sddc_config)
+#        print(self.sddc_config)
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
@@ -98,7 +102,7 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-#    sddc_operations.get_sddc_config()
+    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
 #    sddc_operations.list_user_folders()
