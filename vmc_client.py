@@ -13,9 +13,9 @@ def get_sddc(s3config):
   org_id = j["org"]["id"]
   sddc_id = j["sddc"]["id"]
   
-  print(refresh_token)
-  print(org_id)
-  print(sddc_id)
+#  print(refresh_token)
+#  print(org_id)
+#  print(sddc_id)
   
   # Login to VMware Cloud on AWS
   vmc_client = create_vmc_client(refresh_token)
@@ -31,5 +31,5 @@ def get_sddc(s3config):
     raise ValueError("require at least one SDDC associated"
                      "with the calling user")
     
-    if sddc_id in [sddc.id for sddc in sddcs]:
-      return sddc
+  if sddc_id in [sddc.id for sddc in sddcs]:
+    return sddc
