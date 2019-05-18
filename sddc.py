@@ -34,8 +34,8 @@ class SDDCConfig(object):
         self.vsphere = None
 
         # Login to VMware Cloud on AWS
-        vmc_client = get_vmc_client("s3config.json")
-#        vmc_client = create_vmc_client(refresh_token)
+#        vmc_client = get_vmc_client("s3config.json")
+        vmc_client = create_vmc_client(refresh_token)
         
         # Check if the organization exists
         orgs = vmc_client.Orgs.list()
