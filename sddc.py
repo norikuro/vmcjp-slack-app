@@ -59,7 +59,7 @@ class SDDCConfig(object):
 #                                    "num_hosts": len(self.sddc.resource_config.esx_hosts),
 #                                    "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr,
 #                                    "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version}
-        print(self.sddc.get_field("name"))
+        print(get_members(self.sddc.get_field("resource_config")))
 
     def get_vcenter(self):
         self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
