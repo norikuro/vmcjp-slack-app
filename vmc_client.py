@@ -31,11 +31,16 @@ def get_sddc(s3config):
 #                     "with the calling user")
 
   # Check if the sddc exists and return existing sddc
-  if not set([sddc_id]) <= {sddc.id for sddc in sddcs}:
-    return vmc_client.orgs.Sddcs.get(org_id, sddc_id)
-  else:
-    raise ValueError("SDDC with ID {} doesn't exist".format(sddc_id))
-  
+#  if not set([sddc_id]) <= {sddc.id for sddc in sddcs}:
+#    return vmc_client.orgs.Sddcs.get(org_id, sddc_id)
+#  else:
+#    raise ValueError("SDDC with ID {} doesn't exist".format(sddc_id))
+
+a = "b9faab50-1f98-4fbd-9bf8-869b3df7fe34"
+b = "b9faab50-1f98-4fbd-9bf8-869b3df7fe3"
+c = vmc_client.orgs.Sddcs.get(org_id, a)
+print(c)
+
 #  for sddc in sddcs:
 #    if sddc_id == sddc.id:
 #      return sddc
