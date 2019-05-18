@@ -38,7 +38,7 @@ def get_sddc(s3config):
 
   a = "b9faab50-1f98-4fbd-9bf8-869b3df7fe34"
   b = "b9faab50-1f98-4fbd-9bf8-869b3df7fe3"
-  c = vmc_client.orgs.Sddcs.get(org_id, a)
+  c = vmc_client.orgs.Sddcs.get(org_id, b)
   print(c)
 
 #  for sddc in sddcs:
