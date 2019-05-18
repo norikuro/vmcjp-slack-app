@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import com.vmware.vapi.std.errors_client.NotFound
+from com.vmware.vapi.std.errors_client import NotFound
 
 from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
