@@ -12,6 +12,7 @@ from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from com.vmware.content.library_client import SubscribedItem
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+from vmcutils.metadata import get_members
 from vmc_client import get_sddc
 
 
@@ -58,7 +59,7 @@ class SDDCConfig(object):
 #                                    "num_hosts": len(self.sddc.resource_config.esx_hosts),
 #                                    "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr,
 #                                    "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version}
-        print(self.sddc)
+        print(get_members(self.sddc))
 
     def get_vcenter(self):
         self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
