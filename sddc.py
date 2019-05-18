@@ -13,7 +13,7 @@ from com.vmware.content_client import Library
 from com.vmware.content.library_client import SubscribedItem
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 from vmcutils.metadata import get_members
-from vmc_client import get_sddc
+from vmc_client import get_sddc, get_vcenter
 
 
 class SDDCConfig(object):
