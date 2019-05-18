@@ -22,8 +22,12 @@ class SDDCConfig(object):
 #        j = read_json_from_s3(f["bucket"], f["config"])
 
 #        refresh_token = t["token"]
-        org_id = j["org"]["id"]
-        sddc_id = j["sddc"]["id"]
+#        org_id = j["org"]["id"]
+#        sddc_id = j["sddc"]["id"
+        j = get_config("s3config.json")
+        refresh_token = j["token"]
+        org_id = j["org_id"]
+        sddc_id = j["sddc_id"]
 
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
