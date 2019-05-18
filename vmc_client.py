@@ -31,7 +31,7 @@ def get_sddc(s3config):
                      "with the calling user")
 
   print(set([sddc_id]) & {sddc.id for sddc in sddcs})
-  print(get_members(sddcs))
+  print(get_members(vmc_client.orgs.Sddcs))
   
 #  for sddc in sddcs:
 #    if sddc_id == sddc.id:
