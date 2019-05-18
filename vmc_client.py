@@ -30,7 +30,7 @@ def get_sddc(s3config):
     raise ValueError("require at least one SDDC associated"
                      "with the calling user")
 
-  print(set([sddc_id]) & {sddc.id for sddc in sddcs})
+  print(set([sddc_id]) <= {sddc.id for sddc in sddcs})
   print(vmc_client.orgs.Sddcs.get(org_id, sddc_id))
   
 #  for sddc in sddcs:
