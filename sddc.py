@@ -25,14 +25,14 @@ class SDDCConfig(object):
         org_id = j["org"]["id"]
         sddc_id = j["sddc"]["id"]
 
-        # Login to VMware Cloud on AWS
-        vmc_client = get_vmc_client("s3config.json")
-
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
         self.vsphere = None
 
-
+        # Login to VMware Cloud on AWS
+        vmc_client = get_vmc_client("s3config.json")
+#        vmc_client = create_vmc_client(refresh_token)
+        
         # Check if the organization exists
         orgs = vmc_client.Orgs.list()
         if org_id not in [org.id for org in orgs]:
