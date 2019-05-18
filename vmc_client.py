@@ -30,7 +30,7 @@ def get_sddc(s3config):
                      "with the calling user")
 
   a = set([sddc_id]) & set([sddc.id for sddc in sddcs])
-  print(a)
+  print(a.get(0))
   
   for sddc in sddcs:
     if sddc_id == sddc.id:
