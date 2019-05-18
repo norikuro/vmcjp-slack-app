@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 from collections import OrderedDict
 from six.moves.urllib import parse
-from vmware.vapi.vmc.client import create_vmc_client
+#from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
