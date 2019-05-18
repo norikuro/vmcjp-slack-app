@@ -30,7 +30,7 @@ def get_sddc(s3config):
   try:
     return vmc_client.orgs.Sddcs.get(org_id, sddc_id)
   except NotFound:
-    print("SDDC with ID {} doesn't exist".format(sddc_id))
+    raise ValueError("SDDC with ID {} doesn't exist".format(sddc_id))
 
 def get_vsphere(sddc):
   vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
