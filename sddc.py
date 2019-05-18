@@ -56,7 +56,7 @@ class SDDCConfig(object):
                               "Workloads", "Templates"]
 
         if not self.vsphere:
-          self.vsphere = get_vcenter(self.sddc)
+          self.vsphere = get_vsphere(self.sddc)
 
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
