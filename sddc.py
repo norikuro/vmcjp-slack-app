@@ -20,7 +20,7 @@ class SDDCConfig(object):
         self.vsphere = None
         self.sddc = get_sddc("s3config.json")
 
-    def get_sddc(self):
+    def get_sddc_config(self):
         self.sddc_config["sddc"] = {"id": self.sddc.id,
                                     "name": self.sddc.name,
                                     "num_hosts": len(self.sddc.resource_config.esx_hosts),
@@ -89,7 +89,7 @@ class SDDCConfig(object):
 
 def lambda_handler(event, context):
     sddc_operations = SDDCConfig()
-    sddc_operations.get_sddc()
+    sddc_operations.get_sddc_config()
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
@@ -98,7 +98,7 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.get_sddc()
+    sddc_operations.get_sddc_config()
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
