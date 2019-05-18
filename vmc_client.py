@@ -25,13 +25,16 @@ def get_sddc(s3config):
     raise ValueError("Org with ID {} doesn't exist".format(org_id))
   
   # Check if the sddc exists
-  sddcs = vmc_client.orgs.Sddcs.list(org_id)
-  if not sddcs:
-    raise ValueError("require at least one SDDC associated"
-                     "with the calling user")
+#  sddcs = vmc_client.orgs.Sddcs.list(org_id)
+#  if not sddcs:
+#    raise ValueError("require at least one SDDC associated"
+#                     "with the calling user")
 
-  print(set([sddc_id]) <= {sddc.id for sddc in sddcs})
-  print(vmc_client.orgs.Sddcs.get(org_id, sddc_id))
+  # Check if the sddc exists and return existing sddc
+  if not set([sddc_id]) <= {sddc.id for sddc in sddcs}:
+    return vmc_client.orgs.Sddcs.get(org_id, sddc_id)
+  else:
+    raise ValueError("SDDC with ID {} doesn't exist".format(sddc_id))
   
 #  for sddc in sddcs:
 #    if sddc_id == sddc.id:
