@@ -42,11 +42,8 @@ class SDDCConfig(object):
 
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
 
-#        a = {}
-#        a["name"] = [i.name for i in filter(lambda x: not x.name in management_pools, rps)]
-#        self.sddc_config["resourcepools"] = a
         self.sddc_config["resourcepools"] = {"name": [i.name for i in filter(lambda x: not x.name in management_pools, rps)]}
-        print(dict(self.sddc_config))
+#        print(dict(self.sddc_config))
 
     def list_user_folders(self):
         management_folders = ["Discovered virtual machine", 
