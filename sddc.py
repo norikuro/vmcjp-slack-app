@@ -75,7 +75,7 @@ class SDDCConfig(object):
                             "Compute-ResourcePool"]
 
         if not self.vsphere:
-          self.vsphere = get_vsphere_client(seld.sddc)
+          self.vsphere = get_vsphere_client(self.sddc)
 
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
 
@@ -95,7 +95,7 @@ class SDDCConfig(object):
                               "Workloads", "Templates"]
 
         if not self.vsphere:
-          self.vsphere = get_vsphere_client(seld.sddc)
+          self.vsphere = get_vsphere_client(self.sddc)
 
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
@@ -106,7 +106,7 @@ class SDDCConfig(object):
 
     def list_contentlibrary(self):
         if not self.vsphere:
-          self.vsphere = get_vsphere_client(seld.sddc)
+          self.vsphere = get_vsphere_client(self.sddc)
 
         contentlib_ids = self.vsphere.content.Library.list()
         a = []
