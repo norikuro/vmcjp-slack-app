@@ -10,7 +10,7 @@ from com.vmware.content_client import Library
 from com.vmware.content.library_client import SubscribedItem
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
 from vmcutils.metadata import get_members
-from vmc_client import get_sddc, get_vcenter
+from vmc_client import get_sddc, get_vsphere
 
 
 class SDDCConfig(object):
@@ -36,7 +36,7 @@ class SDDCConfig(object):
                             "Compute-ResourcePool"]
 
         if not self.vsphere:
-          self.vsphere = get_vcenter(self.sddc)
+          self.vsphere = get_vsphere(self.sddc)
 
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
 
@@ -67,7 +67,7 @@ class SDDCConfig(object):
 
     def list_contentlibrary(self):
         if not self.vsphere:
-          self.vsphere = get_vcenter(self.sddc)
+          self.vsphere = get_vsphere(self.sddc)
 
         contentlib_ids = self.vsphere.content.Library.list()
         a = []
