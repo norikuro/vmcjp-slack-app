@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmcutils.fileutils import load_json
 from vmcutils.s3 import read_json_from_s3
