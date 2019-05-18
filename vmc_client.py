@@ -35,7 +35,7 @@ def get_sddc(s3config):
       return sddc
 
 def get_vsphere_client(sddc):
-  vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
+  vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
 #  vc_host = sddc.resource_config.vc_management_ip
   return create_vsphere_client(
     vc_host, 
