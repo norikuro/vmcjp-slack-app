@@ -62,7 +62,6 @@ class SDDCConfig(object):
 
     def get_vcenter(self):
         self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
-        print(dict(self.sddc_config))
 
     def connect_vcenter(self):
 #        vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
@@ -83,6 +82,7 @@ class SDDCConfig(object):
         a = {}
         a["name"] = [i.name for i in filter(lambda x: not x.name in management_pools, rps)]
         self.sddc_config["resourcepools"] = a
+        print(dict(self.sddc_config))
 
     def list_user_folders(self):
         management_folders = ["Discovered virtual machine", 
@@ -137,9 +137,9 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.get_sddc()
-    sddc_operations.get_vcenter()
-#    sddc_operations.list_user_resourcepools()
+#    sddc_operations.get_sddc()
+#    sddc_operations.get_vcenter()
+    sddc_operations.list_user_resourcepools()
 #    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
 #    sddc_operations.output_to_s3()
