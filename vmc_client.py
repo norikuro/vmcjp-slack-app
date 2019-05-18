@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 from vmware.vapi.vmc.client import create_vmc_client
-#from vmcutils.fileutils import load_json
-from vmcutils.configutils import get_config
-#from vmcutils.s3 import read_json_from_s3
+from vmcutils.fileutils import load_json
+#from vmcutils.configutils import get_config
+from vmcutils.s3 import read_json_from_s3
 
 def get_sddc(s3config):
-  j = load_json(s3config)
+  f = load_json(s3config)
   t = read_json_from_s3(f["bucket"], f["token"])
   j = read_json_from_s3(f["bucket"], f["config"])
   
