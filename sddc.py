@@ -82,7 +82,7 @@ class SDDCConfig(object):
                       "on_demand": self.vsphere.content.Library.get(id).subscription_info.on_demand,
                       "automatic_sync_enabled": self.vsphere.content.Library.get(id).subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
-#        print(self.sddc_config)
+        print(self.sddc_config)
 
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
@@ -98,12 +98,12 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.get_sddc_config()
-    sddc_operations.get_vcenter()
-    sddc_operations.list_user_resourcepools()
-    sddc_operations.list_user_folders()
+#    sddc_operations.get_sddc_config()
+#    sddc_operations.get_vcenter()
+#    sddc_operations.list_user_resourcepools()
+#    sddc_operations.list_user_folders()
     sddc_operations.list_contentlibrary()
-    sddc_operations.output_to_s3()
+#    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
