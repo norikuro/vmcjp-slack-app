@@ -22,14 +22,12 @@ def get_sddc(s3config):
   vmc_client = create_vmc_client(refresh_token)
   
   # Check if the organization exists
-#  orgs = vmc_client.Orgs.list()
+  orgs = vmc_client.Orgs.list()
 #  if org_id not in [org.id for org in orgs]:
 #    raise ValueError("Org with ID {} doesn't exist".format(org_id))
-  
-#  org_id = "1c8787fb-d284-4cbd-92d2-860ad7a826b"
-#  orgg = "1c8787fb-d284-4cbd-92d2-860ad7a826b0"
-  print(type(vmc_client.Orgs.get("1c8787fb-d284-4cbd-92d2-860ad7a826b")))
-  
+  if not set[org_id]] <= {org.id for org in orgs}:
+    raise ValueError("Org with ID {} doesn't exist".format(org_id))
+    
   # Check if the sddc exists and return existing sddc
   try:
     return vmc_client.orgs.Sddcs.get(org_id, sddc_id)
