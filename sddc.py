@@ -12,7 +12,7 @@ from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from com.vmware.content.library_client import SubscribedItem
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
-from vmc_client import get_vmc_client
+from vmc_client import get_sddc
 
 
 class SDDCConfig(object):
@@ -23,11 +23,11 @@ class SDDCConfig(object):
 
 #        refresh_token = t["token"]
 #        org_id = j["org"]["id"]
-#        sddc_id = j["sddc"]["id"
-        j = get_config("s3config.json")
-        refresh_token = j["token"]
-        org_id = j["org_id"]
-        sddc_id = j["sddc_id"]
+#        sddc_id = j["sddc"]["id"]
+#        j = get_config("s3config.json")
+#        refresh_token = j["token"]
+#        org_id = j["org_id"]
+#        sddc_id = j["sddc_id"]
 
         self.sddc_config = OrderedDict()
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
@@ -35,21 +35,22 @@ class SDDCConfig(object):
 
         # Login to VMware Cloud on AWS
 #        vmc_client = get_vmc_client("s3config.json")
-        vmc_client = create_vmc_client(refresh_token)
+#        vmc_client = create_vmc_client(refresh_token)
         
         # Check if the organization exists
-        orgs = vmc_client.Orgs.list()
-        if org_id not in [org.id for org in orgs]:
-            raise ValueError("Org with ID {} doesn't exist".format(org_id))
+#        orgs = vmc_client.Orgs.list()
+#        if org_id not in [org.id for org in orgs]:
+#            raise ValueError("Org with ID {} doesn't exist".format(org_id))
 
         # Check if the sddc exists
-        sddcs = vmc_client.orgs.Sddcs.list(org_id)
-        if not sddcs:
-            raise ValueError('require at least one SDDC associated'
-                             'with the calling user')
+#        sddcs = vmc_client.orgs.Sddcs.list(org_id)
+#        if not sddcs:
+#            raise ValueError('require at least one SDDC associated'
+#                             'with the calling user')
 
-        if sddc_id in [sddc.id for sddc in sddcs]:
-            self.sddc = sddc
+#        if sddc_id in [sddc.id for sddc in sddcs]:
+#            self.sddc = sddc
+        self.sddc = get_sddc("s3config.json")
 
     def get_sddc(self):
         self.sddc_config["sddc"] = {"id": self.sddc.id,
