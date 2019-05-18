@@ -29,12 +29,11 @@ def get_sddc(s3config):
     raise ValueError("require at least one SDDC associated"
                      "with the calling user")
 
-  a = set([sddc_id]) & set([sddc.id for sddc in sddcs])
-  print(list(a)[0])
+  return list(set([sddc_id]) & set([sddc.id for sddc in sddcs]))[0]
   
-  for sddc in sddcs:
-    if sddc_id == sddc.id:
-      return sddc
+#  for sddc in sddcs:
+#    if sddc_id == sddc.id:
+#      return sddc
 
 def get_vsphere(sddc):
   vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
