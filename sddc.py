@@ -103,7 +103,6 @@ class SDDCConfig(object):
         a = {}
         a["name"] = [i.name for i in filter(lambda x: not x.name in management_folders, folders)]
         self.sddc_config["folders"] = a
-        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
         if not self.vsphere:
@@ -137,12 +136,12 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-#    sddc_operations.get_sddc()
-#    sddc_operations.get_vcenter()
-#    sddc_operations.list_user_resourcepools()
+    sddc_operations.get_sddc()
+    sddc_operations.get_vcenter()
+    sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
-#    sddc_operations.list_contentlibrary()
-#    sddc_operations.output_to_s3()
+    sddc_operations.list_contentlibrary()
+    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
