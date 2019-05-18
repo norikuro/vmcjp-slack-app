@@ -62,10 +62,11 @@ class SDDCConfig(object):
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
 
-        a = {}
-        a["name"] = [i.name for i in filter(lambda x: not x.name in management_folders, folders)]
-        self.sddc_config["folders"] = a
-#        print(self.sddc_config)
+#        a = {}
+#        a["name"] = [i.name for i in filter(lambda x: not x.name in management_folders, folders)]
+#        self.sddc_config["folders"] = a
+        self.sddc_config["folders"] = {"name": [i.name for i in filter(lambda x: not x.name in management_folders, folders)]}
+        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
         if not self.vsphere:
@@ -102,8 +103,8 @@ def main():
     sddc_operations = SDDCConfig()
 #    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
-    sddc_operations.list_user_resourcepools()
-#    sddc_operations.list_user_folders()
+#    sddc_operations.list_user_resourcepools()
+    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
 #    sddc_operations.output_to_s3()
 
