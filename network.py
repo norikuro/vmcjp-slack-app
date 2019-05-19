@@ -23,7 +23,7 @@ class NetworkConfig(object):
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
-    def list_customer_vpcs():
+    def list_customer_vpcs(self):
         print(get_member(self.nsx_app_client))
 #        print(self.nsx_app_client)
         
