@@ -28,7 +28,9 @@ class NetworkConfig(object):
         vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
         print(vpc.linked_vpc_addresses)
         print(vpc.linked_account)
-        print(get_members(vpc.linked_vpc_subnets[0]))
+        print(vpc.linked_vpc_subnets[0].cidr)
+        print(vpc.linked_vpc_subnets[0].id)
+        print(vpc.linked_vpc_subnets[0].availability_zone)
         print(vpc.linked_vpc_id)
         print(vpc.route_table_ids)
 #        print(self.nsx_app_client)
