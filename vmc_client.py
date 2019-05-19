@@ -44,10 +44,10 @@ def get_vsphere(sddc):
   )
 
 def get_nsx_policy(s3config):
-  f = json.load(open('s3config.json', 'r'))
+  f = load_json(s3config)
   t = read_json_from_s3(f["bucket"], f["token"])
   j = read_json_from_s3(f["bucket"], f["config"])
-  
+
   refresh_token = t["token"]
   org_id = j["org"]["id"]
   sddc_id = j["sddc"]["id"]
