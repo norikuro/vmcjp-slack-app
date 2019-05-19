@@ -45,7 +45,7 @@ class NetworkConfig(object):
 #        print(vpc.route_table_ids[0])
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-        print(self.nsx_app_client)
+        print(self.network_config)
         
     def list_security_groups(self):
         start = time.time()
