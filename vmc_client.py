@@ -6,6 +6,7 @@ from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
+from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 from vmcutils.fileutils import load_json
 from vmcutils.s3 import read_json_from_s3
 from vmcutils.metadata import get_members
@@ -58,8 +59,18 @@ def get_nsx_policy(s3config):
     org_id=org_id,
     sddc_id=sddc_id
   )
-#  return create_nsx_policy_client_for_vmc(
-#    refresh_token,
-#    org_id,
-#    sddc_id
-#  )
+
+def get_nsx_app(s3config):
+  f = load_json(s3config)
+  t = read_json_from_s3(f["bucket"], f["token"])
+  j = read_json_from_s3(f["bucket"], f["config"])
+
+  refresh_token = t["token"]
+  org_id = j["org"]["id"]
+  sddc_id = j["sddc"]["id"]
+  
+  return create_nsx_vmc_app_client_for_vmc(
+    refresh_token=refresh_token,
+    org_id=org_id,
+    sddc_id=sddc_id
+  )
