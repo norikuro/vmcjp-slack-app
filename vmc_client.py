@@ -5,6 +5,7 @@ from com.vmware.vapi.std.errors_client import NotFound
 from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
+from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from vmcutils.fileutils import load_json
 from vmcutils.s3 import read_json_from_s3
 from vmcutils.metadata import get_members
