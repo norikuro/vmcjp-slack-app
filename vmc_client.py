@@ -17,8 +17,8 @@ def get_sddc(s3config):
   j = read_json_from_s3(f["bucket"], f["config"])
   
   refresh_token = t["token"]
-  org_id = j["org"]["id"]
-  sddc_id = j["sddc"]["id"]
+  org_id = j["org_id"]
+  sddc_id = j["sddc_id"]
   
   # Login to VMware Cloud on AWS
   vmc_client = create_vmc_client(refresh_token)
