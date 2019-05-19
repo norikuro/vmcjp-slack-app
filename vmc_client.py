@@ -51,8 +51,8 @@ def get_nsx_policy(s3config):
   j = read_json_from_s3(f["bucket"], f["config"])
 
   refresh_token = t["token"]
-  org_id = j["org"]["id"]
-  sddc_id = j["sddc"]["id"]
+  org_id = j["org_id"]
+  sddc_id = j["sddc_id"]
   
   return create_nsx_policy_client_for_vmc(
     refresh_token=refresh_token,
@@ -66,8 +66,8 @@ def get_nsx_app(s3config):
   j = read_json_from_s3(f["bucket"], f["config"])
 
   refresh_token = t["token"]
-  org_id = j["org"]["id"]
-  sddc_id = j["sddc"]["id"]
+  org_id = j["org_id"]
+  sddc_id = j["sddc_id"]
   
   return create_nsx_vmc_app_client_for_vmc(
     refresh_token=refresh_token,
