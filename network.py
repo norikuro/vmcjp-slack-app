@@ -23,7 +23,7 @@ class NetworkConfig(object):
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
-    def get_customer_vpcs():
+    def list_customer_vpcs():
         print(get_member(self.nsx_app_client))
 #        print(self.nsx_app_client)
         
@@ -66,6 +66,7 @@ class NetworkConfig(object):
 
 def lambda_handler(event, context):
     network_operations = NetworkConfig()
+    network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
     network_operations.list_firewall_rules()
     network_operations.list_segments()
@@ -73,6 +74,7 @@ def lambda_handler(event, context):
 
 def main():
     network_operations = NetworkConfig()
+    network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
     network_operations.list_firewall_rules()
     network_operations.list_segments()
