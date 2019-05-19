@@ -28,7 +28,7 @@ class NetworkConfig(object):
         start = time.time()
         vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
         self.network_config["customer_vpc"] = {
-            "linked_vpc_addresses": vpc.linked_vpc_addresses[0],
+            "linked_vpc_address": vpc.linked_vpc_addresses[0],
             "linked_account": vpc.linked_account,
             "linked_vpc_subnets_cidr": vpc.linked_vpc_subnets[0].cidr,
             "linked_vpc_subnets_id": vpc.linked_vpc_subnets[0].id,
