@@ -88,14 +88,8 @@ vmc-env is bucket name, specified in s3config.json
 vmc-env is bucket name, specified in s3config.json
 ```cmd
 {
-  "org":
-  {
-    "id": "VMC's Organization ID"
-  },
-  "sddc": 
-  {
-    "id": "SDDC ID",
-  }
+  "org_id": "VMC's Organization ID",
+  "sddc_id": "SDDC ID"
 }
 ```
 
