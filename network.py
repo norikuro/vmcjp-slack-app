@@ -34,7 +34,7 @@ class NetworkConfig(object):
             "linked_vpc_subnets_id": vpc.linked_vpc_subnets[0].id,
             "linked_vpc_subnets_availability_zone": vpc.linked_vpc_subnets[0].availability_zone,
             "linked_vpc_id": vpc.linked_vpc_id,
-            "route_table_ids": route_table_ids[0]
+            "route_table_ids": vpc.route_table_ids[0]
         }
 #        print(vpc.linked_vpc_addresses)
 #        print(vpc.linked_account)
