@@ -25,15 +25,27 @@ class NetworkConfig(object):
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_customer_vpcs(self):
+        start = time.time()
         vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
-        print(vpc.linked_vpc_addresses)
-        print(vpc.linked_account)
-        print(vpc.linked_vpc_subnets[0].cidr)
-        print(vpc.linked_vpc_subnets[0].id)
-        print(vpc.linked_vpc_subnets[0].availability_zone)
-        print(vpc.linked_vpc_id)
-        print(vpc.route_table_ids[0])
-#        print(self.nsx_app_client)
+        self.network_config["customer_vpc"] = {
+            "linked_vpc_addresses": vpc.linked_vpc_addresses,
+            "linked_account": vpc.linked_account,
+            "linked_vpc_subnets_cidr": vpc.vpc.linked_vpc_subnets[0].cidr,
+            "linked_vpc_subnets_id": vpc.linked_vpc_subnets[0].id,
+            "linked_vpc_subnets_availability_zone": vpc.linked_vpc_subnets[0].availability_zone,
+            "linked_vpc_id": vpc.linked_vpc_id,
+            "route_table_ids": route_table_ids[0]
+        }
+#        print(vpc.linked_vpc_addresses)
+#        print(vpc.linked_account)
+#        print(vpc.linked_vpc_subnets[0].cidr)
+#        print(vpc.linked_vpc_subnets[0].id)
+#        print(vpc.linked_vpc_subnets[0].availability_zone)
+#        print(vpc.linked_vpc_id)
+#        print(vpc.route_table_ids[0])
+        elapsed_time = time.time() - start
+        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+        print(self.nsx_app_client)
         
     def list_security_groups(self):
         start = time.time()
