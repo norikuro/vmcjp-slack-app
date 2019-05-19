@@ -14,25 +14,27 @@ from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
 from vpns import get_l3vpns
+from vmc_client import get_nsx_policy
 
 class NetworkConfig(object):
     def __init__(self):
-        f = json.load(open('s3config.json', 'r'))
-        t = read_json_from_s3(f["bucket"], f["token"])
-        j = read_json_from_s3(f["bucket"], f["config"])
+#        f = json.load(open('s3config.json', 'r'))
+#        t = read_json_from_s3(f["bucket"], f["token"])
+#        j = read_json_from_s3(f["bucket"], f["config"])
 
-        refresh_token = t["token"]
-        org_id = j["org"]["id"]
-        sddc_id = j["sddc"]["id"]
+#        refresh_token = t["token"]
+#        org_id = j["org"]["id"]
+#        sddc_id = j["sddc"]["id"]
         
         self.network_config = OrderedDict()
         self.network_config["updated"] = datetime.now().strftime("%Y/%m/%d")
 #        start = time.time()
-        self.nsx_client = create_nsx_policy_client_for_vmc(
-          refresh_token=refresh_token,
-          org_id=org_id,
-          sddc_id=sddc_id
-        )
+#        self.nsx_client = create_nsx_policy_client_for_vmc(
+#          refresh_token=refresh_token,
+#          org_id=org_id,
+#          sddc_id=sddc_id
+#        )
+        self.nsx_client = get_nsx_policy("s3config.json")
         self.nsx_app_client = create_nsx_vmc_app_client_for_vmc(
           refresh_token=refresh_token,
           org_id=org_id,
