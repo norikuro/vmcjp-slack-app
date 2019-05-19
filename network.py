@@ -30,10 +30,10 @@ class NetworkConfig(object):
           refresh_token=refresh_token,
           org_id=org_id,
           sddc_id=sddc_id)
-        self.nsx_vpn_client = create_nsx_client_for_vmc(
-          refresh_token=refresh_token,
-          org_id=org_id,
-          sddc_id=sddc_id)
+#        self.nsx_vpn_client = create_nsx_client_for_vmc(
+#          refresh_token=refresh_token,
+#          org_id=org_id,
+#          sddc_id=sddc_id)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
