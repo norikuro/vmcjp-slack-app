@@ -10,7 +10,7 @@ from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
 from vpns import get_l3vpns
-from vmc_client import get_nsx_policy
+from vmc_client import get_nsx_policy, get_nsx_app
 
 class NetworkConfig(object):
     def __init__(self):
@@ -19,9 +19,14 @@ class NetworkConfig(object):
 
         start = time.time()
         self.nsx_client = get_nsx_policy("s3config.json")
+        self.nsx_app_client = get_nsx_app("s3config.json")
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
+    def get_customer_vpcs():
+        print(get_member(self.nsx_app_client))
+#        print(self.nsx_app_client)
+        
     def list_security_groups(self):
         start = time.time()
         self.network_config["security_groups"] = [
