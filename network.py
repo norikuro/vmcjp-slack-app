@@ -40,7 +40,7 @@ class NetworkConfig(object):
 #          org_id=org_id,
 #          sddc_id=sddc_id
 #        )
-        print(self.nsx_app_client.infra.LinkedVpcs.list().results[0].to_dict())
+#        print(self.nsx_app_client.infra.LinkedVpcs.list().results[0].to_dict())
 #        elapsed_time = time.time() - start
 #        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
