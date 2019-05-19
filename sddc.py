@@ -62,9 +62,8 @@ class SDDCConfig(object):
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
 
-#        self.sddc_config["folders"] = {"name": [i.name for i in filter(lambda x: not x.name in management_folders, folders)]}
         self.sddc_config["folders"] = {"name": [fl.name for fl in folders if not fl.name in management_folders]}
-        print(dict(self.sddc_config))
+#        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
         if not self.vsphere:
