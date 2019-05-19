@@ -41,10 +41,7 @@ class SDDCConfig(object):
           self.vsphere = get_vsphere(self.sddc)
 
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
-#        a = [rp.name for rp in rps if not rp.name in management_pools]
-#        print(a)
 
-#        self.sddc_config["resourcepools"] = {"name": [i.name for i in filter(lambda x: not x.name in management_pools, rps)]}
         self.sddc_config["resourcepools"] = {"name": [rp.name for rp in rps if not rp.name in management_pools]}
         print(dict(self.sddc_config))
 
