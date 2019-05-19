@@ -17,7 +17,10 @@ class NetworkConfig(object):
         self.network_config = OrderedDict()
         self.network_config["updated"] = datetime.now().strftime("%Y/%m/%d")
 
+        start = time.time()
         self.nsx_client = get_nsx_policy("s3config.json")
+        elapsed_time = time.time() - start
+        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_security_groups(self):
         start = time.time()
