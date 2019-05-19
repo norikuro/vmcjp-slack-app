@@ -32,7 +32,7 @@ class NetworkConfig(object):
         print(vpc.linked_vpc_subnets[0].id)
         print(vpc.linked_vpc_subnets[0].availability_zone)
         print(vpc.linked_vpc_id)
-        print(vpc.route_table_ids)
+        print(vpc.route_table_ids[0])
 #        print(self.nsx_app_client)
         
     def list_security_groups(self):
