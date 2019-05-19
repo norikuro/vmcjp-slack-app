@@ -25,7 +25,12 @@ class NetworkConfig(object):
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_customer_vpcs(self):
-        print(get_members(self.nsx_app_client.infra.LinkedVpcs.list().results[0]))
+        vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
+        print(vpc.linked_vpc_addresses)
+        print(vpc.linked_account)
+        print(get_members(vpc.linked_vpc_subnets))
+        print(vpc.linked_vpc_id)
+        print(vpc.route_table_ids)
 #        print(self.nsx_app_client)
         
     def list_security_groups(self):
