@@ -8,6 +8,7 @@ SDDC.py will back up VMware Cloud on AWS configurations like following informati
 * SDDC version
 
 network.py will back up VMware Cloud on AWS's network configurations like following information to S3.
+* Connected customer AWS VPC
 * Security Groups (user created groups)
 * Firewall Rules (user created fws)
 * Segments (user created routed and extended segments)
@@ -21,6 +22,7 @@ followings are main scripts
 * networks.py
 
 followings are helper scripts
+* vmc_client.py
 * firewall_rules.py
 * security_groups.py
 * segments.py
@@ -61,7 +63,7 @@ We need following JSON files to run this script.
 |---|---|---|
 | s3config.json | vmc-demo | This file contains S3 information like bucket and file name. |
 | token.json | S3 | This file contains VMC's refresh token. |
-| config.json | S3 | This file contains VMC's org id, SDDC's name, id, connected customer AWS account id and subnet id. |
+| config.json | S3 | This file contains VMC's org id, SDDC's id. |
 
 #### config file example
 * s3config.json
@@ -92,13 +94,7 @@ vmc-env is bucket name, specified in s3config.json
   },
   "sddc": 
   {
-    "name": "VMC SDDC name",
     "id": "SDDC ID",
-    "customer_aws": 
-    {
-      "account_number": "Customer AWS Account ID",
-      "subnet_id": "Customer AWS Subnet ID"
-    }
   }
 }
 ```
