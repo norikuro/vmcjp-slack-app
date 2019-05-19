@@ -42,3 +42,18 @@ def get_vsphere(sddc):
     username=sddc.resource_config.cloud_username, 
     password=sddc.resource_config.cloud_password
   )
+
+def get_nsx_policy(s3config):
+  f = json.load(open('s3config.json', 'r'))
+  t = read_json_from_s3(f["bucket"], f["token"])
+  j = read_json_from_s3(f["bucket"], f["config"])
+  
+  refresh_token = t["token"]
+  org_id = j["org"]["id"]
+  sddc_id = j["sddc"]["id"]
+  
+  return create_nsx_policy_client_for_vmc(
+    refresh_token=refresh_token,
+    org_id=org_id,
+    sddc_id=sddc_id
+  )
