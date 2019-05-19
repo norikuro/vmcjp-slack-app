@@ -6,8 +6,10 @@ import time
 from datetime import datetime
 from collections import OrderedDict
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
+from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 from com.vmware.nsx_client_for_vmc import create_nsx_client_for_vmc
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+from vmcutils.metadata import get_members
 from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
@@ -31,17 +33,12 @@ class NetworkConfig(object):
           org_id=org_id,
           sddc_id=sddc_id
         )
-#        self.nsx_vpn_client = create_nsx_client_for_vmc(
-#          refresh_token=refresh_token,
-#          org_id=org_id,
-#          sddc_id=sddc_id
-#        )
         self.nsx_app_client = create_nsx_vmc_app_client_for_vmc(
           refresh_token=refresh_token,
           org_id=org_id,
-          sddc_id=sddc_id)
+          sddc_id=sddc_id
         )
-        print(get_members(self.nsx_app_client))
+        print(self.nsx_app_client.infra.LinkedVpcs.list().results[0].to_dict())
 #        elapsed_time = time.time() - start
 #        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
