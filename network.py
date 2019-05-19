@@ -51,7 +51,7 @@ class NetworkConfig(object):
         self.network_config["l3vpn"] = get_l3vpns(self.nsx_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
         
     def output_to_s3(self):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
