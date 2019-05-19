@@ -53,8 +53,13 @@ def get_nsx_policy(s3config):
   org_id = j["org"]["id"]
   sddc_id = j["sddc"]["id"]
   
+#  return create_nsx_policy_client_for_vmc(
+#    refresh_token=refresh_token,
+#    org_id=org_id,
+#    sddc_id=sddc_id
+#  )
   return create_nsx_policy_client_for_vmc(
-    refresh_token=refresh_token,
-    org_id=org_id,
-    sddc_id=sddc_id
+    refresh_token,
+    org_id,
+    sddc_id
   )
