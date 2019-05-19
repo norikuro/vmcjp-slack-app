@@ -36,16 +36,9 @@ class NetworkConfig(object):
             "linked_vpc_id": vpc.linked_vpc_id,
             "route_table_id": vpc.route_table_ids[0]
         }
-#        print(vpc.linked_vpc_addresses)
-#        print(vpc.linked_account)
-#        print(vpc.linked_vpc_subnets[0].cidr)
-#        print(vpc.linked_vpc_subnets[0].id)
-#        print(vpc.linked_vpc_subnets[0].availability_zone)
-#        print(vpc.linked_vpc_id)
-#        print(vpc.route_table_ids[0])
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-        print(dict(self.network_config))
+#        print(dict(self.network_config))
         
     def list_security_groups(self):
         start = time.time()
