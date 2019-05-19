@@ -41,7 +41,7 @@ class NetworkConfig(object):
           org_id=org_id,
           sddc_id=sddc_id)
         )
-        print(self.nsx_app_client)
+        print(get_members(self.nsx_app_client))
 #        elapsed_time = time.time() - start
 #        print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
