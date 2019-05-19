@@ -6,6 +6,7 @@ import time
 from datetime import datetime
 from collections import OrderedDict
 from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+from vmcutils.metadata import get_members
 from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
@@ -24,7 +25,7 @@ class NetworkConfig(object):
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_customer_vpcs(self):
-        print(get_member(self.nsx_app_client))
+        print(get_members(self.nsx_app_client))
 #        print(self.nsx_app_client)
         
     def list_security_groups(self):
