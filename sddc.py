@@ -19,6 +19,7 @@ class SDDCConfig(object):
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
         self.vsphere = None
         self.sddc = get_sddc("s3config.json")
+        print(self.sddc)
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {"id": self.sddc.id,
@@ -102,7 +103,7 @@ def main():
 #    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
-    sddc_operations.list_user_folders()
+#    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
 #    sddc_operations.output_to_s3()
 
