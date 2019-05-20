@@ -6,6 +6,7 @@ SDDC.py will back up VMware Cloud on AWS configurations like following informati
 * Number of hosts
 * Management CIDR block
 * SDDC version
+* Resource Pools, Folders, Content Libraries on vCenter
 
 network.py will back up VMware Cloud on AWS's network configurations like following information to S3.
 * Connected customer AWS VPC
