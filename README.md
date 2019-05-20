@@ -96,6 +96,9 @@ vmc-env is bucket name, specified in s3config.json
 
 ### Run scripts
 * run sddc.py or network.py
+** After run these scripts successfully, scrips will create/update sddc.json or network.json on S3's same bucket.
+** You can see backed up VMC's configuration data in sddc.json or network.json
 ```cmd
 $ python sddc.py
 ```
+
