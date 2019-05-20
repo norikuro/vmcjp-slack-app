@@ -40,7 +40,7 @@ class NetworkConfig(object):
         self.network_config["customer_vpc"] = get_customer_vpc(elf.nsx_app_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
+        print(dict(self.network_config))
         
     def list_security_groups(self):
         start = time.time()
