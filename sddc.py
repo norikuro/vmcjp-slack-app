@@ -18,6 +18,7 @@ class SDDCConfig(object):
         self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
         self.vsphere = None
         self.sddc = get_sddc("s3config.json")
+        self.vsphere = get_vsphere(self.sddc)
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {"id": self.sddc.id,
@@ -36,9 +37,6 @@ class SDDCConfig(object):
                             "Mgmt-ResourcePool", 
                             "Compute-ResourcePool"]
 
-        if not self.vsphere:
-          self.vsphere = get_vsphere(self.sddc)
-
         rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
 
         self.sddc_config["resourcepools"] = {"name": [rp.name for rp in rps if not rp.name in management_pools]}
@@ -55,9 +53,6 @@ class SDDCConfig(object):
                               "Management VMs", 
                               "Workloads", "Templates"]
 
-        if not self.vsphere:
-          self.vsphere = get_vsphere(self.sddc)
-
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
         folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
 
@@ -65,9 +60,6 @@ class SDDCConfig(object):
 #        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
-        if not self.vsphere:
-          self.vsphere = get_vsphere(self.sddc)
-
         contentlib_ids = self.vsphere.content.Library.list()
         
         a = []
