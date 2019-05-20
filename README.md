@@ -23,6 +23,7 @@ followings are main scripts
 
 followings are helper scripts
 * vmc_client.py
+* customer_vpcs.py
 * firewall_rules.py
 * security_groups.py
 * segments.py
