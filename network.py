@@ -37,7 +37,7 @@ class NetworkConfig(object):
 #            "linked_vpc_id": vpc.linked_vpc_id,
 #            "route_table_id": vpc.route_table_ids[0]
 #        }
-        self.network_config["customer_vpc"] = get_customer_vpc(elf.nsx_app_client)
+        self.network_config["customer_vpc"] = get_customer_vpc(self.nsx_app_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
         print(dict(self.network_config))
