@@ -11,6 +11,7 @@ from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
 from segments import get_segments
 from vpns import get_l3vpns
+from customer_vpcs import get_customer_vpc
 from vmc_client import get_nsx_policy, get_nsx_app
 
 class NetworkConfig(object):
@@ -26,16 +27,17 @@ class NetworkConfig(object):
 
     def list_customer_vpcs(self):
         start = time.time()
-        vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
-        self.network_config["customer_vpc"] = {
-            "linked_vpc_address": vpc.linked_vpc_addresses[0],
-            "linked_account": vpc.linked_account,
-            "linked_vpc_subnets_cidr": vpc.linked_vpc_subnets[0].cidr,
-            "linked_vpc_subnets_id": vpc.linked_vpc_subnets[0].id,
-            "linked_vpc_subnets_availability_zone": vpc.linked_vpc_subnets[0].availability_zone,
-            "linked_vpc_id": vpc.linked_vpc_id,
-            "route_table_id": vpc.route_table_ids[0]
-        }
+#        vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
+#        self.network_config["customer_vpc"] = {
+#            "linked_vpc_address": vpc.linked_vpc_addresses[0],
+#            "linked_account": vpc.linked_account,
+#            "linked_vpc_subnets_cidr": vpc.linked_vpc_subnets[0].cidr,
+#            "linked_vpc_subnets_id": vpc.linked_vpc_subnets[0].id,
+#            "linked_vpc_subnets_availability_zone": vpc.linked_vpc_subnets[0].availability_zone,
+#            "linked_vpc_id": vpc.linked_vpc_id,
+#            "route_table_id": vpc.route_table_ids[0]
+#        }
+        self.network_config["customer_vpc"] = get_customer_vpc(elf.nsx_app_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
