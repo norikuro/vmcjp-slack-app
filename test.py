@@ -8,3 +8,5 @@ def main():
   vsphere = get_vsphere(sddc)
   print(get_members(sddc))
   
+  if __name__ == '__main__':
+    main()
