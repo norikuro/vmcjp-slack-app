@@ -5,7 +5,7 @@ import time
 
 from datetime import datetime
 from collections import OrderedDict
-from vmcutils.s3 import write_json_to_s3, read_json_from_s3
+from vmcutils.s3 import write_json_to_s3
 from vmcutils.metadata import get_members
 from security_groups import get_security_groups
 from firewall_rules import get_firewall_rules
