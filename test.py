@@ -7,6 +7,7 @@ def main():
   sddc = get_sddc("s3config.json")
   vsphere = get_vsphere(sddc)
   print(get_members(sddc))
+  print(sddc.to_dict())
   
 if __name__ == '__main__':
   main()
