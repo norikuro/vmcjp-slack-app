@@ -19,7 +19,7 @@ class SDDCConfig(object):
         self.vsphere = None
         self.sddc = get_sddc("s3config.json")
         self.vsphere = get_vsphere(self.sddc)
-        print(self.sddc)
+        print(self.sddc.resource_config.region)
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {"id": self.sddc.id,
