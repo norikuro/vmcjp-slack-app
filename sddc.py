@@ -19,6 +19,7 @@ class SDDCConfig(object):
         self.vsphere = None
         self.sddc = get_sddc("s3config.json")
         self.vsphere = get_vsphere(self.sddc)
+        print(get_members(self.sddc))
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {
@@ -93,12 +94,12 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.get_sddc_config()
-    sddc_operations.get_vcenter()
-    sddc_operations.list_user_resourcepools()
-    sddc_operations.list_user_folders()
-    sddc_operations.list_contentlibrary()
-    sddc_operations.output_to_s3()
+#    sddc_operations.get_sddc_config()
+#    sddc_operations.get_vcenter()
+#    sddc_operations.list_user_resourcepools()
+#    sddc_operations.list_user_folders()
+#    sddc_operations.list_contentlibrary()
+#    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
