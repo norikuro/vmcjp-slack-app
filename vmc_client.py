@@ -16,23 +16,19 @@ def get_sddc(s3config):
   t = read_json_from_s3(f["bucket"], f["token"])
   j = read_json_from_s3(f["bucket"], f["config"])
   
-  refresh_token = t["token"]
-  org_id = j["org_id"]
-  sddc_id = j["sddc_id"]
-  
   # Login to VMware Cloud on AWS
-  vmc_client = create_vmc_client(refresh_token)
+  vmc_client = create_vmc_client(t["token"])
   
   # Check if the organization exists
   orgs = vmc_client.Orgs.list()
-  if org_id not in [org.id for org in orgs]:
-    raise ValueError("Org with ID {} doesn't exist".format(org_id))
+  if j["org_id"] not in [org.id for org in orgs]:
+    raise ValueError("Org with ID {} doesn't exist".format(j["org_id"]))
     
   # Check if the sddc exists and return existing sddc
   try:
-    return vmc_client.orgs.Sddcs.get(org_id, sddc_id)
+    return vmc_client.orgs.Sddcs.get(j["org_id"], j["sddc_id"])
   except NotFound:
-    raise ValueError("SDDC with ID {} doesn't exist".format(sddc_id))
+    raise ValueError("SDDC with ID {} doesn't exist".format(j["sddc_id"]))
 
 def get_vsphere(sddc):
   vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
@@ -49,28 +45,20 @@ def get_nsx_policy(s3config):
   f = load_json(s3config)
   t = read_json_from_s3(f["bucket"], f["token"])
   j = read_json_from_s3(f["bucket"], f["config"])
-
-  refresh_token = t["token"]
-  org_id = j["org_id"]
-  sddc_id = j["sddc_id"]
   
   return create_nsx_policy_client_for_vmc(
-    refresh_token=refresh_token,
-    org_id=org_id,
-    sddc_id=sddc_id
+    refresh_token=t["token"],
+    org_id=j["org_id"],
+    sddc_id=j["sddc_id"]
   )
 
 def get_nsx_app(s3config):
   f = load_json(s3config)
   t = read_json_from_s3(f["bucket"], f["token"])
   j = read_json_from_s3(f["bucket"], f["config"])
-
-  refresh_token = t["token"]
-  org_id = j["org_id"]
-  sddc_id = j["sddc_id"]
   
   return create_nsx_vmc_app_client_for_vmc(
-    refresh_token=refresh_token,
-    org_id=org_id,
-    sddc_id=sddc_id
+    refresh_token=t["token"],
+    org_id=j["org_id"],
+    sddc_id=j["sddc_id"]
   )
