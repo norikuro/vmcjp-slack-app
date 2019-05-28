@@ -2,7 +2,6 @@
 
 def get_customer_vpc(nsx_app_client):
   vpc = nsx_app_client.infra.LinkedVpcs.list().results[0]
-  print(vpc)
   return {
     "linked_vpc_address": vpc.linked_vpc_addresses[0],
     "linked_account": vpc.linked_account,
