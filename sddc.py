@@ -7,7 +7,7 @@ from datetime import datetime
 from collections import OrderedDict
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
-from vmcutils import s3
+from vmcutils import s3utils
 from vmcutils import db
 from vmcutils.metadata import get_members
 from vmc_client import get_sddc, get_vsphere
@@ -83,7 +83,7 @@ class SDDCConfig(object):
         db.insert(self.sddc_config)
 
     def output_to_s3(self):
-        s3 = s3()
+        s3 = s3utils()
         s3.write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
 
 def lambda_handler(event, context):
