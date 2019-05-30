@@ -3,7 +3,7 @@
 import json
 import boto3
 
-class s3utils(object):
+class s3(object):
     def __init__(self):
         self.s3 = boto3.resource('s3')
     
