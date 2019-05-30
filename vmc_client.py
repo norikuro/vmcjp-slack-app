@@ -10,36 +10,55 @@ from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_
 from vmcutils import s3utils
 from vmcutils.metadata import get_members
 
-def get_sddc(s3config):
-  s3 = s3utils.s3()
-  f = json.load(open(s3config, 'r'))
-  t = s3.read_json_from_s3(f["bucket"], f["token"])
-  j = s3.read_json_from_s3(f["bucket"], f["config"])
+class vmc(object):
+  org_id
+  sddc_id
+  vmc_client
+  sddc
+  vsphere
   
-  # Login to VMware Cloud on AWS
-  vmc_client = create_vmc_client(t["token"])
-  
-  # Check if the organization exists
-  orgs = vmc_client.Orgs.list()
-  if j["org_id"] not in [org.id for org in orgs]:
-    raise ValueError("Org with ID {} doesn't exist".format(j["org_id"]))
+  def __init__(self):
+    self.s3 = s3utils.s3()
+    f = json.load(open("s3config.json", 'r'))
+    t = s3.read_json_from_s3(f["bucket"], f["token"])
+    j = s3.read_json_from_s3(f["bucket"], f["config"])
+    self.token = t["token"]
+    org_id = j["org_id"]
+    sddc_id = j["sddc_id"]
+    vmc_client = create_vmc_client(self.token)
     
-  # Check if the sddc exists and return existing sddc
-  try:
-    return vmc_client.orgs.Sddcs.get(j["org_id"], j["sddc_id"])
-  except NotFound:
-    raise ValueError("SDDC with ID {} doesn't exist".format(j["sddc_id"]))
-
-def get_vsphere(sddc):
-  vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
-#  vc_host = sddc.resource_config.vc_management_ip
-
+    # Check if the organization exists
+    orgs = vmc_client.Orgs.list()
+    if org_id not in [org.id for org in orgs]:
+      raise ValueError("Org with ID {} doesn't exist".format(org_id))
+    
+    # Check if the sddc exists and return existing sddc
+    try:
+      sddc = vmc_client.orgs.Sddcs.get(org_id, sddc_id)
+    except NotFound:
+      raise ValueError("SDDC with ID {} doesn't exist".format(sddc_id))
+    
+    vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
+  #  vc_host = sddc.resource_config.vc_management_ip
+  
   # Login to vCenter Server
-  return create_vsphere_client(
+  vsphere = create_vsphere_client(
     vc_host, 
     username=sddc.resource_config.cloud_username, 
     password=sddc.resource_config.cloud_password
   )
+  
+  def get_org_id(self):
+    return org_id
+  
+  def get_vmc_client(self):
+    return vmc_client
+    
+  def get_sddc(self):
+    return sddc
+
+  def get_vsphere(self):
+  return vsphere
 
 def get_nsx_policy(s3config):
   s3 = s3utils.s3()
