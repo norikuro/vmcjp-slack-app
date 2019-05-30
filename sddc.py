@@ -67,19 +67,21 @@ class SDDCConfig(object):
 #        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
-        contentlib_ids = self.vsphere.content.Library.list()
+        libs = self.vsphere.content.Library
+        lib_ids = libs.list()
         
         a = []
-        for id in contentlib_ids:
-          t = str(self.vsphere.content.Library.get(id).type)
+        for id in lib_ids:
+          lib = libs.get(id)
+          t = str(lib.type)
           if t == "LOCAL":
-            a.append({"name": self.vsphere.content.Library.get(id).name, "type": t})
+            a.append({"name": lib.name, "type": t})
           elif t == "SUBSCRIBED":
-            a.append({"name": self.vsphere.content.Library.get(id).name, 
+            a.append({"name": lib.name, 
                       "type": t, 
-                      "subscription_url": self.vsphere.content.Library.get(id).subscription_info.subscription_url, 
-                      "on_demand": self.vsphere.content.Library.get(id).subscription_info.on_demand,
-                      "automatic_sync_enabled": self.vsphere.content.Library.get(id).subscription_info.automatic_sync_enabled})
+                      "subscription_url": lib.subscription_info.subscription_url, 
+                      "on_demand": lib.subscription_info.on_demand,
+                      "automatic_sync_enabled": lib.subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
 #        print(self.sddc_config)
     def insert_to_db(self):
