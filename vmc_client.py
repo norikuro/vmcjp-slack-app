@@ -60,26 +60,33 @@ class vmc(object):
   def get_vsphere(self):
   return vsphere
 
-def get_nsx_policy(s3config):
-  s3 = s3utils.s3()
-  f = json.load(open(s3config, 'r'))
-  t = s3.read_json_from_s3(f["bucket"], f["token"])
-  j = s3.read_json_from_s3(f["bucket"], f["config"])
+class nsx(object):
+  nsx_policy
+  nsx_app
   
-  return create_nsx_policy_client_for_vmc(
-    refresh_token=t["token"],
-    org_id=j["org_id"],
-    sddc_id=j["sddc_id"]
-  )
+  def __init__(self):
+    self.s3 = s3utils.s3()
+    f = json.load(open("s3config.json", 'r'))
+    t = s3.read_json_from_s3(f["bucket"], f["token"])
+    j = s3.read_json_from_s3(f["bucket"], f["config"])
+    token = t["token"]
+    org_id = j["org_id"]
+    sddc_id = j["sddc_id"]
+#    vmc_client = create_vmc_client(token)
+    
+    nsx_policy = create_nsx_policy_client_for_vmc(
+      refresh_token=token,
+      org_id=org_id,
+      sddc_id=sddc_id
+    )
+    nsx_app = create_nsx_vmc_app_client_for_vmc(
+      refresh_token=token,
+      org_id=org_id,
+      sddc_id=sddc_id
+    )
+    
+    def get_nsx_policy(self):
+    return nsx_policy
 
-def get_nsx_app(s3config):
-  s3 = s3utils.s3()
-  f = json.load(open(s3config, 'r'))
-  t = s3.read_json_from_s3(f["bucket"], f["token"])
-  j = s3.read_json_from_s3(f["bucket"], f["config"])
-  
-  return create_nsx_vmc_app_client_for_vmc(
-    refresh_token=t["token"],
-    org_id=j["org_id"],
-    sddc_id=j["sddc_id"]
-  )
+    def get_nsx_app(self):
+    return nsx_app
