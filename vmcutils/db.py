@@ -2,8 +2,8 @@
 
 import pymongo
 import sys
-import boto3
-import json
+#import boto3
+#import json
 
 def get_collection():
   f = load_json(s3config)
