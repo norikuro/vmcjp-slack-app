@@ -75,12 +75,12 @@ class SDDCConfig(object):
 
         self.sddc_config["resourcepools"] = {"name": pools}
         
-#        self.db.upsert(
-#            {"vc_url": vc_url}, 
-#            {"$set": 
-#              {"vc_url": vc_url}
-#            }
-#        )
+        self.db.upsert(
+            {"resourcepools": {"$exists":True}}, 
+            {"$set": 
+              {"resourcepools": pools}
+            }
+        )
         
 #        print(dict(self.sddc_config))
 
