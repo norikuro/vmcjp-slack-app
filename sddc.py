@@ -19,6 +19,7 @@ class SDDCConfig(object):
         
         self.sddc_config = OrderedDict()
         self.sddc_config["sddc_updated"] = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
+        print(datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d"))
 #        self.sddc = vmc.get_sddc()
 #        self.vsphere = vmc.get_vsphere()
         
