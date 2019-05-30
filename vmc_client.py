@@ -58,7 +58,7 @@ class vmc(object):
     return sddc
 
   def get_vsphere(self):
-  return vsphere
+    return vsphere
 
 class nsx(object):
   nsx_policy
