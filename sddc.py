@@ -18,8 +18,8 @@ class SDDCConfig(object):
         self.vmc = vmc_client.vmc()
         
         self.sddc_config = OrderedDict()
-        self.sddc_config["sddc_updated"] = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
-        print(datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d"))
+        now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
+        self.sddc_config["sddc_updated"] = now
 #        self.sddc = vmc.get_sddc()
 #        self.vsphere = vmc.get_vsphere()
         
@@ -27,7 +27,7 @@ class SDDCConfig(object):
         self.db.upsert(
             {"sddc.id": self.vmc.sddc_id}, 
             {"$set": 
-              {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}
+              {"sddc_updated": now}
             }
         )
 
