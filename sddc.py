@@ -96,9 +96,18 @@ class SDDCConfig(object):
                               "Workloads", "Templates"]
 
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
-        folders = self.vmc.vsphere.vcenter.Folder.list(folder_filter_spec)
+        fls = self.vmc.vsphere.vcenter.Folder.list(folder_filter_spec)
+        folders = [fl.name for fl in fls if not fl.name in management_folders]
 
-        self.sddc_config["folders"] = {"name": [fl.name for fl in folders if not fl.name in management_folders]}
+        self.sddc_config["folders"] = {"name": folders}
+        
+        self.db.upsert(
+            {"folders": {"$exists":True}}, 
+            {"$set": 
+              {"folders": folders}
+            }
+        )
+        
 #        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
@@ -142,7 +151,7 @@ def main():
     sddc_operations.get_sddc_config()
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
-#    sddc_operations.list_user_folders()
+    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
 #    sddc_operations.insert_to_db()
 #    sddc_operations.output_to_s3()
