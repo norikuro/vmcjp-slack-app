@@ -8,6 +8,7 @@ from collections import OrderedDict
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from vmcutils import s3
+from vmcutils import db
 from vmcutils.metadata import get_members
 from vmc_client import get_sddc, get_vsphere
 
@@ -77,6 +78,9 @@ class SDDCConfig(object):
                       "automatic_sync_enabled": self.vsphere.content.Library.get(id).subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
 #        print(self.sddc_config)
+    def insert_to_db(self):
+        db = db()
+        db.insert(self.sddc_config)
 
     def output_to_s3(self):
         s3 = s3()
@@ -94,11 +98,12 @@ def lambda_handler(event, context):
 def main():
     sddc_operations = SDDCConfig()
     sddc_operations.get_sddc_config()
-    sddc_operations.get_vcenter()
-    sddc_operations.list_user_resourcepools()
-    sddc_operations.list_user_folders()
-    sddc_operations.list_contentlibrary()
-    sddc_operations.output_to_s3()
+#    sddc_operations.get_vcenter()
+#    sddc_operations.list_user_resourcepools()
+#    sddc_operations.list_user_folders()
+#    sddc_operations.list_contentlibrary()
+    insert_to_db()
+#    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
