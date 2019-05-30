@@ -21,11 +21,16 @@ class SDDCConfig(object):
         self.sddc = vmc.get_sddc()
         self.vsphere = vmc.get_vsphere()
         
-        db = dbutils.db()
-        db.upsert({"sddc.id": vmc.sddc_id}, {"$set": {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}})
+        self.db = dbutils.db()
+        self.db.upsert(
+            {"sddc.id": vmc.sddc_id}, 
+            {"$set": 
+              {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}
+            }
+        )
 
     def get_sddc_config(self):
-        self.sddc_config["sddc"] = {
+        sddc_config = {
             "id": self.sddc.id,
             "name": self.sddc.name,
             "num_hosts": len(self.sddc.resource_config.esx_hosts),
@@ -33,6 +38,15 @@ class SDDCConfig(object):
             "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version,
             "region": self.sddc.resource_config.region
         }
+        
+        self.sddc_config["sddc"] = sddc_config
+        
+        self.db.upsert(
+            {"sddc.id": vmc.sddc_id}, 
+            {"$set": 
+              {"sddc": datetime.now().strftime("%Y/%m/%d")}
+            }
+        )
 #        print(self.sddc_config)
 
     def get_vcenter(self):
@@ -103,7 +117,7 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-#    sddc_operations.get_sddc_config()
+    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
 #    sddc_operations.list_user_folders()
