@@ -2,4 +2,5 @@
   "bucket": "vmc-env",
   "token": "token.json",
   "config": "config.json"
+  "db": "db.json"
 }
