@@ -11,8 +11,9 @@ from vmcutils.fileutils import load_json
 from vmcutils import s3
 from vmcutils.metadata import get_members
 
+s3 = s3()
+
 def get_sddc(s3config):
-  s3 = s3()
   f = load_json(s3config)
   t = s3.read_json_from_s3(f["bucket"], f["token"])
   j = s3.read_json_from_s3(f["bucket"], f["config"])
@@ -44,8 +45,8 @@ def get_vsphere(sddc):
 
 def get_nsx_policy(s3config):
   f = load_json(s3config)
-  t = read_json_from_s3(f["bucket"], f["token"])
-  j = read_json_from_s3(f["bucket"], f["config"])
+  t = s3.read_json_from_s3(f["bucket"], f["token"])
+  j = s3.read_json_from_s3(f["bucket"], f["config"])
   
   return create_nsx_policy_client_for_vmc(
     refresh_token=t["token"],
@@ -55,8 +56,8 @@ def get_nsx_policy(s3config):
 
 def get_nsx_app(s3config):
   f = load_json(s3config)
-  t = read_json_from_s3(f["bucket"], f["token"])
-  j = read_json_from_s3(f["bucket"], f["config"])
+  t = s3.read_json_from_s3(f["bucket"], f["token"])
+  j = s3.read_json_from_s3(f["bucket"], f["config"])
   
   return create_nsx_vmc_app_client_for_vmc(
     refresh_token=t["token"],
