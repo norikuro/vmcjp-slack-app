@@ -8,13 +8,14 @@ from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 from vmcutils.fileutils import load_json
-from vmcutils.s3 import read_json_from_s3
+from vmcutils import s3
 from vmcutils.metadata import get_members
 
 def get_sddc(s3config):
+  s3 = s3()
   f = load_json(s3config)
-  t = read_json_from_s3(f["bucket"], f["token"])
-  j = read_json_from_s3(f["bucket"], f["config"])
+  t = s3.read_json_from_s3(f["bucket"], f["token"])
+  j = s3.read_json_from_s3(f["bucket"], f["config"])
   
   # Login to VMware Cloud on AWS
   vmc_client = create_vmc_client(t["token"])
