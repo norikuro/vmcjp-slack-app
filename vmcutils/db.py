@@ -4,3 +4,5 @@ import pymongo
 import sys
 
 def get_collection():
+  
+def insert(data):
