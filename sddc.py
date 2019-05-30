@@ -14,7 +14,7 @@ import vmc_client
 
 class SDDCConfig(object):
     def __init__(self):
-        vmc = vmc_client.vmc()
+        self.vmc = vmc_client.vmc()
         
         self.sddc_config = OrderedDict()
         self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
@@ -23,7 +23,7 @@ class SDDCConfig(object):
         
         self.db = dbutils.db()
         self.db.upsert(
-            {"sddc.id": vmc.sddc_id}, 
+            {"sddc.id": self.vmc.sddc_id}, 
             {"$set": 
               {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}
             }
@@ -42,7 +42,7 @@ class SDDCConfig(object):
         self.sddc_config["sddc"] = sddc_config
         
         self.db.upsert(
-            {"sddc.id": vmc.sddc_id}, 
+            {"sddc.id": self.vmc.sddc_id}, 
             {"$set": 
               {"sddc": sddc_config}
             }
