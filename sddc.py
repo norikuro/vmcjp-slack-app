@@ -19,6 +19,9 @@ class SDDCConfig(object):
         self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
         self.sddc = get_sddc("s3config.json")
         self.vsphere = get_vsphere(self.sddc)
+        
+        db = dbutils.db()
+        db.upsert()
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {
@@ -97,12 +100,12 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.get_sddc_config()
+#    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
 #    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
-    sddc_operations.insert_to_db()
+#    sddc_operations.insert_to_db()
 #    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
