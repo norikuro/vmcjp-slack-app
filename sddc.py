@@ -21,11 +21,8 @@ class SDDCConfig(object):
         self.sddc = vmc.get_sddc()
         self.vsphere = vmc.get_vsphere()
         
-        sddc_id = vmc.sddc_id
-        print(sddc_id)
-        
         db = dbutils.db()
-        db.upsert({"sddc.id": sddc_id}, {"$set": {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}})
+        db.upsert({"sddc.id": vmc.sddc_id}, {"$set": {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}})
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {
