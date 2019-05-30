@@ -53,7 +53,7 @@ class SDDCConfig(object):
 #        print(self.sddc_config)
 
     def get_vcenter(self):
-        vc_url = vmc.sddc.resource_config.vc_url
+        vc_url = self.vmc.sddc.resource_config.vc_url
         
         self.sddc_config["vcenter"] = {"vc_url": vc_url}
         
