@@ -10,18 +10,23 @@ from com.vmware.content_client import Library
 from vmcutils import s3utils
 from vmcutils import dbutils
 from vmcutils.metadata import get_members
-from vmc_client import get_sddc, get_vsphere
+import vmc_client
+get_sddc, get_vsphere
 
 
 class SDDCConfig(object):
     def __init__(self):
+        vmc = vmc_client.vmc()
+        
         self.sddc_config = OrderedDict()
         self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
-        self.sddc = get_sddc("s3config.json")
-        self.vsphere = get_vsphere(self.sddc)
+        self.sddc = vmc.get_sddc()
+        self.vsphere = vmc.get_vsphere()
+        
+        sddc_id = vmc.sddc_id
         
         db = dbutils.db()
-        db.upsert({"sddc.id": "b9faab50-1f98-4fbd-9bf8-869b3df7fe34"}, {"$set": {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}})
+        db.upsert({"sddc.id": sddc_id}, {"$set": {"sddc_updated": datetime.now().strftime("%Y/%m/%d")}})
 
     def get_sddc_config(self):
         self.sddc_config["sddc"] = {
