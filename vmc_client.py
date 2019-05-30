@@ -85,8 +85,8 @@ class nsx(object):
       sddc_id=sddc_id
     )
     
-    def get_nsx_policy(self):
+  def get_nsx_policy(self):
     return nsx_policy
 
-    def get_nsx_app(self):
+  def get_nsx_app(self):
     return nsx_app
