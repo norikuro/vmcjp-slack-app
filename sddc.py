@@ -15,13 +15,11 @@ import vmc_client
 
 class SDDCConfig(object):
     def __init__(self):
-        self.vmc = vmc_client.vmc()
-        
+        self.vmc = vmc_client.vmc()        
         self.sddc_config = OrderedDict()
+        
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         self.sddc_config["sddc_updated"] = now
-#        self.sddc = vmc.get_sddc()
-#        self.vsphere = vmc.get_vsphere()
         
         self.db = dbutils.db()
         self.db.upsert(
@@ -55,7 +53,16 @@ class SDDCConfig(object):
 #        print(self.sddc_config)
 
     def get_vcenter(self):
-        self.sddc_config["vcenter"] = {"vc_url": vmc.sddc.resource_config.vc_url}
+        vc_url = vmc.sddc.resource_config.vc_url
+        
+        self.sddc_config["vcenter"] = {"vc_url": vc_url}
+        
+        self.db.upsert(
+            {"vc_url": vc_url}, 
+            {"$set": 
+              {"vc_url": vc_url}
+            }
+        )
 #        print(self.sddc_config)
 
     def list_user_resourcepools(self):
