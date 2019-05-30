@@ -11,8 +11,6 @@ from vmcutils import s3utils
 from vmcutils import dbutils
 from vmcutils.metadata import get_members
 import vmc_client
-get_sddc, get_vsphere
-
 
 class SDDCConfig(object):
     def __init__(self):
