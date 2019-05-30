@@ -11,7 +11,7 @@ from vmcutils import s3utils
 from vmcutils.metadata import get_members
 
 def get_sddc(s3config):
-  s3 = s3utils()
+  s3 = s3utils.s3()
   f = json.load(open(s3config, 'r'))
   t = s3.read_json_from_s3(f["bucket"], f["token"])
   j = s3.read_json_from_s3(f["bucket"], f["config"])
@@ -42,7 +42,7 @@ def get_vsphere(sddc):
   )
 
 def get_nsx_policy(s3config):
-  s3 = s3utils()
+  s3 = s3utils.s3()
   f = json.load(open(s3config, 'r'))
   t = s3.read_json_from_s3(f["bucket"], f["token"])
   j = s3.read_json_from_s3(f["bucket"], f["config"])
@@ -54,7 +54,7 @@ def get_nsx_policy(s3config):
   )
 
 def get_nsx_app(s3config):
-  s3 = s3utils()
+  s3 = s3utils.s3()
   f = json.load(open(s3config, 'r'))
   t = s3.read_json_from_s3(f["bucket"], f["token"])
   j = s3.read_json_from_s3(f["bucket"], f["config"])
