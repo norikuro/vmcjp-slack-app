@@ -71,8 +71,17 @@ class SDDCConfig(object):
                             "Compute-ResourcePool"]
 
         rps = self.vmc.vsphere.vcenter.ResourcePool.list(filter=None)
+        pools = [rp.name for rp in rps if not rp.name in management_pools]
 
-        self.sddc_config["resourcepools"] = {"name": [rp.name for rp in rps if not rp.name in management_pools]}
+        self.sddc_config["resourcepools"] = {"name": pools}
+        
+#        self.db.upsert(
+#            {"vc_url": vc_url}, 
+#            {"$set": 
+#              {"vc_url": vc_url}
+#            }
+#        )
+        
 #        print(dict(self.sddc_config))
 
     def list_user_folders(self):
