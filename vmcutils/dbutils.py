@@ -29,4 +29,4 @@ class db(object):
     return self.collection
   
   def upsert(self, query, update_data):
-    self.collection.update(query, update_data, true)
+    self.collection.update(query, update_data, upsert=True)
