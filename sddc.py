@@ -18,7 +18,7 @@ class SDDCConfig(object):
         
         self.sddc_config = OrderedDict()
         self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
-        self.sddc = vmc.get_sddc()
+#        self.sddc = vmc.get_sddc()
         self.vsphere = vmc.get_vsphere()
         
         self.db = dbutils.db()
@@ -30,13 +30,16 @@ class SDDCConfig(object):
         )
 
     def get_sddc_config(self):
+        sddc = self.vmc.sddc
+        resource_config = sddc.resource_config
+        
         sddc_config = {
-            "id": self.sddc.id,
-            "name": self.sddc.name,
-            "num_hosts": len(self.sddc.resource_config.esx_hosts),
-            "vpc_cidr": self.sddc.resource_config.vpc_info.vpc_cidr,
-            "vmc_version": self.sddc.resource_config.sddc_manifest.vmc_version,
-            "region": self.sddc.resource_config.region
+            "id": sddc.id,
+            "name": sddc.name,
+            "num_hosts": len(resource_config.esx_hosts),
+            "vpc_cidr": resource_config.vpc_info.vpc_cidr,
+            "vmc_version": resource_config.sddc_manifest.vmc_version,
+            "region": resource_config.region
         }
         
         self.sddc_config["sddc"] = sddc_config
@@ -50,7 +53,7 @@ class SDDCConfig(object):
 #        print(self.sddc_config)
 
     def get_vcenter(self):
-        self.sddc_config["vcenter"] = {"vc_url": self.sddc.resource_config.vc_url}
+        self.sddc_config["vcenter"] = {"vc_url": vmc.sddc.resource_config.vc_url}
 #        print(self.sddc_config)
 
     def list_user_resourcepools(self):
@@ -98,6 +101,7 @@ class SDDCConfig(object):
                       "automatic_sync_enabled": lib.subscription_info.automatic_sync_enabled})
         self.sddc_config["contentlibrary"] = a
 #        print(self.sddc_config)
+
     def insert_to_db(self):
         db = dbutils.db()
 #        db.insert(self.sddc_config)
