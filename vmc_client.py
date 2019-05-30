@@ -10,9 +10,8 @@ from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_
 from vmcutils import s3
 from vmcutils.metadata import get_members
 
-s3 = s3()
-
 def get_sddc(s3config):
+  s3 = s3()
   f = json.load(open(s3config, 'r'))
   t = s3.read_json_from_s3(f["bucket"], f["token"])
   j = s3.read_json_from_s3(f["bucket"], f["config"])
