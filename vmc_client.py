@@ -18,7 +18,7 @@ class vmc(object):
   vsphere = ""
   
   def __init__(self):
-    self.s3 = s3utils.s3()
+    s3 = s3utils.s3()
     f = json.load(open("s3config.json", 'r'))
     t = s3.read_json_from_s3(f["bucket"], f["token"])
     j = s3.read_json_from_s3(f["bucket"], f["config"])
@@ -65,7 +65,7 @@ class nsx(object):
   nsx_app = ""
   
   def __init__(self):
-    self.s3 = s3utils.s3()
+    s3 = s3utils.s3()
     f = json.load(open("s3config.json", 'r'))
     t = s3.read_json_from_s3(f["bucket"], f["token"])
     j = s3.read_json_from_s3(f["bucket"], f["config"])
