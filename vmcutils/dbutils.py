@@ -28,5 +28,5 @@ class db(object):
   def get_collection(self):
     return self.collection
   
-  def upsert(query, update_data):
+  def upsert(self, query, update_data):
     self.collection.update(query, update_data, true)
