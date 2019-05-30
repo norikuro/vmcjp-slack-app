@@ -28,4 +28,5 @@ class db(object):
   def get_collection(self):
     return self.collection
   
-#def insert(data):
+  def upsert(condition ,operator, data):
+    self.collection.update({ condition }, { operator : { data } }, true)
