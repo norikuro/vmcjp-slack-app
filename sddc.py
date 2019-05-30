@@ -4,6 +4,7 @@ import argparse
 import json
 
 from datetime import datetime
+from pytz import timezone
 from collections import OrderedDict
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
@@ -17,7 +18,7 @@ class SDDCConfig(object):
         self.vmc = vmc_client.vmc()
         
         self.sddc_config = OrderedDict()
-        self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
+        self.sddc_config["sddc_updated"] = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
 #        self.sddc = vmc.get_sddc()
 #        self.vsphere = vmc.get_vsphere()
         
