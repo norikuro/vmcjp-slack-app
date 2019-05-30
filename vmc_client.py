@@ -41,12 +41,12 @@ class vmc(object):
     vc_host = parse.urlparse(sddc.resource_config.vc_url).hostname
   #  vc_host = sddc.resource_config.vc_management_ip
   
-  # Login to vCenter Server
-  vsphere = create_vsphere_client(
-    vc_host, 
-    username=sddc.resource_config.cloud_username, 
-    password=sddc.resource_config.cloud_password
-  )
+    # Login to vCenter Server
+    vsphere = create_vsphere_client(
+      vc_host, 
+      username=sddc.resource_config.cloud_username, 
+      password=sddc.resource_config.cloud_password
+    )
   
   def get_org_id(self):
     return org_id
