@@ -9,3 +9,8 @@ def write_json_to_s3(bucket, key, dictionary):
 
 def read_json_from_s3(bucket, key):
     return json.loads(boto3.resource('s3').Object(bucket, key).get()['Body'].read())
+
+def download_from_s3(bucket, key, target):
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket)
+    bucket.download_file(key, target)
