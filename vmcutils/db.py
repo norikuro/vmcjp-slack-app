@@ -6,6 +6,7 @@ import sys
 #import json
 
 from vmcutils import s3
+from vmcutils.fileutils import load_json
 
 class db(object):
   def __init__(self):
