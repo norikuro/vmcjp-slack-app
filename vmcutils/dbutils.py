@@ -13,7 +13,7 @@ class db(object):
     
     f = json.load(open("s3config.json", 'r'))
     url = s3.read_json_from_s3(f["bucket"], f["db"])["url"]
-    s3.download_from_s3(f["bucket"], "rds-combined-ca-bundle.pem", "/tmp")
+    s3.download_from_s3(f["bucket"], "rds-combined-ca-bundle.pem", "/tmp/rds-combined-ca-bundle.pem")
     
     self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=/tmp/rds-combined-ca-bundle.pem&replicaSet=rs0")
     self.db = self.client.sddc_db
