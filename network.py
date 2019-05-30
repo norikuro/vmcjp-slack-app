@@ -17,7 +17,7 @@ from vmc_client import get_nsx_policy, get_nsx_app
 class NetworkConfig(object):
     def __init__(self):
         self.network_config = OrderedDict()
-        self.network_config["updated"] = datetime.now().strftime("%Y/%m/%d")
+        self.network_config["network_updated"] = datetime.now().strftime("%Y/%m/%d")
 
         start = time.time()
         self.nsx_client = get_nsx_policy("s3config.json")
