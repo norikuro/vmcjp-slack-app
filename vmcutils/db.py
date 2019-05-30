@@ -5,11 +5,11 @@ import pymongo
 import sys
 #import boto3
 
-from vmcutils import s3
+from vmcutils import s3utils
 
 class db(object):
   def __init__(self):
-    s3 = s3()
+    s3 = s3utils()
     
     f = json.load(open("s3config", 'r'))
     url = s3.read_json_from_s3(f["bucket"], f["db"])["url"]
