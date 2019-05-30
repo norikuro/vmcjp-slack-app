@@ -102,7 +102,7 @@ def main():
 #    sddc_operations.list_user_resourcepools()
 #    sddc_operations.list_user_folders()
 #    sddc_operations.list_contentlibrary()
-    insert_to_db()
+    sddc_operations.insert_to_db()
 #    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
