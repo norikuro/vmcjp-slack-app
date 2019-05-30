@@ -44,7 +44,7 @@ class SDDCConfig(object):
         self.db.upsert(
             {"sddc.id": vmc.sddc_id}, 
             {"$set": 
-              {"sddc": datetime.now().strftime("%Y/%m/%d")}
+              {"sddc": sddc_config}
             }
         )
 #        print(self.sddc_config)
