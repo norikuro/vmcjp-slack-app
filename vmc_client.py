@@ -11,11 +11,11 @@ from vmcutils import s3utils
 from vmcutils.metadata import get_members
 
 class vmc(object):
-  org_id
-  sddc_id
-  vmc_client
-  sddc
-  vsphere
+  org_id = ""
+  sddc_id = ""
+  vmc_client = ""
+  sddc = ""
+  vsphere = ""
   
   def __init__(self):
     self.s3 = s3utils.s3()
@@ -61,8 +61,8 @@ class vmc(object):
     return vsphere
 
 class nsx(object):
-  nsx_policy
-  nsx_app
+  nsx_policy = ""
+  nsx_app = ""
   
   def __init__(self):
     self.s3 = s3utils.s3()
