@@ -15,7 +15,7 @@ from vmc_client import get_sddc, get_vsphere
 class SDDCConfig(object):
     def __init__(self):
         self.sddc_config = OrderedDict()
-        self.sddc_config["updated"] = datetime.now().strftime("%Y/%m/%d")
+        self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
         self.sddc = get_sddc("s3config.json")
         self.vsphere = get_vsphere(self.sddc)
 
