@@ -83,7 +83,7 @@ class SDDCConfig(object):
         db.insert(self.sddc_config)
 
     def output_to_s3(self):
-        s3 = s3utils()
+        s3 = s3utils.s3()
         s3.write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
 
 def lambda_handler(event, context):
