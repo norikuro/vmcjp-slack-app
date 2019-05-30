@@ -19,7 +19,7 @@ class SDDCConfig(object):
         self.sddc_config = OrderedDict()
         self.sddc_config["sddc_updated"] = datetime.now().strftime("%Y/%m/%d")
 #        self.sddc = vmc.get_sddc()
-        self.vsphere = vmc.get_vsphere()
+#        self.vsphere = vmc.get_vsphere()
         
         self.db = dbutils.db()
         self.db.upsert(
@@ -61,7 +61,7 @@ class SDDCConfig(object):
                             "Mgmt-ResourcePool", 
                             "Compute-ResourcePool"]
 
-        rps = self.vsphere.vcenter.ResourcePool.list(filter=None)
+        rps = self.vmc.vsphere.vcenter.ResourcePool.list(filter=None)
 
         self.sddc_config["resourcepools"] = {"name": [rp.name for rp in rps if not rp.name in management_pools]}
 #        print(dict(self.sddc_config))
@@ -78,13 +78,13 @@ class SDDCConfig(object):
                               "Workloads", "Templates"]
 
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
-        folders = self.vsphere.vcenter.Folder.list(folder_filter_spec)
+        folders = self.vmc.vsphere.vcenter.Folder.list(folder_filter_spec)
 
         self.sddc_config["folders"] = {"name": [fl.name for fl in folders if not fl.name in management_folders]}
 #        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
-        libs = self.vsphere.content.Library
+        libs = self.vmc.vsphere.content.Library
         lib_ids = libs.list()
         
         a = []
