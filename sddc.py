@@ -8,7 +8,7 @@ from collections import OrderedDict
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from vmcutils import s3utils
-from vmcutils import db
+from vmcutils import dbutils
 from vmcutils.metadata import get_members
 from vmc_client import get_sddc, get_vsphere
 
@@ -79,8 +79,8 @@ class SDDCConfig(object):
         self.sddc_config["contentlibrary"] = a
 #        print(self.sddc_config)
     def insert_to_db(self):
-        db = db()
-        db.insert(self.sddc_config)
+        db = dbutils.db()
+#        db.insert(self.sddc_config)
 
     def output_to_s3(self):
         s3 = s3utils.s3()
