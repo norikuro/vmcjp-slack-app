@@ -27,8 +27,8 @@ class vmc(object):
       raise ValueError("Org with ID {} doesn't exist".format(self.org_id))
     
     i2 = iter(orgs)
-    print(i2)
-#    for org in orgs:
+    for org in orgs:
+      print(next(i2))
 #      if lookfor not in i2:
         
     
