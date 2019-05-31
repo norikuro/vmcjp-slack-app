@@ -26,8 +26,8 @@ class vmc(object):
     for org in orgs:
       if self.org_id == org.id:
         self.org_name = org.name
-#      else:
-#        raise ValueError("Org with ID {} doesn't exist".format(self.org_id))        
+    if self.org_name == None:
+        raise ValueError("Org with ID {} doesn't exist".format(self.org_id))        
     
     # Check if the sddc exists and return existing sddc
     try:
