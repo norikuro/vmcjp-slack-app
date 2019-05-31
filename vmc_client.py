@@ -19,10 +19,10 @@ class vmc(object):
     self.token = t["token"]
     self.org_id = j["org_id"]
     self.sddc_id = j["sddc_id"]
-    self.vmc_client = create_vmc_client(self.token)
+    vmc_client = create_vmc_client(self.token)
     
     # Check if the organization exists
-    org_ls = self.vmc_client.Orgs.list()
+    org_ls = vmc_client.Orgs.list()
     for org in org_ls:
       if self.org_id == org.id:
         self.org_display_name = org.display_name
@@ -33,7 +33,7 @@ class vmc(object):
     
     # Check if the sddc exists and return existing sddc
     try:
-      self.sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
+      self.sddc = vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
     except NotFound:
       raise ValueError("SDDC with ID {} doesn't exist".format(self.sddc_id))
     
@@ -56,9 +56,6 @@ class vmc(object):
   def get_sddc_id(self):
     return self.sddc_id
   
-  def get_vmc_client(self):
-    return self.vmc_client
-    
   def get_sddc(self):
     return self.sddc
 
