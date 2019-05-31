@@ -30,9 +30,10 @@ class SDDCConfig(object):
         )
     
     def get_org_config(self):
+        print(self.vmc.org_id, self.vmc.org_display_name
         sddc_config = {
             "id": self.vmc.org_id,
-            "name": self.vmc.org_name
+            "name": self.vmc.org_display_name
         }
         
         print(sddc_config)
