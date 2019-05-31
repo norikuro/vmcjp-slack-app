@@ -21,6 +21,8 @@ class SDDCConfig(object):
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         self.sddc_config["sddc_updated"] = now
         
+        print(self.vmc.sddc_id)
+        
         self.db = dbutils.db()
         self.db.upsert(
             {"sddc.id": self.vmc.sddc_id}, 
