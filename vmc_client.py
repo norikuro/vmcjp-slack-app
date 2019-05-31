@@ -45,6 +45,9 @@ class vmc(object):
       password=self.sddc.resource_config.cloud_password
     )
   
+  def get_org_name(self):
+    return self.org_name
+  
   def get_org_id(self):
     return self.org_id
   
