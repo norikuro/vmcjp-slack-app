@@ -58,6 +58,7 @@ class SDDCConfig(object):
             "region": resource_config.region
         }
         
+        print(sddc_config)
         self.sddc_config["sddc"] = sddc_config
         
         self.db.upsert(
