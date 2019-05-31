@@ -24,50 +24,12 @@ class vmc(object):
     self.vmc_client = create_vmc_client(token)
     self.orgs = self.vmc_client.orgs
     self.org = self.vmc_client.Orgs.get(self.org_id)
-    
-#    # Check if the organization exists
-#    org_ls = vmc_client.Orgs.list()
-#    for org in org_ls:
-#      if self.org_id == org.id:
-#        self.org_display_name = org.display_name
-#    if self.org_display_name == None:
-#        raise ValueError("Org with ID {} doesn't exist".format(self.org_id)) 
-
-#    self.org_display_name = self.org.display_name
-
-#    # Check if the sddc exists and return existing sddc
-#    try:
     self.sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
-#    except NotFound:
-#      raise ValueError("SDDC with ID {} doesn't exist".format(self.sddc_id))
-    
-#    vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
-#    vc_host = self.sddc.resource_config.vc_management_ip
-  
-    # Login to vCenter Server
     self.vsphere = create_vsphere_client(
       parse.urlparse(self.sddc.resource_config.vc_url).hostname, 
       username=self.sddc.resource_config.cloud_username, 
       password=self.sddc.resource_config.cloud_password
     )
-    
-  def get_orgs(self):
-    return self.orgs
-  
-  def get_org_name(self):
-    return self.org_name
-  
-  def get_org_id(self):
-    return self.org_id
-  
-  def get_sddc_id(self):
-    return self.sddc_id
-  
-  def get_sddc(self):
-    return self.sddc
-
-  def get_vsphere(self):
-    return self.vsphere
 
 class nsx(object):
   def __init__(self):
