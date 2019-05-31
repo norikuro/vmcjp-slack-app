@@ -52,7 +52,7 @@ class SDDCConfig(object):
                 }
             )
         sddc_config = {"aws_connected_account": a}
-        self.sddc_config["sddc"] = sddc_config
+#        self.sddc_config["sddc"] = sddc_config
 
         self.db.upsert(
             {"aws_connected_account": {"$exists":True}}, 
