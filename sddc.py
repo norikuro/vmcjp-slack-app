@@ -16,10 +16,10 @@ import vmc_client
 class SDDCConfig(object):
     def __init__(self):
         self.vmc = vmc_client.vmc()
-        self.sddc_config = OrderedDict()
+#        self.sddc_config = OrderedDict()
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
-        self.sddc_config["sddc_updated"] = now
+#        self.sddc_config["sddc_updated"] = now
         
         self.db = dbutils.db()
         self.db.upsert(
@@ -33,7 +33,7 @@ class SDDCConfig(object):
             "display_name": self.vmc.org.display_name
         }
         
-        self.sddc_config["org"] = sddc_config
+#        self.sddc_config["org"] = sddc_config
         self.db.upsert(
             {"org": {"$exists":True}}, 
             {"$set": 
@@ -75,7 +75,7 @@ class SDDCConfig(object):
             "region": resource_config.region
         }
         
-        self.sddc_config["sddc"] = sddc_config
+#        self.sddc_config["sddc"] = sddc_config
         self.db.upsert(
             {"sddc.id": self.vmc.sddc_id}, 
             {"$set": 
@@ -87,7 +87,7 @@ class SDDCConfig(object):
     def get_vcenter(self):
         vc_url = self.vmc.sddc.resource_config.vc_url
         
-        self.sddc_config["vcenter"] = {"vc_url": vc_url}
+#        self.sddc_config["vcenter"] = {"vc_url": vc_url}
         self.db.upsert(
             {"vc_url": vc_url}, 
             {"$set": 
@@ -104,7 +104,7 @@ class SDDCConfig(object):
         rps = self.vmc.vcenter.ResourcePool.list(filter=None)
         pools = [rp.name for rp in rps if not rp.name in management_pools]
 
-        self.sddc_config["resourcepools"] = {"name": pools}
+#        self.sddc_config["resourcepools"] = {"name": pools}
         self.db.upsert(
             {"resourcepools": {"$exists":True}}, 
             {"$set": 
@@ -129,7 +129,7 @@ class SDDCConfig(object):
         fls = self.vmc.vcenter.Folder.list(folder_filter_spec)
         folders = [fl.name for fl in fls if not fl.name in management_folders]
 
-        self.sddc_config["folders"] = {"name": folders}
+#        self.sddc_config["folders"] = {"name": folders}
         self.db.upsert(
             {"folders": {"$exists":True}}, 
             {"$set": 
@@ -156,7 +156,7 @@ class SDDCConfig(object):
                       "on_demand": lib.subscription_info.on_demand,
                       "automatic_sync_enabled": lib.subscription_info.automatic_sync_enabled})
             
-        self.sddc_config["contentlibraries"] = a
+#        self.sddc_config["contentlibraries"] = a
         self.db.upsert(
             {"contentlibraries": {"$exists":True}}, 
             {"$set": 
@@ -166,9 +166,9 @@ class SDDCConfig(object):
 
 #        print(self.sddc_config)
 
-    def output_to_s3(self):
-        s3 = s3utils.s3()
-        s3.write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
+#    def output_to_s3(self):
+#        s3 = s3utils.s3()
+#        s3.write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
 
 def lambda_handler(event, context):
     sddc_operations = SDDCConfig()
