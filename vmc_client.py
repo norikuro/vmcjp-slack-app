@@ -22,10 +22,9 @@ class vmc(object):
     self.vmc_client = create_vmc_client(self.token)
     
     # Check if the organization exists
-    orgs = self.vmc_client.Orgs.list()
-    for org in orgs:
+    self.orgs = self.vmc_client.Orgs.list()
+    for org in self.orgs:
       if self.org_id == org.id:
-        self.org = org
         self.org_display_name = org.display_name
     if self.org_display_name == None:
         raise ValueError("Org with ID {} doesn't exist".format(self.org_id)) 
