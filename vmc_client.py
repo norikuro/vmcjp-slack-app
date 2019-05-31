@@ -21,7 +21,7 @@ class vmc(object):
     self.org_id = j["org_id"]
     self.sddc_id = j["sddc_id"]
     self.vmc_client = create_vmc_client(token)
-    self.orgs = vmc_client.orgs
+    self.orgs = self.vmc_client.orgs
     
 #    # Check if the organization exists
 #    org_ls = vmc_client.Orgs.list()
