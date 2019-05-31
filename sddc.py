@@ -16,10 +16,8 @@ import vmc_client
 class SDDCConfig(object):
     def __init__(self):
         self.vmc = vmc_client.vmc()
-#        self.sddc_config = OrderedDict()
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
-#        self.sddc_config["sddc_updated"] = now
         
         self.db = dbutils.db()
         self.db.upsert(
@@ -33,7 +31,6 @@ class SDDCConfig(object):
             "display_name": self.vmc.org.display_name
         }
         
-#        self.sddc_config["org"] = sddc_config
         self.db.upsert(
             {"org": {"$exists":True}}, 
             {"$set": 
@@ -52,7 +49,6 @@ class SDDCConfig(object):
                 }
             )
         sddc_config = {"aws_connected_account": a}
-#        self.sddc_config["sddc"] = sddc_config
 
         self.db.upsert(
             {"aws_connected_account": {"$exists":True}}, 
@@ -75,26 +71,22 @@ class SDDCConfig(object):
             "region": resource_config.region
         }
         
-#        self.sddc_config["sddc"] = sddc_config
         self.db.upsert(
             {"sddc.id": self.vmc.sddc_id}, 
             {"$set": 
               {"sddc": sddc_config}
             }
         )
-#        print(self.sddc_config)
 
     def get_vcenter(self):
         vc_url = self.vmc.sddc.resource_config.vc_url
         
-#        self.sddc_config["vcenter"] = {"vc_url": vc_url}
         self.db.upsert(
             {"vc_url": vc_url}, 
             {"$set": 
               {"vc_url": vc_url}
             }
         )
-#        print(self.sddc_config)
 
     def list_user_resourcepools(self):
         management_pools = ["Resources", 
@@ -104,15 +96,12 @@ class SDDCConfig(object):
         rps = self.vmc.vcenter.ResourcePool.list(filter=None)
         pools = [rp.name for rp in rps if not rp.name in management_pools]
 
-#        self.sddc_config["resourcepools"] = {"name": pools}
         self.db.upsert(
             {"resourcepools": {"$exists":True}}, 
             {"$set": 
               {"resourcepools": pools}
             }
         )
-        
-#        print(dict(self.sddc_config))
 
     def list_user_folders(self):
         management_folders = ["Discovered virtual machine", 
@@ -129,15 +118,12 @@ class SDDCConfig(object):
         fls = self.vmc.vcenter.Folder.list(folder_filter_spec)
         folders = [fl.name for fl in fls if not fl.name in management_folders]
 
-#        self.sddc_config["folders"] = {"name": folders}
         self.db.upsert(
             {"folders": {"$exists":True}}, 
             {"$set": 
               {"folders": folders}
             }
         )
-        
-#        print(dict(self.sddc_config))
 
     def list_contentlibrary(self):
         libs = self.vmc.vsphere.content.Library
@@ -156,7 +142,6 @@ class SDDCConfig(object):
                       "on_demand": lib.subscription_info.on_demand,
                       "automatic_sync_enabled": lib.subscription_info.automatic_sync_enabled})
             
-#        self.sddc_config["contentlibraries"] = a
         self.db.upsert(
             {"contentlibraries": {"$exists":True}}, 
             {"$set": 
@@ -164,20 +149,15 @@ class SDDCConfig(object):
             }
         )
 
-#        print(self.sddc_config)
-
-#    def output_to_s3(self):
-#        s3 = s3utils.s3()
-#        s3.write_json_to_s3("vmc-env", "sddc.json", self.sddc_config)
-
 def lambda_handler(event, context):
     sddc_operations = SDDCConfig()
+    sddc_operations.get_org_config()
+    sddc_operations.get_aws_connected_accounts()
     sddc_operations.get_sddc_config()
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
     sddc_operations.list_contentlibrary()
-    sddc_operations.output_to_s3()
 
 def main():
     sddc_operations = SDDCConfig()
@@ -188,7 +168,6 @@ def main():
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
     sddc_operations.list_contentlibrary()
-#    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
