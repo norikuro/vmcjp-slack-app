@@ -24,14 +24,7 @@ class vmc(object):
     # Check if the organization exists
     orgs = self.vmc_client.Orgs.list()
     if self.org_id not in [org.id for org in orgs]:
-      raise ValueError("Org with ID {} doesn't exist".format(self.org_id))
-    
-    i2 = iter(orgs)
-#    print(next(i2))
-    all(str(self.org_id) in i2 for org in orgs)
-#    for org in orgs:
-#      if lookfor not in i2:
-        
+      raise ValueError("Org with ID {} doesn't exist".format(self.org_id))        
     
     # Check if the sddc exists and return existing sddc
     try:
