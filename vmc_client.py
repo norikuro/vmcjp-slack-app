@@ -22,7 +22,6 @@ class vmc(object):
     self.org_id = j["org_id"]
     self.sddc_id = j["sddc_id"]
     self.vmc_client = create_vmc_client(token)
-    print(get_members(self.vmc_client))
     self.orgs = self.vmc_client.orgs
     self.org = self.vmc_client.Orgs.get(self.org_id)
     self.sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
