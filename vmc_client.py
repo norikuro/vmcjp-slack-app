@@ -25,10 +25,10 @@ class vmc(object):
     orgs = self.vmc_client.Orgs.list()
     for org in orgs:
       if self.org_id == org.id:
-        self.org_name = org.display_name
+        self.org_display_name = org.display_name
     if self.org_name == None:
         raise ValueError("Org with ID {} doesn't exist".format(self.org_id))        
-    print(self.org_id, self.org_name)
+    print(self.org_id, self.org_display_name)
     # Check if the sddc exists and return existing sddc
     try:
       self.sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
