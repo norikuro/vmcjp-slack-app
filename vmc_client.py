@@ -17,10 +17,10 @@ class vmc(object):
     f = json.load(open("s3config.json", 'r'))
     t = s3.read_json_from_s3(f["bucket"], f["token"])
     j = s3.read_json_from_s3(f["bucket"], f["config"])
-    self.token = t["token"]
+    token = t["token"]
     self.org_id = j["org_id"]
     self.sddc_id = j["sddc_id"]
-    vmc_client = create_vmc_client(self.token)
+    vmc_client = create_vmc_client(token)
     self.orgs = vmc_client.orgs
     
     # Check if the organization exists
