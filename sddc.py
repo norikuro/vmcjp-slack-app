@@ -184,7 +184,7 @@ def lambda_handler(event, context):
 def main():
     sddc_operations = SDDCConfig()
 #    sddc_operations.get_org_config()
-    sddc_operations.get_aws_connected_accounts()
+#    sddc_operations.get_aws_connected_accounts()
 #    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
