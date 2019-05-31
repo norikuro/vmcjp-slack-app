@@ -31,10 +31,11 @@ class SDDCConfig(object):
     
     def get_org_config(self):
         sddc_config = {
-            "id": self.vmc.id,
-            "name": self.vmc.name
+            "id": self.vmc.org_id,
+            "name": self.vmc.org_name
         }
         
+        print(sddc_config)
         self.sddc_config["org"] = sddc_config
         
         self.db.upsert(
