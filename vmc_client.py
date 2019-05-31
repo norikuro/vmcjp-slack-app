@@ -25,8 +25,7 @@ class vmc(object):
     orgs = self.vmc_client.Orgs.list()
     for org in orgs:
       if self.org_id == org.id:
-        self.org_name = org.name
-        print(org)
+        self.org_name = org.display_name
     if self.org_name == None:
         raise ValueError("Org with ID {} doesn't exist".format(self.org_id))        
     print(self.org_id, self.org_name)
