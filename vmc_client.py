@@ -28,7 +28,7 @@ class vmc(object):
     
     i2 = iter(orgs)
 #    print(next(i2))
-    print(self.org_id in i2 for org in orgs)
+    all(self.org_id in i2 for org in orgs)
 #    for org in orgs:
 #      if lookfor not in i2:
         
