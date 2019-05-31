@@ -22,8 +22,8 @@ class vmc(object):
     self.vmc_client = create_vmc_client(self.token)
     
     # Check if the organization exists
-    self.orgs = self.vmc_client.Orgs.list()
-    for org in self.orgs:
+    org_ls = self.vmc_client.Orgs.list()
+    for org in org_ls:
       if self.org_id == org.id:
         self.org_display_name = org.display_name
     if self.org_display_name == None:
@@ -46,10 +46,7 @@ class vmc(object):
       username=self.sddc.resource_config.cloud_username, 
       password=self.sddc.resource_config.cloud_password
     )
-  
-  def get_orgs(self):
-    return self.orgs
-  
+    
   def get_org_name(self):
     return self.org_name
   
