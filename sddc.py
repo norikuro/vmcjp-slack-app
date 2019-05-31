@@ -38,9 +38,9 @@ class SDDCConfig(object):
         self.sddc_config["org"] = sddc_config
         
         self.db.upsert(
-            {"org.id": self.vmc.id}, 
+            {"org": {"$exists":True}}, 
             {"$set": 
-              {"org.id": self.vmc.id, "org.name": self.vmc.name}
+              {"org": sddc_config}
             }
         )
 
