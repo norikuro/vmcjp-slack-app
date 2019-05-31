@@ -28,12 +28,11 @@ class SDDCConfig(object):
               {"sddc_updated": now}
             }
         )
-        print(self.vmc.org_id, self.vmc.org_display_name)
     
     def get_org_config(self):
         sddc_config = {
             "id": self.vmc.org_id,
-            "name": self.vmc.org_display_name
+            "display_name": self.vmc.org_display_name
         }
         
         print(sddc_config)
@@ -167,7 +166,7 @@ def lambda_handler(event, context):
 
 def main():
     sddc_operations = SDDCConfig()
-    sddc_operations.get_org_config
+    sddc_operations.get_org_config()
 #    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
