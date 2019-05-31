@@ -24,9 +24,7 @@ class SDDCConfig(object):
         self.db = dbutils.db()
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
-#            {"$set": 
               {"sddc_updated": now}
-#            }
         )
     
     def get_org_config(self):
