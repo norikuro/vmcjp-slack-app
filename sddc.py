@@ -32,7 +32,7 @@ class SDDCConfig(object):
     def get_org_config(self):
         sddc_config = {
             "id": self.vmc.org_id,
-            "display_name": self.vmc.org_display_name
+            "display_name": self.vmc.org.display_name
         }
         
         self.sddc_config["org"] = sddc_config
