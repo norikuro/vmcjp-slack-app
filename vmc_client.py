@@ -23,7 +23,7 @@ class vmc(object):
     vmc_client = create_vmc_client(token)
     self.orgs = vmc_client.orgs
     
-    # Check if the organization exists
+#    # Check if the organization exists
 #    org_ls = vmc_client.Orgs.list()
 #    for org in org_ls:
 #      if self.org_id == org.id:
@@ -32,13 +32,13 @@ class vmc(object):
 #        raise ValueError("Org with ID {} doesn't exist".format(self.org_id)) 
 
     org = vmc_client.Orgs.get(self.org_id)
-    print(org.id)
+    self.org_display_name = org.display_name
 
-    # Check if the sddc exists and return existing sddc
-    try:
-      self.sddc = vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
-    except NotFound:
-      raise ValueError("SDDC with ID {} doesn't exist".format(self.sddc_id))
+#    # Check if the sddc exists and return existing sddc
+#    try:
+    self.sddc = vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
+#    except NotFound:
+#      raise ValueError("SDDC with ID {} doesn't exist".format(self.sddc_id))
     
     vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
 #    vc_host = self.sddc.resource_config.vc_management_ip
