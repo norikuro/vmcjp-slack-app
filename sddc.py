@@ -15,7 +15,7 @@ import vmc_client
 
 class SDDCConfig(object):
     def __init__(self):
-        self.vmc = vmc_client.vmc()        
+        self.vmc = vmc_client.vmc()
         self.sddc_config = OrderedDict()
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
