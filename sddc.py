@@ -43,7 +43,11 @@ class SDDCConfig(object):
               {"org": sddc_config}
             }
         )
-
+    
+    def get_connected_accounts(self):
+        accounts = vmc.orgs.account_link.ConnectedAccounts.get(self.vmc.org_id)
+        for account in accounts:
+            print(account)
 
     def get_sddc_config(self):
         sddc = self.vmc.sddc
@@ -169,6 +173,7 @@ def lambda_handler(event, context):
 def main():
     sddc_operations = SDDCConfig()
 #    sddc_operations.get_org_config()
+    sddc_operations.get_connected_accounts()
 #    sddc_operations.get_sddc_config()
 #    sddc_operations.get_vcenter()
 #    sddc_operations.list_user_resourcepools()
