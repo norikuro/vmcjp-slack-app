@@ -30,6 +30,7 @@ class vmc(object):
       username=self.sddc.resource_config.cloud_username, 
       password=self.sddc.resource_config.cloud_password
     )
+    self.vcenter = self.vsphere.vcenter
 
 class nsx(object):
   def __init__(self):
