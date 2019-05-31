@@ -26,7 +26,7 @@ class vmc(object):
     for org in orgs:
       if self.org_id == org.id:
         self.org_display_name = org.display_name
-        print(get_members(org))
+        print(org.properties)
     if self.org_display_name == None:
         raise ValueError("Org with ID {} doesn't exist".format(self.org_id)) 
     
