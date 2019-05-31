@@ -35,7 +35,6 @@ class SDDCConfig(object):
             "display_name": self.vmc.org_display_name
         }
         
-        print(sddc_config)
         self.sddc_config["org"] = sddc_config
         
         self.db.upsert(
