@@ -23,7 +23,7 @@ class vmc(object):
     
     # Check if the organization exists
     orgs = self.vmc_client.Orgs.list()
-    a = [if self.org_id in [org.id for org in orgs]]:
+    a = [if self.org_id in [org.id for org in orgs]]
     print(a)
 #      raise ValueError("Org with ID {} doesn't exist".format(self.org_id))        
     
