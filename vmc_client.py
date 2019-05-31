@@ -33,7 +33,7 @@ class vmc(object):
 #    if self.org_display_name == None:
 #        raise ValueError("Org with ID {} doesn't exist".format(self.org_id)) 
 
-    self.org_display_name = self.org.display_name
+#    self.org_display_name = self.org.display_name
 
 #    # Check if the sddc exists and return existing sddc
 #    try:
@@ -41,12 +41,12 @@ class vmc(object):
 #    except NotFound:
 #      raise ValueError("SDDC with ID {} doesn't exist".format(self.sddc_id))
     
-    vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
+#    vc_host = parse.urlparse(self.sddc.resource_config.vc_url).hostname
 #    vc_host = self.sddc.resource_config.vc_management_ip
   
     # Login to vCenter Server
     self.vsphere = create_vsphere_client(
-      vc_host, 
+      parse.urlparse(self.sddc.resource_config.vc_url).hostname, 
       username=self.sddc.resource_config.cloud_username, 
       password=self.sddc.resource_config.cloud_password
     )
