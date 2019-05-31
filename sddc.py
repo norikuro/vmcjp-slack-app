@@ -174,7 +174,7 @@ def main():
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
     sddc_operations.list_contentlibrary()
-#    sddc_operations.output_to_s3()
+    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
     main()
