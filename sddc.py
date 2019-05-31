@@ -58,7 +58,6 @@ class SDDCConfig(object):
             "region": resource_config.region
         }
         
-        print(sddc_config)
         self.sddc_config["sddc"] = sddc_config
         
         self.db.upsert(
@@ -129,10 +128,10 @@ class SDDCConfig(object):
 
     def list_contentlibrary(self):
         libs = self.vmc.vsphere.content.Library
-        lib_ids = libs.list()
+        lib_ls = libs.list()
         
         a = []
-        for id in lib_ids:
+        for id in lib_ls:
           lib = libs.get(id)
           t = str(lib.type)
           if t == "LOCAL":
@@ -143,12 +142,16 @@ class SDDCConfig(object):
                       "subscription_url": lib.subscription_info.subscription_url, 
                       "on_demand": lib.subscription_info.on_demand,
                       "automatic_sync_enabled": lib.subscription_info.automatic_sync_enabled})
-        self.sddc_config["contentlibrary"] = a
-#        print(self.sddc_config)
+        self.sddc_config["contentlibraries"] = a
+        
+        self.db.upsert(
+            {"contentlibraries": {"$exists":True}}, 
+            {"$set": 
+              {"contentlibraries": a}
+            }
+        )
 
-    def insert_to_db(self):
-        db = dbutils.db()
-#        db.insert(self.sddc_config)
+#        print(self.sddc_config)
 
     def output_to_s3(self):
         s3 = s3utils.s3()
@@ -170,8 +173,7 @@ def main():
     sddc_operations.get_vcenter()
     sddc_operations.list_user_resourcepools()
     sddc_operations.list_user_folders()
-#    sddc_operations.list_contentlibrary()
-#    sddc_operations.insert_to_db()
+    sddc_operations.list_contentlibrary()
 #    sddc_operations.output_to_s3()
 
 if __name__ == '__main__':
