@@ -28,6 +28,22 @@ class SDDCConfig(object):
               {"sddc_updated": now}
             }
         )
+    
+    def get_org_config(self):
+        sddc_config = {
+            "id": self.vmc.id,
+            "name": self.vmc.name
+        }
+        
+        self.sddc_config["org"] = sddc_config
+        
+        self.db.upsert(
+            {"org.id": self.vmc.id}, 
+            {"$set": 
+              {"org.id": self.vmc.id, "org.name": self.vmc.name}
+            }
+        )
+
 
     def get_sddc_config(self):
         sddc = self.vmc.sddc
