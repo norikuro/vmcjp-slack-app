@@ -45,7 +45,7 @@ class SDDCConfig(object):
         )
     
     def get_connected_accounts(self):
-        accounts = vmc.orgs.account_link.ConnectedAccounts.get(self.vmc.org_id)
+        accounts = self.vmc.orgs.account_link.ConnectedAccounts.get(self.vmc.org_id)
         for account in accounts:
             print(account)
 
