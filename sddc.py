@@ -103,7 +103,7 @@ class SDDCConfig(object):
                             "Mgmt-ResourcePool", 
                             "Compute-ResourcePool"]
 
-        rps = self.vmc.vsphere.vcenter.ResourcePool.list(filter=None)
+        rps = self.vmc.vcenter.ResourcePool.list(filter=None)
         pools = [rp.name for rp in rps if not rp.name in management_pools]
 
         self.sddc_config["resourcepools"] = {"name": pools}
@@ -128,7 +128,7 @@ class SDDCConfig(object):
                               "Workloads", "Templates"]
 
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
-        fls = self.vmc.vsphere.vcenter.Folder.list(folder_filter_spec)
+        fls = self.vmc.vcenter.Folder.list(folder_filter_spec)
         folders = [fl.name for fl in fls if not fl.name in management_folders]
 
         self.sddc_config["folders"] = {"name": folders}
