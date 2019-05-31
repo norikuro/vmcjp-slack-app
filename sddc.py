@@ -23,7 +23,7 @@ class SDDCConfig(object):
         
         self.db = dbutils.db()
         self.db.upsert(
-            {"sddc.id": self.vmc.sddc_id}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"sddc_updated": now}
             }
