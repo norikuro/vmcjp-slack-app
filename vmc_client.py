@@ -33,7 +33,7 @@ class vmc(object):
     
     # Check if the sddc exists and return existing sddc
     try:
-      self.sddc = self.orgs.Sddcs.get(self.org_id, self.sddc_id)
+      self.sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
     except NotFound:
       raise ValueError("SDDC with ID {} doesn't exist".format(self.sddc_id))
     
