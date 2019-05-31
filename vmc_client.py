@@ -18,10 +18,12 @@ class vmc(object):
     t = s3.read_json_from_s3(f["bucket"], f["token"])
     j = s3.read_json_from_s3(f["bucket"], f["config"])
     token = t["token"]
+    
     self.org_id = j["org_id"]
     self.sddc_id = j["sddc_id"]
     self.vmc_client = create_vmc_client(token)
     self.orgs = self.vmc_client.orgs
+    self.org = self.vmc_client.Orgs.get(self.org_id)
     
 #    # Check if the organization exists
 #    org_ls = vmc_client.Orgs.list()
@@ -31,8 +33,7 @@ class vmc(object):
 #    if self.org_display_name == None:
 #        raise ValueError("Org with ID {} doesn't exist".format(self.org_id)) 
 
-    org = self.vmc_client.Orgs.get(self.org_id)
-    self.org_display_name = org.display_name
+    self.org_display_name = self.org.display_name
 
 #    # Check if the sddc exists and return existing sddc
 #    try:
