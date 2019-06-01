@@ -15,7 +15,7 @@ import vmcjptool.vmc_client
 
 class SddcConfig(object):
     def __init__(self):
-        self.vmc = vmc_client.vmc()
+        self.vmc = vmc_client.Vmc()
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
