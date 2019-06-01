@@ -22,8 +22,7 @@ class SddcConfig(object):
         s3 = s3utils.S3()
         f = json.load(open(config, "r"))
         j = s3.read_json_from_s3(f["bucket"], f["config"])
-        token = j["token"]
-        self.vmc_client = create_vmc_client(token)
+        self.vmc_client = create_vmc_client(j["token"])
         self.org_id = j["org_id"]
         self.sddc_id = j["sddc_id"]
         
