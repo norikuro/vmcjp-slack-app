@@ -12,7 +12,7 @@ class DocmentDb(object, s3config):
     s3 = s3utils.S3()
     
     f = json.load(open(s3config, 'r'))
-    url = s3.read_json_from_s3(f["bucket"], f["db"])["url"]
+    url = s3.read_json_from_s3(f["bucket"], f["config"])["db_url"]
     s3.download_from_s3(f["bucket"], "rds-combined-ca-bundle.pem", "/tmp/rds-combined-ca-bundle.pem")
     
     self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=/tmp/rds-combined-ca-bundle.pem&replicaSet=rs0")
