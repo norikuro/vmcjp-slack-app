@@ -5,7 +5,7 @@ import pymongo
 import sys
 #import boto3
 
-from vmcutils import s3utils
+from vmcjptool.utils import s3utils
 
 class db(object):
   def __init__(self):
