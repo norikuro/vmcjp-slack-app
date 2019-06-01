@@ -67,7 +67,6 @@ We need following JSON files to run this script.
 ```cmd
 {
   "bucket": "vmc-env", #S3 bucket name
-  "token": "token.json", #VMC's refresh token file name
   "config": "config.json" #config file name 
 }
 ```
