@@ -110,7 +110,7 @@ class SddcConfig(object):
             username=self.sddc.resource_config.cloud_username, 
             password=self.sddc.resource_config.cloud_password
         )
-        self.vcenter = vsphere.vcenter
+        self.vcenter = self.vsphere.vcenter
         rps = self.vcenter.ResourcePool.list(filter=None)
         pools = [rp.name for rp in rps if not rp.name in management_pools]
 
