@@ -14,7 +14,6 @@ from com.vmware.content_client import Library
 from vmcjptool.utils import s3utils
 from vmcjptool.utils import dbutils
 from vmcjptool.utils.metadata import get_members
-#import vmcjptool.vmc_client
 
 S3_CONFIG = "s3config.json"
 
@@ -25,7 +24,6 @@ class SddcConfig(object):
         j = s3.read_json_from_s3(f["bucket"], f["config"])
         token = j["token"]
         self.vmc_client = create_vmc_client(token)
-#        self.vmc = vmcjptool.vmc_client.Vmc()
         self.org_id = j["org_id"]
         self.sddc_id = j["sddc_id"]
         
