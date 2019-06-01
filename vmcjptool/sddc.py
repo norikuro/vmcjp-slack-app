@@ -20,7 +20,7 @@ S3_CONFIG = "s3config.json"
 class SddcConfig(object):
     def __init__(self, config):
         s3 = s3utils.S3()
-        f = json.load(open("s3config.json", "r"))
+        f = json.load(open(config, "r"))
         j = s3.read_json_from_s3(f["bucket"], f["config"])
         token = j["token"]
         self.vmc_client = create_vmc_client(token)
