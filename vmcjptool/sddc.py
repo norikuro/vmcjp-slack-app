@@ -69,7 +69,7 @@ class SddcConfig(object):
         
 
     def get_sddc_config(self):
-        sddc = self.vmc.sddc
+        sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
         resource_config = sddc.resource_config
         
         sddc_config = {
