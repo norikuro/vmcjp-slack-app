@@ -8,10 +8,10 @@ from pytz import timezone
 from collections import OrderedDict
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
-from vmcutils import s3utils
-from vmcutils import dbutils
-from vmcutils.metadata import get_members
-import vmc_client
+from vmcjptool.utils import s3utils
+from vmcjptool.utils import dbutils
+from vmcjptool.utils.metadata import get_members
+import vmcjptool.vmc_client
 
 class SDDCConfig(object):
     def __init__(self):
