@@ -16,7 +16,7 @@ class DocmentDb(object):
     
     f = json.load(open(s3config, 'r'))
     url = s3.read_json_from_s3(f["bucket"], f["config"])["db_url"]
-    s3.download_from_s3(f["bucket"], DocmentDb.DOWNLOAD_TARGET)
+    s3.download_from_s3(f["bucket"], CA_BUMDLE, DocmentDb.DOWNLOAD_TARGET)
     
     self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=" + DOWNLOAD_TARGET + "&replicaSet=rs0")
     self.db = self.client.sddc_db
