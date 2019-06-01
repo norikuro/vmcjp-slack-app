@@ -11,7 +11,7 @@ from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_
 from vmcjptool.utils import s3utils
 from vmcjptool.utils.metadata import get_members
 
-class vmc(object):
+class Vmc(object):
   def __init__(self):
     s3 = s3utils.S3()
     f = json.load(open("s3config.json", 'r'))
@@ -32,9 +32,9 @@ class vmc(object):
     )
     self.vcenter = self.vsphere.vcenter
 
-class nsx(object):
+class Nsx(object):
   def __init__(self):
-    s3 = s3utils.s3()
+    s3 = s3utils.S3()
     f = json.load(open("s3config.json", 'r'))
     t = s3.read_json_from_s3(f["bucket"], f["token"])
     j = s3.read_json_from_s3(f["bucket"], f["config"])
