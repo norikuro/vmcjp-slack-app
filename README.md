@@ -59,8 +59,7 @@ We need following JSON files to run this script.
 | file          | file localtion | description |
 |---|---|---|
 | s3config.json | vmc-demo | This file contains S3 information like bucket and file name. |
-| token.json | S3 | This file contains VMC's refresh token. |
-| config.json | S3 | This file contains VMC's org id, SDDC's id. |
+| config.json | S3 | This file contains VMC's org id, SDDC's id, refresh token. |
 
 #### config file example
 * s3config.json
