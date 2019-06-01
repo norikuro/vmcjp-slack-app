@@ -13,13 +13,13 @@ from vmcjptool.utils import dbutils
 from vmcjptool.utils.metadata import get_members
 import vmcjptool.vmc_client
 
-class SDDCConfig(object):
+class SddcConfig(object):
     def __init__(self):
         self.vmc = vmc_client.vmc()
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-        self.db = dbutils.db()
+        self.db = dbutils.DocmentDb()
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
               {"sddc_updated": now}
