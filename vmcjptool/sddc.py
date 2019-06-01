@@ -32,7 +32,9 @@ class SddcConfig(object):
         self.db = dbutils.DocmentDb()
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
+            {"$set": 
               {"sddc_updated": now}
+            }
         )
     
     def get_org_config(self):
@@ -42,7 +44,7 @@ class SddcConfig(object):
         }
         
         self.db.upsert(
-            {"org": {"$exists":True}}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"org": sddc_config}
             }
@@ -61,7 +63,7 @@ class SddcConfig(object):
         sddc_config = {"aws_connected_account": a}
 
         self.db.upsert(
-            {"aws_connected_account": {"$exists":True}}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"aws_connected_account": a}
             }
@@ -82,7 +84,7 @@ class SddcConfig(object):
         }
         
         self.db.upsert(
-            {"sddc.id": self.sddc_id}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"sddc": sddc_config}
             }
@@ -92,7 +94,7 @@ class SddcConfig(object):
         vc_url = self.sddc.resource_config.vc_url
         
         self.db.upsert(
-            {"vc_url": vc_url}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"vc_url": vc_url}
             }
@@ -113,7 +115,7 @@ class SddcConfig(object):
         pools = [rp.name for rp in rps if not rp.name in management_pools]
 
         self.db.upsert(
-            {"resourcepools": {"$exists":True}}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"resourcepools": pools}
             }
@@ -135,7 +137,7 @@ class SddcConfig(object):
         folders = [fl.name for fl in fls if not fl.name in management_folders]
 
         self.db.upsert(
-            {"folders": {"$exists":True}}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"folders": folders}
             }
@@ -159,7 +161,7 @@ class SddcConfig(object):
                       "automatic_sync_enabled": lib.subscription_info.automatic_sync_enabled})
             
         self.db.upsert(
-            {"contentlibraries": {"$exists":True}}, 
+            {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"contentlibraries": a}
             }
