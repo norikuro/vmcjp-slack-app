@@ -7,11 +7,11 @@ import sys
 
 from vmcjptool.utils import s3utils
 
-class DocmentDb(object):
+class DocmentDb(object, s3config):
   def __init__(self):
     s3 = s3utils.S3()
     
-    f = json.load(open("s3config.json", 'r'))
+    f = json.load(open(s3config, 'r'))
     url = s3.read_json_from_s3(f["bucket"], f["db"])["url"]
     s3.download_from_s3(f["bucket"], "rds-combined-ca-bundle.pem", "/tmp/rds-combined-ca-bundle.pem")
     
