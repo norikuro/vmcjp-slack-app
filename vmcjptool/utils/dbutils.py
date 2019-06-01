@@ -9,7 +9,7 @@ from vmcjptool.utils import s3utils
 
 class DocmentDb(object):
   def __init__(self):
-    s3 = s3utils.s3()
+    s3 = s3utils.S3()
     
     f = json.load(open("s3config.json", 'r'))
     url = s3.read_json_from_s3(f["bucket"], f["db"])["url"]
