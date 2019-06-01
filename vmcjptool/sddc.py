@@ -13,8 +13,10 @@ from vmcjptool.utils import dbutils
 from vmcjptool.utils.metadata import get_members
 import vmcjptool.vmc_client
 
+S3_CONFIG = "s3config.json"
+
 class SddcConfig(object):
-    def __init__(self):
+    def __init__(self, config):
         s3 = s3utils.S3()
         f = json.load(open("s3config.json", "r"))
         j = s3.read_json_from_s3(f["bucket"], f["config"])
@@ -154,7 +156,7 @@ class SddcConfig(object):
         )
 
 def lambda_handler(event, context):
-    sddc_operations = SddcConfig()
+    sddc_operations = SddcConfig(S3_CONFIG)
     sddc_operations.get_org_config()
     sddc_operations.get_aws_connected_accounts()
     sddc_operations.get_sddc_config()
@@ -164,7 +166,7 @@ def lambda_handler(event, context):
     sddc_operations.list_contentlibrary()
 
 def main():
-    sddc_operations = SddcConfig()
+    sddc_operations = SddcConfig(S3_CONFIG)
     sddc_operations.get_org_config()
     sddc_operations.get_aws_connected_accounts()
     sddc_operations.get_sddc_config()
