@@ -50,7 +50,7 @@ class SddcConfig(object):
     
     def get_aws_connected_accounts(self):
         a = []
-        accounts = self.vmc.orgs.account_link.ConnectedAccounts.get(self.vmc.org_id)
+        accounts = self.vmc_client.orgs.account_link.ConnectedAccounts.get(self.org_id)
         for account in accounts:
             a.append(
                 {
