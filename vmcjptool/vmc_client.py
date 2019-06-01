@@ -8,8 +8,8 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
-from vmcutils import s3utils
-from vmcutils.metadata import get_members
+from vmcjptool.utils import s3utils
+from vmcjptool.utils.metadata import get_members
 
 class vmc(object):
   def __init__(self):
