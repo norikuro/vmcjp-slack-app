@@ -8,14 +8,17 @@ import sys
 from vmcjptool.utils import s3utils
 
 class DocmentDb(object, s3config):
+  CA_BUMDLE = "rds-combined-ca-bundle.pem"
+  DOWNLOAD_TARGET = "/tmp/" + CA_BUMDLE
+  
   def __init__(self):
     s3 = s3utils.S3()
     
     f = json.load(open(s3config, 'r'))
     url = s3.read_json_from_s3(f["bucket"], f["config"])["db_url"]
-    s3.download_from_s3(f["bucket"], "rds-combined-ca-bundle.pem", "/tmp/rds-combined-ca-bundle.pem")
+    s3.download_from_s3(f["bucket"], DOWNLOAD_TARGET)
     
-    self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=/tmp/rds-combined-ca-bundle.pem&replicaSet=rs0")
+    self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=" + DOWNLOAD_TARGET + "&replicaSet=rs0")
     self.db = self.client.sddc_db
     self.collection = self.db.sddc_collection
     
