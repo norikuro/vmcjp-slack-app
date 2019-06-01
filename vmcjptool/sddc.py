@@ -84,7 +84,7 @@ class SddcConfig(object):
         }
         
         self.db.upsert(
-            {"sddc.id": self.vmc.sddc_id}, 
+            {"sddc.id": self.sddc_id}, 
             {"$set": 
               {"sddc": sddc_config}
             }
