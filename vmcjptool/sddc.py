@@ -69,12 +69,12 @@ class SddcConfig(object):
         
 
     def get_sddc_config(self):
-        sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
-        resource_config = sddc.resource_config
+        self.sddc = self.vmc_client.orgs.Sddcs.get(self.org_id, self.sddc_id)
+        resource_config = self.sddc.resource_config
         
         sddc_config = {
-            "id": sddc.id,
-            "name": sddc.name,
+            "id": self.sddc.id,
+            "name": self.sddc.name,
             "num_hosts": len(resource_config.esx_hosts),
             "vpc_cidr": resource_config.vpc_info.vpc_cidr,
             "vmc_version": resource_config.sddc_manifest.vmc_version,
@@ -89,7 +89,7 @@ class SddcConfig(object):
         )
 
     def get_vcenter(self):
-        vc_url = self.vmc.sddc.resource_config.vc_url
+        vc_url = self.sddc.resource_config.vc_url
         
         self.db.upsert(
             {"vc_url": vc_url}, 
