@@ -15,6 +15,10 @@ import vmcjptool.vmc_client
 
 class SddcConfig(object):
     def __init__(self):
+        s3 = s3utils.S3()
+        f = json.load(open("s3config.json", "r"))
+        j = s3.read_json_from_s3(f["bucket"], f["config"])
+        token = j["token"]
         self.vmc = vmcjptool.vmc_client.Vmc()
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
