@@ -7,6 +7,7 @@ from datetime import datetime
 from pytz import timezone
 from collections import OrderedDict
 from vmware.vapi.vmc.client import create_vmc_client
+from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from vmcjptool.utils import s3utils
@@ -103,7 +104,13 @@ class SddcConfig(object):
                             "Mgmt-ResourcePool", 
                             "Compute-ResourcePool"]
 
-        rps = self.vmc.vcenter.ResourcePool.list(filter=None)
+        self.vsphere = create_vsphere_client(
+            parse.urlparse(self.sddc.resource_config.vc_url).hostname, 
+            username=self.sddc.resource_config.cloud_username, 
+            password=self.sddc.resource_config.cloud_password
+        )
+        self.vcenter = vsphere.vcenter
+        rps = self.vcenter.ResourcePool.list(filter=None)
         pools = [rp.name for rp in rps if not rp.name in management_pools]
 
         self.db.upsert(
@@ -125,7 +132,7 @@ class SddcConfig(object):
                               "Workloads", "Templates"]
 
         folder_filter_spec = Folder.FilterSpec(type="VIRTUAL_MACHINE")
-        fls = self.vmc.vcenter.Folder.list(folder_filter_spec)
+        fls = self.vcenter.Folder.list(folder_filter_spec)
         folders = [fl.name for fl in fls if not fl.name in management_folders]
 
         self.db.upsert(
@@ -136,7 +143,7 @@ class SddcConfig(object):
         )
 
     def list_contentlibrary(self):
-        libs = self.vmc.vsphere.content.Library
+        libs = self.vsphere.content.Library
         lib_ls = libs.list()
         
         a = []
