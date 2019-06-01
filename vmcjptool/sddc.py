@@ -21,7 +21,10 @@ class SddcConfig(object):
         f = json.load(open("s3config.json", "r"))
         j = s3.read_json_from_s3(f["bucket"], f["config"])
         token = j["token"]
+        self.vmc_client = create_vmc_client(token)
         self.vmc = vmcjptool.vmc_client.Vmc()
+        self.org_id = j["org_id"]
+        self.sddc_id = j["sddc_id"]
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
@@ -33,8 +36,8 @@ class SddcConfig(object):
     
     def get_org_config(self):
         sddc_config = {
-            "id": self.vmc.org_id,
-            "display_name": self.vmc.org.display_name
+            "id": self.org_id,
+            "display_name": self.vmc_client.Orgs.get(self.org_id).display_name
         }
         
         self.db.upsert(
