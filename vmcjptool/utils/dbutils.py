@@ -7,7 +7,7 @@ import sys
 
 from vmcjptool.utils import s3utils
 
-class db(object):
+class DocmentDb(object):
   def __init__(self):
     s3 = s3utils.s3()
     
