@@ -19,17 +19,12 @@ You can run this script on AWS EC2 or AWS Lambda.
 
 ## Scrips
 followings are main scripts
-* sddc.py
-* networks.py
+* vmcjptool/sddc.py
+* vmcjptool/networks.py
 
 followings are helper scripts
-* vmc_client.py
-* customer_vpcs.py
-* firewall_rules.py
-* security_groups.py
-* segments.py
-* vpns.py
-* vmcutils/*.py
+* other vmcjptool/*.py
+* utils/*.py
 
 ## How to...
 ### Configure AWS Endpoint and deploy EC2 instance
