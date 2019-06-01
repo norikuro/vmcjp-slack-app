@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 from pytz import timezone
 from collections import OrderedDict
+from vmware.vapi.vmc.client import create_vmc_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from vmcjptool.utils import s3utils
