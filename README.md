@@ -79,7 +79,8 @@ vmc-env is bucket name, specified in s3config.json
 {
   "org_id": "VMC's Organization ID",
   "sddc_id": "SDDC ID",
-  "token": "Refresh token number"
+  "token": "Refresh token number",
+  "db_url": "mongodb://master:VMware1!@docdb-xxxxxxxxxx.cluster-cmtpcwnhqpq9.ap-northeast-1.docdb.amazonaws.com:27017/",
 }
 ```
 
