@@ -59,7 +59,6 @@ class NetworkConfig(object):
     def list_customer_vpcs(self):
         start = time.time()
         network_config = get_customer_vpc(self.nsx_app_client)
-        
         self.db.upsert(
             {"network_updated": {"$exists":True}},
             {"$set": 
@@ -71,10 +70,16 @@ class NetworkConfig(object):
         
     def list_security_groups(self):
         start = time.time()
-        self.network_config["security_groups"] = [
+        network_config = [
             get_security_groups("mgw", self.nsx_policy_client),
             get_security_groups("cgw", self.nsx_policy_client)
         ]
+        self.db.upsert(
+            {"network_updated": {"$exists":True}},
+            {"$set": 
+              {"security_groups": network_config}
+            }
+        )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
@@ -118,7 +123,7 @@ def lambda_handler(event, context):
 def main():
     network_operations = NetworkConfig(S3_CONFIG)
     network_operations.list_customer_vpcs()
-#    network_operations.list_security_groups()
+    network_operations.list_security_groups()
 #    network_operations.list_firewall_rules()
 #    network_operations.list_segments()
 #    network_operations.list_l3vpns()
