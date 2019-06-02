@@ -12,7 +12,8 @@ from firewall_rules import get_firewall_rules
 from segments import get_segments
 from vpns import get_l3vpns
 from customer_vpcs import get_customer_vpc
-from vmc_client import get_nsx_policy, get_nsx_app
+from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
+from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
 S3_CONFIG = "vmcjptool/s3config.json"
 
