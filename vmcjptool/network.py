@@ -18,11 +18,27 @@ S3_CONFIG = "vmcjptool/s3config.json"
 
 class NetworkConfig(object):
     def __init__(self, config):
+        s3 = s3utils.S3()
+        f = json.load(open(config, "r"))
+        j = s3.read_json_from_s3(f["bucket"], f["config"])
+#        self.vmc_client = create_vmc_client(j["token"])
+        token = j["token"]
+        org_id = j["org_id"]
+        sddc_id = j["sddc_id"]
+        
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
 
         start = time.time()
-        self.nsx_client = get_nsx_policy("s3config.json")
-        self.nsx_app_client = get_nsx_app("s3config.json")
+        self.nsx_policy = create_nsx_policy_client_for_vmc(
+            refresh_token=token,
+            org_id=org_id,
+            sddc_id=sddc_id
+        )
+        self.nsx_app = create_nsx_vmc_app_client_for_vmc(
+            refresh_token=token,
+            org_id=org_id,
+            sddc_id=sddc_id
+        )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
