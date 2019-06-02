@@ -14,8 +14,10 @@ from vpns import get_l3vpns
 from customer_vpcs import get_customer_vpc
 from vmc_client import get_nsx_policy, get_nsx_app
 
+S3_CONFIG = "vmcjptool/s3config.json"
+
 class NetworkConfig(object):
-    def __init__(self):
+    def __init__(self, config):
         self.network_config = OrderedDict()
         self.network_config["network_updated"] = datetime.now().strftime("%Y/%m/%d")
 
@@ -70,7 +72,7 @@ class NetworkConfig(object):
         write_json_to_s3("vmc-env", "network.json", self.network_config)
 
 def lambda_handler(event, context):
-    network_operations = NetworkConfig()
+    network_operations = NetworkConfig(S3_CONFIG)
     network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
     network_operations.list_firewall_rules()
