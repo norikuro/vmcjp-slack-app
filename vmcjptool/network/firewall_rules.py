@@ -2,7 +2,7 @@
 import inspect
 
 from security_groups import get_security_group_ids_and_names
-from vmcutils.metadata import get_members
+from vmcjptool.utils.metadata import get_members
 from vmcutils.listutils import compare_list_and_dict
 from vmcutils.stringutils import replace_strings_in_list
 
