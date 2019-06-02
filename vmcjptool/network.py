@@ -34,7 +34,7 @@ class NetworkConfig(object):
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-        self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
+        self.db = dbutils.DocmentDb(config, NetworkConfig.DB_NAME, NetworkConfig.COLLECTION_NAME)
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
