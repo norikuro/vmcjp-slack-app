@@ -11,7 +11,7 @@ class DocmentDb(object):
   CA_BUMDLE = "rds-combined-ca-bundle.pem"
   DOWNLOAD_TARGET = "/tmp/" + CA_BUMDLE
   
-  def __init__(self, s3config):
+  def __init__(self, s3config, db_name, collection_name):
     s3 = s3utils.S3()
     
     f = json.load(open(s3config, 'r'))
@@ -19,8 +19,8 @@ class DocmentDb(object):
     s3.download_from_s3(f["bucket"], DocmentDb.CA_BUMDLE, DocmentDb.DOWNLOAD_TARGET)
     
     self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=" + DocmentDb.DOWNLOAD_TARGET + "&replicaSet=rs0")
-    self.db = self.client["sddc_db"]
-    self.collection = self.db["sddc_collection"]
+    self.db = self.client[db_name]
+    self.collection = self.db[collection_name]
     
   def get_client(self):
     return self.client
