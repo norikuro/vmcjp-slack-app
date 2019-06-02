@@ -18,8 +18,7 @@ S3_CONFIG = "vmcjptool/s3config.json"
 
 class NetworkConfig(object):
     def __init__(self, config):
-        self.network_config = OrderedDict()
-        self.network_config["network_updated"] = datetime.now().strftime("%Y/%m/%d")
+        now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
 
         start = time.time()
         self.nsx_client = get_nsx_policy("s3config.json")
