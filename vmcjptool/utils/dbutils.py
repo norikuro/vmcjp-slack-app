@@ -19,8 +19,8 @@ class DocmentDb(object):
     s3.download_from_s3(f["bucket"], DocmentDb.CA_BUMDLE, DocmentDb.DOWNLOAD_TARGET)
     
     self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=" + DocmentDb.DOWNLOAD_TARGET + "&replicaSet=rs0")
-    self.db = self.client.sddc_db
-    self.collection = self.db.sddc_collection
+    self.db = self.client["sddc_db"]
+    self.collection = self.db["sddc_collection"]
     
   def get_client(self):
     return self.client
