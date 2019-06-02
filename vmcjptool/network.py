@@ -57,9 +57,9 @@ class NetworkConfig(object):
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
     def list_customer_vpcs(self):
+        start = time.time()
         network_config = get_customer_vpc(self.nsx_app_client)
         
-        start = time.time()
         self.db.upsert(
             {"network_updated": {"$exists":True}},
             {"$set": 
