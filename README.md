@@ -23,8 +23,9 @@ followings are main scripts
 * vmcjptool/networks.py
 
 followings are helper scripts
-* other vmcjptool/*.py
-* utils/*.py
+* vmcjptool/*.py
+* vmcjptool/network/*.py
+* vmcjptool/utils/*.py
 
 ## How to...
 ### Configure AWS Endpoint and deploy EC2 instance
