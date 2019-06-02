@@ -86,10 +86,16 @@ class NetworkConfig(object):
 
     def list_firewall_rules(self):
         start = time.time()
-        self.network_config["firewall_rules"] = [
+        network_config = [
             get_firewall_rules("mgw", self.nsx_policy_client),
             get_firewall_rules("cgw", self.nsx_policy_client)
         ]
+        self.db.upsert(
+            {"network_updated": {"$exists":True}},
+            {"$set": 
+              {"firewall_rules": network_config}
+            }
+        )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
@@ -124,7 +130,7 @@ def main():
     network_operations = NetworkConfig(S3_CONFIG)
     network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
-#    network_operations.list_firewall_rules()
+    network_operations.list_firewall_rules()
 #    network_operations.list_segments()
 #    network_operations.list_l3vpns()
 #    network_operations.output_to_s3()
