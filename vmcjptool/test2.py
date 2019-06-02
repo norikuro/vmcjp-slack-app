@@ -7,7 +7,7 @@ from vmcjptool.utils import dbutils
 
 class Test(object):
   def db(self):
-    db = DocmentDb("vmcjptool/s3config.json")
+    db = dbutils.DocmentDb("vmcjptool/s3config.json")
 #    collection.remove()
     col = db.find_all()
     for data in col:
