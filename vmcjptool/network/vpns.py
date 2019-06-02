@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-from vmcutils.metadata import get_members
+
+from vmcjptool.utils.metadata import get_members
 
 def get_l3vpns(nsx_client):
 #  tier0_id = nsx_client.infra.Tier0s.list().results[0].get_field("id") ##vmc
