@@ -9,7 +9,7 @@ class Test(object):
   def db(self):
     db = DocmentDb("vmcjptool/s3config.json")
 #    collection.remove()
-    col = collection.find()
+    col = db.find_all()
     for data in col:
       print(data)
   
