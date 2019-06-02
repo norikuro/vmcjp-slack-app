@@ -3,7 +3,7 @@
 import pymongo
 import sys
 
-import vmcjptool.vmcutils.dbutils
+import vmcjptool.vmcutils.dbutils.DocmentDb
 
 class Test(object):
   def db(self):
