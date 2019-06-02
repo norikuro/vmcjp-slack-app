@@ -102,20 +102,32 @@ class NetworkConfig(object):
     
     def list_segments(self):
         start = time.time()
-        self.network_config["segments"] = get_segments("cgw", self.nsx_policy_client)
+        network_config = get_segments("cgw", self.nsx_policy_client)
+        self.db.upsert(
+            {"network_updated": {"$exists":True}},
+            {"$set": 
+              {"segments": network_config}
+            }
+        )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
 
     def list_l3vpns(self):
         start = time.time()
-        self.network_config["l3vpn"] = get_l3vpns(self.nsx_policy_client)
+        network_config = get_l3vpns(self.nsx_policy_client)
+        self.db.upsert(
+            {"network_updated": {"$exists":True}},
+            {"$set": 
+              {"l3vpn": network_config}
+            }
+        )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
         
-    def output_to_s3(self):
-        write_json_to_s3("vmc-env", "network.json", self.network_config)
+#    def output_to_s3(self):
+#        write_json_to_s3("vmc-env", "network.json", self.network_config)
 
 def lambda_handler(event, context):
     network_operations = NetworkConfig(S3_CONFIG)
@@ -124,16 +136,14 @@ def lambda_handler(event, context):
     network_operations.list_firewall_rules()
     network_operations.list_segments()
     network_operations.list_l3vpns()
-    network_operations.output_to_s3()
 
 def main():
     network_operations = NetworkConfig(S3_CONFIG)
     network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
     network_operations.list_firewall_rules()
-#    network_operations.list_segments()
-#    network_operations.list_l3vpns()
-#    network_operations.output_to_s3()
+    network_operations.list_segments()
+    network_operations.list_l3vpns()
 
 if __name__ == '__main__':
     main()
