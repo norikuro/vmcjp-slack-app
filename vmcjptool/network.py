@@ -20,6 +20,9 @@ from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_
 S3_CONFIG = "vmcjptool/s3config.json"
 
 class NetworkConfig(object):
+    DB_NAME = "sddc_db"
+    COLLECTION_NAME = "sddc_collection"
+
     def __init__(self, config):
         s3 = s3utils.S3()
         f = json.load(open(config, "r"))
@@ -30,7 +33,15 @@ class NetworkConfig(object):
         sddc_id = j["sddc_id"]
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
-
+        
+        self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
+        self.db.upsert(
+            {"sddc_updated": {"$exists":True}}, 
+            {"$set": 
+              {"network_updated": now}
+            }
+        )
+        
         start = time.time()
         self.nsx_policy_client = create_nsx_policy_client_for_vmc(
             refresh_token=token,
@@ -100,7 +111,7 @@ def lambda_handler(event, context):
 
 def main():
     network_operations = NetworkConfig()
-    network_operations.list_customer_vpcs()
+#    network_operations.list_customer_vpcs()
 #    network_operations.list_security_groups()
 #    network_operations.list_firewall_rules()
 #    network_operations.list_segments()
