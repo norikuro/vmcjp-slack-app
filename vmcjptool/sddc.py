@@ -18,6 +18,9 @@ from vmcjptool.utils.metadata import get_members
 S3_CONFIG = "s3config.json"
 
 class SddcConfig(object):
+    DB_NAME = "sddc_db"
+    COLLECTION_NAME = "sddc_collection"
+    
     def __init__(self, config):
         s3 = s3utils.S3()
         f = json.load(open(config, "r"))
@@ -28,7 +31,7 @@ class SddcConfig(object):
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-        self.db = dbutils.DocmentDb(config, "sddc_db", "sddc_collection")
+        self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
