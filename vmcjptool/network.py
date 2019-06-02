@@ -29,12 +29,12 @@ class NetworkConfig(object):
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
 
         start = time.time()
-        self.nsx_policy = create_nsx_policy_client_for_vmc(
+        self.nsx_policy_client = create_nsx_policy_client_for_vmc(
             refresh_token=token,
             org_id=org_id,
             sddc_id=sddc_id
         )
-        self.nsx_app = create_nsx_vmc_app_client_for_vmc(
+        self.nsx_app_client = create_nsx_vmc_app_client_for_vmc(
             refresh_token=token,
             org_id=org_id,
             sddc_id=sddc_id
@@ -52,8 +52,8 @@ class NetworkConfig(object):
     def list_security_groups(self):
         start = time.time()
         self.network_config["security_groups"] = [
-            get_security_groups("mgw", self.nsx_client),
-            get_security_groups("cgw", self.nsx_client)
+            get_security_groups("mgw", self.nsx_policy_client),
+            get_security_groups("cgw", self.nsx_policy_client)
         ]
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
@@ -62,8 +62,8 @@ class NetworkConfig(object):
     def list_firewall_rules(self):
         start = time.time()
         self.network_config["firewall_rules"] = [
-            get_firewall_rules("mgw", self.nsx_client),
-            get_firewall_rules("cgw", self.nsx_client)
+            get_firewall_rules("mgw", self.nsx_policy_client),
+            get_firewall_rules("cgw", self.nsx_policy_client)
         ]
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
@@ -71,14 +71,14 @@ class NetworkConfig(object):
     
     def list_segments(self):
         start = time.time()
-        self.network_config["segments"] = get_segments("cgw", self.nsx_client)
+        self.network_config["segments"] = get_segments("cgw", self.nsx_policy_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
 
     def list_l3vpns(self):
         start = time.time()
-        self.network_config["l3vpn"] = get_l3vpns(self.nsx_client)
+        self.network_config["l3vpn"] = get_l3vpns(self.nsx_policy_client)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 #        print(dict(self.network_config))
