@@ -28,7 +28,7 @@ class SddcConfig(object):
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-        self.db = dbutils.DocmentDb(config)
+        self.db = dbutils.DocmentDb(config, "sddc_db", "sddc_collection")
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
