@@ -8,11 +8,11 @@ from pytz import timezone
 from vmcjptool.utils import s3utils
 from vmcjptool.utils import dbutils
 from vmcjptool.utils.metadata import get_members
-from vmcjptool.network.security_groups import get_security_groups
-from vmcjptool.network.firewall_rules import get_firewall_rules
-from vmcjptool.network.segments import get_segments
-from vmcjptool.network.vpns import get_l3vpns
-from vmcjptool.network.customer_vpcs import get_customer_vpc
+#from vmcjptool.network.security_groups import get_security_groups
+#from vmcjptool.network.firewall_rules import get_firewall_rules
+#from vmcjptool.network.segments import get_segments
+#from vmcjptool.network.vpns import get_l3vpns
+#from vmcjptool.network.customer_vpcs import get_customer_vpc
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
@@ -122,11 +122,11 @@ class NetworkConfig(object):
 
 def lambda_handler(event, context):
     network_operations = NetworkConfig(S3_CONFIG)
-    network_operations.list_customer_vpcs()
-    network_operations.list_security_groups()
-    network_operations.list_firewall_rules()
-    network_operations.list_segments()
-    network_operations.list_l3vpns()
+#    network_operations.list_customer_vpcs()
+#    network_operations.list_security_groups()
+#    network_operations.list_firewall_rules()
+#    network_operations.list_segments()
+#    network_operations.list_l3vpns()
 
 def main():
     network_operations = NetworkConfig(S3_CONFIG)
