@@ -3,8 +3,8 @@ import inspect
 
 from vmcjptool.network.security_groups import get_security_group_ids_and_names
 from vmcjptool.utils.metadata import get_members
-from vmcjptool.vmcutils.listutils import compare_list_and_dict
-from vmcjptool.vmcutils.stringutils import replace_strings_in_list
+from vmcjptool.utils.listutils import compare_list_and_dict
+from vmcjptool.utils.stringutils import replace_strings_in_list
 
 def get_firewall_rules(gateway_type, nsx_client):
   admin_user = set(["admin", "admin;admin"])
