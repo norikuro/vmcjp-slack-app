@@ -58,19 +58,16 @@ class NetworkConfig(object):
 
     def list_customer_vpcs(self):
         network_config = get_customer_vpc(self.nsx_app_client)
-        start = time.time()
-#        self.network_config["customer_vpc"] = get_customer_vpc(self.nsx_app_client)
         
+        start = time.time()
         self.db.upsert(
-            {"sddc_updated": {"$exists":True}}, 
+            {"network_updated": {"$exists":True}},
             {"$set": 
               {"customer_vpc": network_config}
             }
         )
-        
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
         
     def list_security_groups(self):
         start = time.time()
