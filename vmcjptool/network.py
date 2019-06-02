@@ -5,7 +5,6 @@ import time
 
 from datetime import datetime
 from pytz import timezone
-#from collections import OrderedDict
 from vmcjptool.utils import s3utils
 from vmcjptool.utils import dbutils
 from vmcjptool.utils.metadata import get_members
@@ -27,7 +26,6 @@ class NetworkConfig(object):
         s3 = s3utils.S3()
         f = json.load(open(config, "r"))
         j = s3.read_json_from_s3(f["bucket"], f["config"])
-#        self.vmc_client = create_vmc_client(j["token"])
         token = j["token"]
         org_id = j["org_id"]
         sddc_id = j["sddc_id"]
@@ -82,7 +80,6 @@ class NetworkConfig(object):
         )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
 
     def list_firewall_rules(self):
         start = time.time()
@@ -98,7 +95,6 @@ class NetworkConfig(object):
         )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
     
     def list_segments(self):
         start = time.time()
@@ -111,7 +107,6 @@ class NetworkConfig(object):
         )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
 
     def list_l3vpns(self):
         start = time.time()
@@ -124,10 +119,6 @@ class NetworkConfig(object):
         )
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-#        print(dict(self.network_config))
-        
-#    def output_to_s3(self):
-#        write_json_to_s3("vmc-env", "network.json", self.network_config)
 
 def lambda_handler(event, context):
     network_operations = NetworkConfig(S3_CONFIG)
