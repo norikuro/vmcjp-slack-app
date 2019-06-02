@@ -33,3 +33,6 @@ class DocmentDb(object):
   
   def upsert(self, query, update_data):
     self.collection.update(query, update_data, upsert=True)
+
+  def find_all():
+    return self.collection.find()
