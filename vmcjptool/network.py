@@ -110,7 +110,7 @@ def lambda_handler(event, context):
     network_operations.output_to_s3()
 
 def main():
-    network_operations = NetworkConfig()
+    network_operations = NetworkConfig(S3_CONFIG)
 #    network_operations.list_customer_vpcs()
 #    network_operations.list_security_groups()
 #    network_operations.list_firewall_rules()
