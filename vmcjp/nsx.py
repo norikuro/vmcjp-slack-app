@@ -7,6 +7,7 @@ import atexit
 
 from datetime import datetime
 from pytz import timezone
+from vmcjp.config import Config
 from vmcjp.utils import s3utils
 from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
