@@ -18,7 +18,8 @@ from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_
 
 #S3_CONFIG = "vmcjp/s3config.json"
 
-class NetworkConfig(object):
+#class NetworkConfig(object):
+class NetworkConfig(Config):
 #    DB_NAME = "sddc_db"
 #    COLLECTION_NAME = "sddc_collection"
 
