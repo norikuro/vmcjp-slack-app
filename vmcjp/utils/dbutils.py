@@ -43,5 +43,5 @@ class DocmentDb(object):
   def find_with_fields(self, query, fields):
     return self.collection.find(query, fields)
   
-#  def find(self, query):
-#    return self.collection.find(query)
+  def find(self, query):
+    return self.collection.find(query)
