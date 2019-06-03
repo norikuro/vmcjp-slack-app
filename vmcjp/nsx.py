@@ -5,14 +5,14 @@ import time
 
 from datetime import datetime
 from pytz import timezone
-from vmcjptool.utils import s3utils
-from vmcjptool.utils import dbutils
-from vmcjptool.utils.metadata import get_members
-from vmcjptool.network.security_groups import get_security_groups
-from vmcjptool.network.firewall_rules import get_firewall_rules
-from vmcjptool.network.segments import get_segments
-from vmcjptool.network.vpns import get_l3vpns
-from vmcjptool.network.customer_vpcs import get_customer_vpc
+from vmcjp.utils import s3utils
+from vmcjp.utils import dbutils
+from vmcjp.utils.metadata import get_members
+from vmcjp.network.security_groups import get_security_groups
+from vmcjp.network.firewall_rules import get_firewall_rules
+from vmcjp.network.segments import get_segments
+from vmcjp.network.vpns import get_l3vpns
+from vmcjp.network.customer_vpcs import get_customer_vpc
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
