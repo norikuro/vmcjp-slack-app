@@ -11,7 +11,7 @@ class Test(object):
     collection = db.get_collection()
 #    col = collection.aggregate([{"$project": {"sddc.name": 1}}])
 #    collection.remove()
-    col = db.find(
+    col = db.find_with_fields(
       {}, 
       {
         "sddc_updated": 1,
