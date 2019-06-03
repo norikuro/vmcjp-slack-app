@@ -108,7 +108,7 @@ class NetworkConfig(object):
     
     def list_segments(self):
         start = time.time()
-        segments = self.nsx_client.infra.tier_1s.Segments.list(gateway_type).results
+        segments = self.nsx_policy_client.infra.tier_1s.Segments.list(gateway_type).results
 #        network_config = get_segments("cgw", self.nsx_policy_client)
         network_config = [
             {"create_user": segment.get_field("create_user"),
