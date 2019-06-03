@@ -20,5 +20,5 @@ class Config(object):
       
       now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
       
-      self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
+      self.db = dbutils.DocmentDb(config, Config.DB_NAME, Config.COLLECTION_NAME)
  
