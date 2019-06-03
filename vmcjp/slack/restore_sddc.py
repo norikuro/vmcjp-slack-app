@@ -62,17 +62,25 @@ def create_button(config):
         },
         {
             "title": "SDDC name",
-            "value": config["sddc"]["name"],
+#            "value": config["sddc"]["name"],
+            "value": "nk_single_api_test", #for test
             "short": "true"
         },
         {
             "title": "Number of hosts",
-            "value": config["sddc"]["num_hosts"],
+#            "value": config["sddc"]["num_hosts"],
+            "value": 3, #for test
             "short": "true"
         },
         {
             "title": "AWS account",
             "value": config["customer_vpc"]["linked_account"],
+            "short": "true"
+        },
+        {
+            "title": "AWS linked subnet",
+#            "value": config["customer_vpc"]["linked_vpc_subnets_id"],
+            "value": "subnet-4c80da05", #fortest,
             "short": "true"
         },
         {
