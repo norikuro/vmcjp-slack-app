@@ -5,7 +5,7 @@ import json
 import requests
 import atexit
 
-import vmcjp.config.Config
+import vmcjp.config
 from datetime import datetime
 from pytz import timezone
 from collections import OrderedDict
