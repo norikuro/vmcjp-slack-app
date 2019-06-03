@@ -36,3 +36,6 @@ class DocmentDb(object):
 
   def find_all(self):
     return self.collection.find()
+  
+  def find_one(self, query):
+    return self.collection.find_one(query)
