@@ -15,9 +15,6 @@ from vmcjp.config import Config
 from vmcjp.utils.metadata import get_members
 
 class SddcConfig(Config):
-#    DB_NAME = "sddc_db"
-#    COLLECTION_NAME = "sddc_collection"
-    
     def __init__(self):
         super(SddcConfig, self).__init__()
         
