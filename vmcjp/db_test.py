@@ -10,7 +10,7 @@ class Test(object):
     db = dbutils.DocmentDb("vmcjp/s3config.json", "sddc_db", "sddc_collection")
 #    collection = db.get_collection()
 #    collection.remove()
-    col = db.find({"sddc": {"$elemMatch": {"$all"}})
+    col = db.find({"sddc": {"$elemMatch": {"$all"}}})
 #    col = db.find_one({"sddc": {"$exists": True}})
     print(col)
 #    col = db.find_all()
