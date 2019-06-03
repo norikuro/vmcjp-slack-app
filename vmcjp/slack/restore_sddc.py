@@ -15,7 +15,7 @@ S3_CONFIG = "vmcjp/s3config.json"
 
 def restore_sddc():
     db = dbutils.DocmentDb(S3_CONFIG, DB_NAME, COLLECTION_NAME)
-    config = db.find_with_fields(
+    return db.find_with_fields(
       {}, 
       {
         "sddc_updated": 1,
@@ -28,23 +28,6 @@ def restore_sddc():
         "_id": 0
       }
     )
-    
-#    config = {
-#        "updated": config["updated"],
-#        "org_id": config["org"]["org_id"],
-#        "region": config["sddc"]["region"],
-##        "sddc_name": config["sddc"]["name"],
-#        "sddc_name": "nk_single_api_test", #for test
-#        "aws_account_id": config["customer_vpc"]["linked_account"],
-##       "customer_subnet_id": config["customer_vpc"]["linked_vpc_subnets_id"],
-#        "customer_subnet_id": "subnet-4c80da05", #fortest
-##       "provider": os.environ.get('VMC_PROVIDER', SddcConfig.PROVIDER_AWS),
-#        "provider": os.environ.get('VMC_PROVIDER', "ZEROCLOUD"), #for test
-##       "num_hosts": config["sddc"]["num_hosts"]
-#        "num_hosts": 3 #for test
-#    }    
-
-    return config
 
 def create_button(config):
     button_set = json.load(open("vmcjp/slack/button.json", 'r'))
@@ -57,7 +40,8 @@ def create_button(config):
         },
         {
             "title": "Org Name",
-            "value": config["org"]["display_name"],
+#            "value": config["org"]["display_name"],
+            "value": "APJ SME Zero Cloud Org",
             "short": "true"
         },
         {
