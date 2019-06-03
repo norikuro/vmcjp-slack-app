@@ -18,7 +18,7 @@ from vmcjp.utils import s3utils
 from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
 
-S3_CONFIG = "vmcjp/s3config.json"
+#S3_CONFIG = "vmcjp/s3config.json"
 
 #class SddcConfig(object):
 class SddcConfig(Config):
@@ -26,7 +26,7 @@ class SddcConfig(Config):
     COLLECTION_NAME = "sddc_collection"
     
     def __init__(self, config):
-        super(SddcConfig, self).__init__(config)
+        super(SddcConfig, self).__init__()
 #        s3 = s3utils.S3()
 #        f = json.load(open(config, "r"))
 #        j = s3.read_json_from_s3(f["bucket"], f["config"])
