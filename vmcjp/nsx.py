@@ -56,7 +56,7 @@ class NetworkConfig(object):
 
     def list_customer_vpcs(self):
         start = time.time()
-        vpc = nsx_app_client.infra.LinkedVpcs.list().results[0]
+        vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
 #        network_config = get_customer_vpc(self.nsx_app_client)
         network_config = {
             "linked_vpc_address": vpc.linked_vpc_addresses[0],
