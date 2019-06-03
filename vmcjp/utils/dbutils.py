@@ -37,6 +37,9 @@ class DocmentDb(object):
   def find_all(self):
     return self.collection.find()
   
+  def find_one(self, query):
+    return self.collection.find_one(query)
+  
   def find(self, query, fields):
     return self.collection.find(query, fields)
   
