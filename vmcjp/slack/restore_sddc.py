@@ -49,49 +49,38 @@ def restore_sddc():
 def create_button(config):
     button_set = json.load(open("button.json", 'r'))
     
-    fields = []
-    fields.append(
+    fields = [
         {
             "title": "Updated date",
             "value": config["sddc_updated"],
             "short": "true"
-        }
-    )
-    fields.append(
+        },
         {
             "title": "Org Name",
             "value": config["org"]["display_name"],
             "short": "true"
-        }
-    )
-    fields.append(
+        },
         {
             "title": "SDDC name",
             "value": config["sddc"]["name"],
             "short": "true"
-            }
-        )
-    fields.append(
+        },
         {
             "title": "Number of hosts",
             "value": config["num_hosts"],
             "short": "true"
-        }
-    )
-    fields.append(
+        },
         {
             "title": "AWS account",
             "value": config["customer_vpc"]["linked_account"],
             "short": "true"
-        }
-    )
-    fields.append(
+        },
         {
             "title": "Region",
             "value": config["sddc"]["region"],
             "short": "true"
         }
-    )
+    ]
 
     button_set["attachments"][0]["fields"] = fields
     logging.info(button_set)
