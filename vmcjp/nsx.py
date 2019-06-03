@@ -46,13 +46,13 @@ class NetworkConfig(object):
             refresh_token=token,
             org_id=org_id,
             sddc_id=sddc_id,
-            session
+            session=session
         )
         self.nsx_app_client = create_nsx_vmc_app_client_for_vmc(
             refresh_token=token,
             org_id=org_id,
             sddc_id=sddc_id,
-            session
+            session=session
         )
         atexit.register(session.close)
         elapsed_time = time.time() - start
