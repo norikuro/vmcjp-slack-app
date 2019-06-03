@@ -15,6 +15,7 @@ S3_CONFIG = "vmcjp/s3config.json"
 
 def restore_sddc():
     db = dbutils.DocmentDb(S3_CONFIG, DB_NAME, COLLECTION_NAME)
+    find_one({"sddc": {$exists: true})
     
 #    s3 = boto3.resource('s3')
 #    org = json.loads(s3.Object("vmc-env", "test_config.json").get()['Body'].read())
