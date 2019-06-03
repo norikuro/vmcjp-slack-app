@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from vmcjptool.utils.metadata import get_members
+from vmcjp.utils.metadata import get_members
 
 def get_security_groups(gateway_type, nsx_client):
     sys_usr = ["admin", "admin;admin"]
