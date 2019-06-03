@@ -10,7 +10,7 @@ from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
 from vmcjp.network.security_groups import get_security_groups
 from vmcjp.network.firewall_rules import get_firewall_rules
-from vmcjp.network.segments import get_segments
+#from vmcjp.network.segments import get_segments
 from vmcjp.network.vpns import get_l3vpns
 #from vmcjp.network.customer_vpcs import get_customer_vpc
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
@@ -108,7 +108,18 @@ class NetworkConfig(object):
     
     def list_segments(self):
         start = time.time()
-        network_config = get_segments("cgw", self.nsx_policy_client)
+        segments = self.nsx_client.infra.tier_1s.Segments.list(gateway_type).results
+#        network_config = get_segments("cgw", self.nsx_policy_client)
+        network_config = [
+            {"create_user": segment.get_field("create_user"),
+             "display_name": segment.get_field("display_name"),
+             "domain_name": segment.get_field("domain_name"),
+             "l2_extension": segment.get_field("l2_extension"),
+             "subnet": segment.get_field("subnets")[0].to_dict(),
+             "type": segment.get_field("type")}
+            for segment in segments 
+            if segment.get_field("create_user") != "admin"
+        ]
         self.db.upsert(
             {"network_updated": {"$exists":True}},
             {"$set": 
