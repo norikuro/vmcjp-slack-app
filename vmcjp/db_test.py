@@ -11,7 +11,7 @@ class Test(object):
     collection = db.get_collection()
 #    col = collection.aggregate([{"$project": {"sddc.name": 1}}])
 #    collection.remove()
-    col = db.find({}, {"sddc.name": 1, "sddc.region": 1, "_id" :0})
+    col = db.find({}, {"sddc.name": 1, "sddc.region": 1, "sddc.id": 1, "sddc.num_hosts": 1, ""_id" :0})
 #    col = db.find_one({"sddc.name": {"$exists": True}})
 #    print(col)
 #    col = db.find_all()
