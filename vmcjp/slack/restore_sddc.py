@@ -4,15 +4,22 @@ import logging
 import boto3
 
 from vmcjp.utils.slack_post import post_to_response_url
+from vmcjp.utils import dbutils
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+DB_NAME = "sddc_db"
+COLLECTION_NAME = "sddc_collection"
+S3_CONFIG = "vmcjp/s3config.json"
+
 def restore_sddc():
-    s3 = boto3.resource('s3')
-    org = json.loads(s3.Object("vmc-env", "test_config.json").get()['Body'].read())
-    sddc = json.loads(s3.Object("vmc-env", "sddc.json").get()['Body'].read())
-    network = json.loads(s3.Object("vmc-env", "network.json").get()['Body'].read())
+    db = dbutils.DocmentDb(S3_CONFIG, DB_NAME, COLLECTION_NAME)
+    
+#    s3 = boto3.resource('s3')
+#    org = json.loads(s3.Object("vmc-env", "test_config.json").get()['Body'].read())
+#    sddc = json.loads(s3.Object("vmc-env", "sddc.json").get()['Body'].read())
+#    network = json.loads(s3.Object("vmc-env", "network.json").get()['Body'].read())
     
     config = {
         "updated": sddc["updated"],
