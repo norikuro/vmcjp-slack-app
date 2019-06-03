@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 
-import argparse
+#import argparse
 import json
 import requests
 import atexit
 
 from datetime import datetime
 from pytz import timezone
-from collections import OrderedDict
+#from collections import OrderedDict
 from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from vmcjp.config import Config
-from vmcjp.utils import s3utils
-from vmcjp.utils import dbutils
+#from vmcjp.utils import s3utils
+#from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
 
 #S3_CONFIG = "vmcjp/s3config.json"
