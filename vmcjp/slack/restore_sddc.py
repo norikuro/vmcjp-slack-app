@@ -3,7 +3,7 @@ import os
 import logging
 import boto3
 
-from slack_post import post_to_response_url
+from vmcjp.utils.slack_post import post_to_response_url
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
