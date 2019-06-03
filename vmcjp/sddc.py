@@ -25,7 +25,7 @@ class SddcConfig(Config):
     DB_NAME = "sddc_db"
     COLLECTION_NAME = "sddc_collection"
     
-    def __init__(self, config):
+    def __init__(self):
         super(SddcConfig, self).__init__()
 #        s3 = s3utils.S3()
 #        f = json.load(open(config, "r"))
@@ -181,7 +181,7 @@ class SddcConfig(Config):
         )
 
 def lambda_handler(event, context):
-    sddc_operations = SddcConfig(S3_CONFIG)
+    sddc_operations = SddcConfig()
     sddc_operations.get_org_config()
     sddc_operations.get_aws_connected_accounts()
     sddc_operations.get_sddc_config()
@@ -191,7 +191,7 @@ def lambda_handler(event, context):
     sddc_operations.list_contentlibrary()
 
 def main():
-    sddc_operations = SddcConfig(S3_CONFIG)
+    sddc_operations = SddcConfig()
     sddc_operations.get_org_config()
     sddc_operations.get_aws_connected_accounts()
     sddc_operations.get_sddc_config()
