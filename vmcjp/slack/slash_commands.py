@@ -44,7 +44,7 @@ def command_handler(params):
         }
         call_lambda("restore_sddc", data)
         return {
-        'text': "OK, restore from backed up configration on S3"
+        'text': "OK, restore from backed up configration."
         }
 #        return
     else:
