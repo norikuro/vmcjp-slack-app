@@ -10,10 +10,11 @@ from vmcjp.utils import dbutils
 class Config(object):
     DB_NAME = "sddc_db"
     COLLECTION_NAME = "sddc_collection"
+    S3_CONFIG = "vmcjp/s3config.json"
     
-    def __init__(self, config):
+    def __init__(self):
       s3 = s3utils.S3()
-      f = json.load(open(config, "r"))
+      f = json.load(open(Config.S3_CONFIG, "r"))
       j = s3.read_json_from_s3(f["bucket"], f["config"])
       self.token = j["token"]
       self.org_id = j["org_id"]
