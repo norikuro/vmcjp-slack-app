@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from vmcjptool.utils.metadata import get_members
+from vmcjp.utils.metadata import get_members
 
 def get_segments(gateway_type, nsx_client):
   segments = nsx_client.infra.tier_1s.Segments.list(gateway_type).results
