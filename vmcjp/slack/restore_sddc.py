@@ -87,17 +87,4 @@ def lambda_handler(event, context):
     button = create_button(config)
     
     response = post_to_response_url(url, button)
-
-#    data = {
-#        "channel": event["channel_id"],
-#        "text": config
-#    }
-    
-#    response = post_to_response_url(url, data)
-    
 #    logging.info(response.read())
-  
-#    return {
-#        'statusCode': 200,
-#        'body': json.dumps('Hello from Lambda!')
-#    }
