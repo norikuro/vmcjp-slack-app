@@ -35,7 +35,7 @@ class NetworkConfig(object):
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
 #        self.db = dbutils.DocmentDb(config, NetworkConfig.DB_NAME, NetworkConfig.COLLECTION_NAME)
-        db.upsert(
+        self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
               {"network_updated": now}
@@ -45,15 +45,15 @@ class NetworkConfig(object):
         start = time.time()
         session = requests.Session()
         self.nsx_policy_client = create_nsx_policy_client_for_vmc(
-            refresh_token=token,
-            org_id=org_id,
-            sddc_id=sddc_id,
+            refresh_token=self.token,
+            org_id=self.org_id,
+            sddc_id=self.sddc_id,
             session=session
         )
         self.nsx_app_client = create_nsx_vmc_app_client_for_vmc(
-            refresh_token=token,
-            org_id=org_id,
-            sddc_id=sddc_id,
+            refresh_token=self.token,
+            org_id=self.org_id,
+            sddc_id=self.sddc_id,
             session=session
         )
         atexit.register(session.close)
