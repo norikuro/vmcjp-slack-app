@@ -13,7 +13,6 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
-from vmcjp import config
 from vmcjp.utils import s3utils
 from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
