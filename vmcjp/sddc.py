@@ -15,13 +15,13 @@ from vmcjp.config import Config
 from vmcjp.utils.metadata import get_members
 
 class SddcConfig(Config):
-    DB_NAME = "sddc_db"
-    COLLECTION_NAME = "sddc_collection"
+#    DB_NAME = "sddc_db"
+#    COLLECTION_NAME = "sddc_collection"
     
     def __init__(self):
         super(SddcConfig, self).__init__()
-        now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
+        now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
