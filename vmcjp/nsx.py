@@ -2,6 +2,8 @@
 
 import json
 import time
+import requests
+import atexit
 
 from datetime import datetime
 from pytz import timezone
@@ -39,16 +41,20 @@ class NetworkConfig(object):
         )
         
         start = time.time()
+        session = requests.Session()
         self.nsx_policy_client = create_nsx_policy_client_for_vmc(
             refresh_token=token,
             org_id=org_id,
-            sddc_id=sddc_id
+            sddc_id=sddc_id,
+            session
         )
         self.nsx_app_client = create_nsx_vmc_app_client_for_vmc(
             refresh_token=token,
             org_id=org_id,
-            sddc_id=sddc_id
+            sddc_id=sddc_id,
+            session
         )
+        atexit.register(session.close)
         elapsed_time = time.time() - start
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
