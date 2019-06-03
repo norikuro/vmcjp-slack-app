@@ -6,7 +6,7 @@ from vmcjp.utils import s3utils
 from datetime import datetime
 from pytz import timezone
 
-class SddcConfig(object):
+class Config(object):
     DB_NAME = "sddc_db"
     COLLECTION_NAME = "sddc_collection"
     
