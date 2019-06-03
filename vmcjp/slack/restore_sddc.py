@@ -67,7 +67,7 @@ def create_button(config):
         },
         {
             "title": "Number of hosts",
-            "value": config["num_hosts"],
+            "value": config["sddc"]["num_hosts"],
             "short": "true"
         },
         {
