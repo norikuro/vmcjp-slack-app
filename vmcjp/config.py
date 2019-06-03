@@ -18,8 +18,4 @@ class Config(object):
       self.token = j["token"]
       self.org_id = j["org_id"]
       self.sddc_id = j["sddc_id"]
-      
-      now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
-      
       self.db = dbutils.DocmentDb(config, Config.DB_NAME, Config.COLLECTION_NAME)
- 
