@@ -23,7 +23,7 @@ class Test(object):
         "org.id": 1,
         "customer_vpc.linked_account": 1,
         "customer_vpc.linked_vpc_subnets_id": 1,
-        "customer_vpc.linked_vpc_subnets_availability_zone": 1,
+        "customer_vpc.linked_vpc_subnets_availability_zone": 1
         "_id" :0})
 #    col = db.find_one({"sddc.name": {"$exists": True}})
 #    print(col)
