@@ -2,9 +2,10 @@
 
 import json
 
-from vmcjp.utils import s3utils
 from datetime import datetime
 from pytz import timezone
+from vmcjp.utils import s3utils
+from vmcjp.utils import dbutils
 
 class Config(object):
     DB_NAME = "sddc_db"
