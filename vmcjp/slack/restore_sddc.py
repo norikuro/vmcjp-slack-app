@@ -51,7 +51,7 @@ def create_button(config):
     
     fields = [
         {
-            "title": "Updated date",
+            "title": "Backed up date",
             "value": config["sddc_updated"],
             "short": "true"
         },
