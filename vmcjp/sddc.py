@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import requests
+import atexit
 
 from datetime import datetime
 from pytz import timezone
@@ -25,7 +27,6 @@ class SddcConfig(object):
         s3 = s3utils.S3()
         f = json.load(open(config, "r"))
         j = s3.read_json_from_s3(f["bucket"], f["config"])
-        self.vmc_client = create_vmc_client(j["token"])
         self.org_id = j["org_id"]
         self.sddc_id = j["sddc_id"]
         
@@ -38,6 +39,11 @@ class SddcConfig(object):
               {"sddc_updated": now}
             }
         )
+        
+        session = requests.Session()
+        self.vmc_client = create_vmc_client(j["token"], session=session)
+        atexit.register(session.close)
+
     
     def get_org_config(self):
         sddc_config = {
