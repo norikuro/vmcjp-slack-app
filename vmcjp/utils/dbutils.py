@@ -34,14 +34,5 @@ class DocmentDb(object):
   def upsert(self, query, update_data):
     self.collection.update(query, update_data, upsert=True)
 
-  def find_all(self):
-    return self.collection.find()
-  
-  def find_one(self, query):
-    return self.collection.find_one(query)
-  
   def find_with_fields(self, query, fields):
-    return self.collection.find(query, fields)
-  
-  def find(self, query):
-    return self.collection.find(query)
+    return self.collection.find(query, fields)[0]
