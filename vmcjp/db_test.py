@@ -11,7 +11,7 @@ class Test(object):
 #    collection = db.get_collection()
 #    collection.remove()
 #    col = db.find({}, {"_id":0, "sddc.name": 1, "sddc.region": 1})
-#    col = db.find({"sddc": })
+    col = db.find_one({"sddc": {"$exists": True}})
 #    col = db.find_all()
     for data in col:
       print(data)
