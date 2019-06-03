@@ -33,10 +33,10 @@ class SddcConfig(Config):
 #        self.org_id = j["org_id"]
 #        self.sddc_id = j["sddc_id"]
         
-        print(self.sddc_id)
+#        print(self.sddc_id)
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-        self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
+#        self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
