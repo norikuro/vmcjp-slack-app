@@ -19,4 +19,4 @@ class Config(object):
       self.token = j["token"]
       self.org_id = j["org_id"]
       self.sddc_id = j["sddc_id"]
-      self.db = dbutils.DocmentDb(config, Config.DB_NAME, Config.COLLECTION_NAME)
+      self.db = dbutils.DocmentDb(Config.S3_CONFIG, Config.DB_NAME, Config.COLLECTION_NAME)
