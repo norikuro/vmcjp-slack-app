@@ -10,8 +10,8 @@ class Test(object):
     db = dbutils.DocmentDb("vmcjp/s3config.json", "sddc_db", "sddc_collection")
 #    collection = db.get_collection()
 #    collection.remove()
-#    col = db.find({"sddc": {"$all"}})
-    col = db.find_one({"sddc.name": {"$exists": True}})
+    col = db.find({}, {"name": 1, "region": 1, "_id" :0})
+#    col = db.find_one({"sddc.name": {"$exists": True}})
     print(col)
 #    col = db.find_all()
 #    for data in col:
