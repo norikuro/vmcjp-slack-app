@@ -16,7 +16,7 @@ from vmcjp.network.customer_vpcs import get_customer_vpc
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
-S3_CONFIG = "vmcjptool/s3config.json"
+S3_CONFIG = "vmcjp/s3config.json"
 
 class NetworkConfig(object):
     DB_NAME = "sddc_db"
