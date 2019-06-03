@@ -5,7 +5,7 @@ import pymongo
 import sys
 #import boto3
 
-from vmcjptool.utils import s3utils
+from vmcjp.utils import s3utils
 
 class DocmentDb(object):
   CA_BUMDLE = "rds-combined-ca-bundle.pem"
