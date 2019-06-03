@@ -25,10 +25,10 @@ class Test(object):
       }
     )
 #    col = db.find_one({"sddc.name": {"$exists": True}})
-#    print(col)
+    print(col[0])
 #    col = db.find_all()
-    for data in col:
-      print(data)
+#    for data in col:
+#      print(data)
   
 def main():
   test = Test()
