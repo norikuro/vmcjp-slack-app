@@ -5,6 +5,7 @@ import json
 import requests
 import atexit
 
+import vmcjp.config.Config
 from datetime import datetime
 from pytz import timezone
 from collections import OrderedDict
@@ -20,7 +21,7 @@ from vmcjp.utils.metadata import get_members
 S3_CONFIG = "vmcjp/s3config.json"
 
 #class SddcConfig(object):
-class SddcConfig(Config):
+class SddcConfig(config.Config):
     DB_NAME = "sddc_db"
     COLLECTION_NAME = "sddc_collection"
     
