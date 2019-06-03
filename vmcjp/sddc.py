@@ -11,9 +11,9 @@ from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
-from vmcjptool.utils import s3utils
-from vmcjptool.utils import dbutils
-from vmcjptool.utils.metadata import get_members
+from vmcjp.utils import s3utils
+from vmcjp.utils import dbutils
+from vmcjp.utils.metadata import get_members
 
 S3_CONFIG = "vmcjptool/s3config.json"
 
