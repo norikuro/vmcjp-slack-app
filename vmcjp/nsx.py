@@ -16,23 +16,25 @@ from vmcjp.network.vpns import get_l3vpns
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
-S3_CONFIG = "vmcjp/s3config.json"
+#S3_CONFIG = "vmcjp/s3config.json"
 
 class NetworkConfig(object):
-    DB_NAME = "sddc_db"
-    COLLECTION_NAME = "sddc_collection"
+#    DB_NAME = "sddc_db"
+#    COLLECTION_NAME = "sddc_collection"
 
-    def __init__(self, config):
-        s3 = s3utils.S3()
-        f = json.load(open(config, "r"))
-        j = s3.read_json_from_s3(f["bucket"], f["config"])
-        token = j["token"]
-        org_id = j["org_id"]
-        sddc_id = j["sddc_id"]
+    def __init__(self):
+        super(NetworkConfig, self).__init__()
+        
+#        s3 = s3utils.S3()
+#        f = json.load(open(config, "r"))
+#        j = s3.read_json_from_s3(f["bucket"], f["config"])
+#        token = j["token"]
+#        org_id = j["org_id"]
+#        sddc_id = j["sddc_id"]
         
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-        self.db = dbutils.DocmentDb(config, NetworkConfig.DB_NAME, NetworkConfig.COLLECTION_NAME)
+#        self.db = dbutils.DocmentDb(config, NetworkConfig.DB_NAME, NetworkConfig.COLLECTION_NAME)
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
@@ -144,7 +146,7 @@ class NetworkConfig(object):
         print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
 def lambda_handler(event, context):
-    network_operations = NetworkConfig(S3_CONFIG)
+    network_operations = NetworkConfig()
     network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
     network_operations.list_firewall_rules()
@@ -152,7 +154,7 @@ def lambda_handler(event, context):
     network_operations.list_l3vpns()
 
 def main():
-    network_operations = NetworkConfig(S3_CONFIG)
+    network_operations = NetworkConfig()
     network_operations.list_customer_vpcs()
     network_operations.list_security_groups()
     network_operations.list_firewall_rules()
