@@ -40,7 +40,7 @@ class DocmentDb(object):
   def find_one(self, query):
     return self.collection.find_one(query)
   
-  def find(self, query, fields):
+  def find_with_fields(self, query, fields):
     return self.collection.find(query, fields)
   
 #  def find(self, query):
