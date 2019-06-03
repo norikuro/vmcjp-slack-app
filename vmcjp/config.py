@@ -2,8 +2,8 @@
 
 import json
 
-from datetime import datetime
-from pytz import timezone
+#from datetime import datetime
+#from pytz import timezone
 from vmcjp.utils import s3utils
 from vmcjp.utils import dbutils
 
