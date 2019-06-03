@@ -19,7 +19,8 @@ from vmcjp.utils.metadata import get_members
 
 S3_CONFIG = "vmcjp/s3config.json"
 
-class SddcConfig(object):
+#class SddcConfig(object):
+class SddcConfig(Config):
     DB_NAME = "sddc_db"
     COLLECTION_NAME = "sddc_collection"
     
