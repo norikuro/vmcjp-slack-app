@@ -45,7 +45,8 @@ class SddcConfig(Config):
         )
         
         session = requests.Session()
-        self.vmc_client = create_vmc_client(j["token"], session=session)
+        self.vmc_client = create_vmc_client(self.token, session=session)
+#        self.vmc_client = create_vmc_client(j["token"], session=session)
         atexit.register(session.close)
 
     
