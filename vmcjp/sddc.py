@@ -24,9 +24,10 @@ class SddcConfig(object):
     COLLECTION_NAME = "sddc_collection"
     
     def __init__(self, config):
-        s3 = s3utils.S3()
-        f = json.load(open(config, "r"))
-        j = s3.read_json_from_s3(f["bucket"], f["config"])
+        super.__init__(config)
+#        s3 = s3utils.S3()
+#        f = json.load(open(config, "r"))
+#        j = s3.read_json_from_s3(f["bucket"], f["config"])
         self.org_id = j["org_id"]
         self.sddc_id = j["sddc_id"]
         
