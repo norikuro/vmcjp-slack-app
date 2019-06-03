@@ -10,9 +10,7 @@ from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
 from vmcjp.network.security_groups import get_security_groups
 from vmcjp.network.firewall_rules import get_firewall_rules
-#from vmcjp.network.segments import get_segments
 from vmcjp.network.vpns import get_l3vpns
-#from vmcjp.network.customer_vpcs import get_customer_vpc
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
@@ -57,7 +55,6 @@ class NetworkConfig(object):
     def list_customer_vpcs(self):
         start = time.time()
         vpc = self.nsx_app_client.infra.LinkedVpcs.list().results[0]
-#        network_config = get_customer_vpc(self.nsx_app_client)
         network_config = {
             "linked_vpc_address": vpc.linked_vpc_addresses[0],
             "linked_account": vpc.linked_account,
@@ -109,7 +106,6 @@ class NetworkConfig(object):
     def list_segments(self):
         start = time.time()
         segments = self.nsx_policy_client.infra.tier_1s.Segments.list("cgw").results
-#        network_config = get_segments("cgw", self.nsx_policy_client)
         network_config = [
             {"create_user": segment.get_field("create_user"),
              "display_name": segment.get_field("display_name"),
