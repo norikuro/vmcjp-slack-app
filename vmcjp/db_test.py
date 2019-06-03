@@ -13,7 +13,7 @@ class Test(object):
 #    col = db.find_all()
 #    for data in col:
 #      print(data)
-    print(db.find_one({"sddc": {}}))
+    print(db.find_one({}, {"sddc": 1}))
   
 def main():
   test = Test()
