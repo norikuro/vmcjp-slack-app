@@ -1,42 +1,27 @@
 #!/usr/bin/env python
 
-#import argparse
 import json
 import requests
 import atexit
 
 from datetime import datetime
 from pytz import timezone
-#from collections import OrderedDict
 from six.moves.urllib import parse
 from vmware.vapi.vmc.client import create_vmc_client
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import ResourcePool, Folder
 from com.vmware.content_client import Library
 from vmcjp.config import Config
-#from vmcjp.utils import s3utils
-#from vmcjp.utils import dbutils
 from vmcjp.utils.metadata import get_members
 
-#S3_CONFIG = "vmcjp/s3config.json"
-
-#class SddcConfig(object):
 class SddcConfig(Config):
     DB_NAME = "sddc_db"
     COLLECTION_NAME = "sddc_collection"
     
     def __init__(self):
         super(SddcConfig, self).__init__()
-#        s3 = s3utils.S3()
-#        f = json.load(open(config, "r"))
-#        j = s3.read_json_from_s3(f["bucket"], f["config"])
-#        self.org_id = j["org_id"]
-#        self.sddc_id = j["sddc_id"]
-        
-#        print(self.sddc_id)
         now = datetime.now(timezone("Asia/Tokyo")).strftime("%Y/%m/%d")
         
-#        self.db = dbutils.DocmentDb(config, SddcConfig.DB_NAME, SddcConfig.COLLECTION_NAME)
         self.db.upsert(
             {"sddc_updated": {"$exists":True}}, 
             {"$set": 
@@ -46,7 +31,6 @@ class SddcConfig(Config):
         
         session = requests.Session()
         self.vmc_client = create_vmc_client(self.token, session=session)
-#        self.vmc_client = create_vmc_client(j["token"], session=session)
         atexit.register(session.close)
 
     
