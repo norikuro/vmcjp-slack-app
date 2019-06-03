@@ -15,31 +15,36 @@ S3_CONFIG = "vmcjp/s3config.json"
 
 def restore_sddc():
     db = dbutils.DocmentDb(S3_CONFIG, DB_NAME, COLLECTION_NAME)
-    find_one({"sddc": {$exists: true})
+    config = db.find_with_fields(
+      {}, 
+      {
+        "sddc_updated": 1,
+        "sddc.name": 1, 
+        "sddc.region": 1, 
+        "sddc.num_hosts": 1, 
+        "org.display_name": 1,
+        "customer_vpc.linked_account": 1,
+        "customer_vpc.linked_vpc_subnets_id": 1,
+        "_id": 0
+      }
+    )
     
-#    s3 = boto3.resource('s3')
-#    org = json.loads(s3.Object("vmc-env", "test_config.json").get()['Body'].read())
-#    sddc = json.loads(s3.Object("vmc-env", "sddc.json").get()['Body'].read())
-#    network = json.loads(s3.Object("vmc-env", "network.json").get()['Body'].read())
-    
-    config = {
-        "updated": sddc["updated"],
-        "org_id": org["org_id"],
-        "region": sddc["sddc"]["region"],
-#        "sddc_name": sddc["sddc"]["name"],
-        "sddc_name": "nk_single_api_test", #for test
-        "sddc_id": sddc["sddc"]["id"],
-        "aws_account_id": network["customer_vpc"]["linked_account"],
-#       "customer_subnet_id": network["customer_vpc"]["linked_vpc_subnets_id"],
-        "customer_subnet_id": "subnet-4c80da05", #fortest
-#       "provider": os.environ.get('VMC_PROVIDER', SddcConfig.PROVIDER_AWS),
-        "provider": os.environ.get('VMC_PROVIDER', "ZEROCLOUD"), #for test
-#       "num_hosts": sddc["sddc"]["num_hosts"]
-        "num_hosts": 3 #for test
-    }    
+#    config = {
+#        "updated": config["updated"],
+#        "org_id": config["org"]["org_id"],
+#        "region": config["sddc"]["region"],
+##        "sddc_name": config["sddc"]["name"],
+#        "sddc_name": "nk_single_api_test", #for test
+#        "aws_account_id": config["customer_vpc"]["linked_account"],
+##       "customer_subnet_id": config["customer_vpc"]["linked_vpc_subnets_id"],
+#        "customer_subnet_id": "subnet-4c80da05", #fortest
+##       "provider": os.environ.get('VMC_PROVIDER', SddcConfig.PROVIDER_AWS),
+#        "provider": os.environ.get('VMC_PROVIDER', "ZEROCLOUD"), #for test
+##       "num_hosts": config["sddc"]["num_hosts"]
+#        "num_hosts": 3 #for test
+#    }    
 
     return config
-#    return "test data"
 
 def create_button(config):
     button_set = json.load(open("button.json", 'r'))
@@ -48,21 +53,21 @@ def create_button(config):
     fields.append(
         {
             "title": "Updated date",
-            "value": config["updated"],
+            "value": config["sddc_updated"],
             "short": "true"
         }
     )
     fields.append(
         {
-            "title": "Org ID",
-            "value": config["org_id"],
+            "title": "Org Name",
+            "value": config["org"]["display_name"],
             "short": "true"
         }
     )
     fields.append(
         {
             "title": "SDDC name",
-            "value": config["sddc_name"],
+            "value": config["sddc"]["name"],
             "short": "true"
             }
         )
@@ -76,14 +81,14 @@ def create_button(config):
     fields.append(
         {
             "title": "AWS account",
-            "value": config["aws_account_id"],
+            "value": config["customer_vpc"]["linked_account"],
             "short": "true"
         }
     )
     fields.append(
         {
             "title": "Region",
-            "value": config["region"],
+            "value": config["sddc"]["region"],
             "short": "true"
         }
     )
