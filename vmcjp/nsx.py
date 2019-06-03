@@ -12,7 +12,7 @@ from vmcjp.network.security_groups import get_security_groups
 from vmcjp.network.firewall_rules import get_firewall_rules
 from vmcjp.network.segments import get_segments
 from vmcjp.network.vpns import get_l3vpns
-from vmcjp.network.customer_vpcs import get_customer_vpc
+#from vmcjp.network.customer_vpcs import get_customer_vpc
 from com.vmware.nsx_policy_client_for_vmc import create_nsx_policy_client_for_vmc
 from com.vmware.nsx_vmc_app_client_for_vmc import create_nsx_vmc_app_client_for_vmc
 
@@ -56,7 +56,17 @@ class NetworkConfig(object):
 
     def list_customer_vpcs(self):
         start = time.time()
-        network_config = get_customer_vpc(self.nsx_app_client)
+        vpc = nsx_app_client.infra.LinkedVpcs.list().results[0]
+#        network_config = get_customer_vpc(self.nsx_app_client)
+        network_config = {
+            "linked_vpc_address": vpc.linked_vpc_addresses[0],
+            "linked_account": vpc.linked_account,
+            "linked_vpc_subnets_cidr": vpc.linked_vpc_subnets[0].cidr,
+            "linked_vpc_subnets_id": vpc.linked_vpc_subnets[0].id,
+            "linked_vpc_subnets_availability_zone": vpc.linked_vpc_subnets[0].availability_zone,
+            "linked_vpc_id": vpc.linked_vpc_id,
+            "route_table_id": vpc.route_table_ids[0]
+        }
         self.db.upsert(
             {"network_updated": {"$exists":True}},
             {"$set": 
