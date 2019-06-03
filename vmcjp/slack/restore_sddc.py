@@ -47,7 +47,7 @@ def restore_sddc():
     return config
 
 def create_button(config):
-    button_set = json.load(open("button.json", 'r'))
+    button_set = json.load(open("vmcjp/slack/button.json", 'r'))
     
     fields = [
         {
