@@ -103,7 +103,7 @@ def lambda_handler(event, context):
     
 #    response = post_to_response_url(url, data)
     
-    logging.info(response.read())
+#    logging.info(response.read())
   
 #    return {
 #        'statusCode': 200,
