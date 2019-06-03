@@ -13,7 +13,7 @@ class Test(object):
 #    col = db.find_all()
 #    for data in col:
 #      print(data)
-    print(db.find_one({"sddc": {"$exists":True}))
+    print(db.find_one({"sddc": {"$exists":True}}))
   
 def main():
   test = Test()
