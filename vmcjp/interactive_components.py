@@ -22,7 +22,7 @@ def command_handler(params):
         elif response == "no":
             return {"text": "how many hosts do you want to deploy?"}
     else:
-        return {"response_url" response_url, "callback_id": callback_id, "response": response, "user": user}
+        return {"response_url": response_url, "callback_id": callback_id, "response": response, "user": user}
 
 def is_token_valid(params):
     if "token" in params:
