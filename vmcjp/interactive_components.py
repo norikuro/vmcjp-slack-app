@@ -11,13 +11,12 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def call_lambda(function, data):
-#    clientLambda = boto3.client("lambda")
-#    clientLambda.invoke(
-#        FunctionName=function,
-#        InvocationType="Event",
-#        Payload=json.dumps(data)
-#    )
-    logging.info("!!!call lambda!!!!!")
+    clientLambda = boto3.client("lambda")
+    clientLambda.invoke(
+        FunctionName=function,
+        InvocationType="Event",
+        Payload=json.dumps(data)
+    )
 
 def command_handler(params):
     callback_id = params["callback_id"]
