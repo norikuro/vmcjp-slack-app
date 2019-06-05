@@ -2,19 +2,29 @@ import json
 import ast
 import os
 import logging
+import boto3
 from urlparse import parse_qs
-#from urllib import unquote
 
 EXPECTED_TOKEN = os.environ["token"]
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+def call_lambda(function, data):
+#    clientLambda = boto3.client("lambda")
+#    clientLambda.invoke(
+#        FunctionName=function,
+#        InvocationType="Event",
+#        Payload=json.dumps(data)
+#    )
+    logging.info("!!!call lambda!!!!!")
+
 def command_handler(params):
     callback_id = params["callback_id"]
     response = params["actions"][0]["name"]
     user = params["user"]["name"]
     response_url = params["response_url"]
+    channel_id = params["channel"]["id"]
 
     if callback_id == "create_sddc":
         if response == "yes":
@@ -23,7 +33,14 @@ def command_handler(params):
             return {"text": "how many hosts do you want to deploy?"}
     elif callback_id == "restore_sddc":
         if response == "yes":
-            return {"response_url": response_url, "callback_id": callback_id, "response": response, "user": user}
+            data = {
+                "response_url": response_url,
+                "channel_id": channel_id
+            }
+            call_lambda("check_resources", )
+            return "checking current resoures..."
+        elif response == "no":
+            return "OK, canceled restoring sddc."
     else:
         return "other response"
 
