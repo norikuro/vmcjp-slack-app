@@ -21,8 +21,11 @@ def command_handler(params):
             return {"text": "creating sddc"}
         elif response == "no":
             return {"text": "how many hosts do you want to deploy?"}
+    elif callback_id == "restore_sddc":
+        if response == "yes":
+            return {"response_url": response_url, "callback_id": callback_id, "response": response, "user": user}
     else:
-        return {"response_url": response_url, "callback_id": callback_id, "response": response, "user": user}
+        return "other response"
 
 def is_token_valid(params):
     if "token" in params:
