@@ -36,7 +36,8 @@ def command_handler(params):
                 "response_url": response_url,
                 "channel_id": channel_id
             }
-            call_lambda("check-resources", data)
+#            call_lambda("check-resources", data)
+            call_lambda("restore_sddc", data)
             return "checking current resoures..."
         elif response == "no":
             return "OK, canceled restoring sddc."
