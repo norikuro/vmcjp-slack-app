@@ -4,19 +4,20 @@ import os
 import logging
 import boto3
 from urlparse import parse_qs
+from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def call_lambda(function, data):
-    clientLambda = boto3.client("lambda")
-    clientLambda.invoke(
-        FunctionName=function,
-        InvocationType="Event",
-        Payload=json.dumps(data)
-    )
+#def call_lambda(function, data):
+#    clientLambda = boto3.client("lambda")
+#    clientLambda.invoke(
+#        FunctionName=function,
+#        InvocationType="Event",
+#        Payload=json.dumps(data)
+#    )
 
 def command_handler(params):
     callback_id = params["callback_id"]
