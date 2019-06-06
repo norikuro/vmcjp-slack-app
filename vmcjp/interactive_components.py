@@ -38,7 +38,7 @@ def command_handler(params):
             }
             call_lambda("check-resources", data)
 #            call_lambda("restore_sddc", data)
-            return {text: "checking current resoures..."}
+            return {"text": "checking current resoures..."}
         elif response == "no":
             return {"text": "OK, canceled restoring sddc."}
     else:
