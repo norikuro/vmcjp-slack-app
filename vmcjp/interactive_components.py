@@ -38,11 +38,11 @@ def command_handler(params):
             }
             call_lambda("check-resources", data)
 #            call_lambda("restore_sddc", data)
-            return "checking current resoures..."
+            return {text: "checking current resoures..."}
         elif response == "no":
-            return "OK, canceled restoring sddc."
+            return {text: "OK, canceled restoring sddc."}
     else:
-        return "other response"
+        return {text: "other response"}
 
 def is_token_valid(params):
     if "token" in params:
