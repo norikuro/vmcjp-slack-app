@@ -33,12 +33,13 @@ def command_handler(params):
             return {"text": "how many hosts do you want to deploy?"}
     elif callback_id == "restore_sddc":
         if response == "yes":
+            
             data = {
                 "response_url": response_url,
                 "channel_id": channel_id
             }
-            call_lambda("check-resources", data)
-#            call_lambda("restore_sddc", data)
+            call_lambda("check_resources", data)
+            
             return {"text": "checking current resoures..."}
         elif response == "no":
             return {"text": "OK, restoring sddc is canceled."}
