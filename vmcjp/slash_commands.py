@@ -19,14 +19,6 @@ help_message = "help message here.."
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-#def call_lambda(function, data):
-#    clientLambda = boto3.client("lambda")
-#    clientLambda.invoke(
-#        FunctionName=function,
-#        InvocationType="Event",
-#        Payload=json.dumps(data)
-#    )
-
 def command_handler(params):
 
     if params.has_key("text"):
@@ -47,7 +39,6 @@ def command_handler(params):
         return {
         'text': "OK, restore from backed up configration."
         }
-#        return
     else:
         return command_massage
 
@@ -70,8 +61,3 @@ def lambda_handler(event, context):
         return {'statusCode': 400}
     
     return command_handler(params)
-    
-#    return {
-#        'statusCode': 200,
-#        'body': json.dumps('Hello from Lambda!')
-#    }
