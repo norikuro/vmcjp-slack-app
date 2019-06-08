@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-import boto3
+#import boto3
 
 from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
