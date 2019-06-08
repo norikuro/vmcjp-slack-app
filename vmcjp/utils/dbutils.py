@@ -2,7 +2,7 @@
 
 import json
 import pymongo
-import sys
+#import sys
 #import boto3
 
 from vmcjp.utils import s3utils
