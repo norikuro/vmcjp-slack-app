@@ -15,6 +15,7 @@ def command_handler(params):
     callback_id = params["callback_id"]
     response = params["actions"][0]["name"]
     user = params["user"]["name"]
+    user_id = params["user"]["id"]
     response_url = params["response_url"]
     channel_id = params["channel"]["id"]
 
@@ -27,6 +28,8 @@ def command_handler(params):
         if response == "yes":
             
             data = {
+                "user": user,
+                "user_id": user_id,
                 "response_url": response_url,
                 "channel_id": channel_id
             }
