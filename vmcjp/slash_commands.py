@@ -14,7 +14,11 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def command_handler(params):
-
+    user = params["user_name"][0]
+    user_id = params["user_id"][0]
+    response_url = params["response_url"][0]
+    channel_id = params["channel_id"][0]
+    
     if params.has_key("text"):
         command = params["text"][0]
     else:
@@ -26,8 +30,10 @@ def command_handler(params):
         return {"text": "Creating sddc"}
     elif "restore sddc" in command:
         data = {
-            "response_url": params["response_url"][0],
-            "channel_id": params["channel_id"][0]
+            "user": user,
+            "user_id": user_id,
+            "response_url": response_url,
+            "channel_id": channel_id
         }
         call_lambda("restore_sddc", data)
         return {
