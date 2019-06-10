@@ -1,17 +1,11 @@
 import json
 import os
 import logging
-#import boto3
 
 from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
-
-success = {
-    "statusCode": 200,
-    "body": "OK"
-}
 
 command_massage = "'/vmcjp' is tool to manage SDDCs of VMC Japan. Please type '/vmcjp help' to see in detail"
 help_message = "help message here.."
@@ -29,7 +23,7 @@ def command_handler(params):
     if "help" in command:
         return {"text": help_message}
     elif "create sddc" in command:
-        return "creating sddc"
+        return {"text": "Creating sddc"}
     elif "restore sddc" in command:
         data = {
             "response_url": params["response_url"][0],
@@ -37,7 +31,7 @@ def command_handler(params):
         }
         call_lambda("restore_sddc", data)
         return {
-        'text': "OK, restore from backed up configration."
+        "text": "OK, restore from backed up configration."
         }
     else:
         return command_massage
@@ -58,6 +52,6 @@ def lambda_handler(event, context):
 #    logging.info(params)
 
     if not is_token_valid(params):
-        return {'statusCode': 400}
+        return {"statusCode": 400}
     
     return command_handler(params)
