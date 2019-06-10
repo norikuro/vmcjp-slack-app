@@ -2,8 +2,6 @@ import json
 import os
 import urllib2
 
-#from urlparse import parse_qs
-
 BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
 def post(url, data):
