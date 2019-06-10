@@ -21,9 +21,9 @@ def command_handler(params):
 
     if callback_id == "create_sddc":
         if response == "yes":
-            return {"text": "creating sddc"}
+            return {"text": "Creating sddc"}
         elif response == "no":
-            return {"text": "how many hosts do you want to deploy?"}
+            return {"text": "How many hosts do you want to deploy?"}
     elif callback_id == "restore_sddc":
         if response == "yes":
             
@@ -35,7 +35,7 @@ def command_handler(params):
             }
             call_lambda("check_resources", data)
             
-            return {"text": "checking current resoures..."}
+            return {"text": "Checking current resoures..."}
         elif response == "no":
             return {"text": "OK, restoring sddc is canceled."}
     else:
