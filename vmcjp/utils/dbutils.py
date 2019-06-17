@@ -3,18 +3,16 @@
 import json
 import pymongo
 
-from vmcjp.utils import s3utils
+from vmcjp.utils.s3utils import read_json_from_s3, download_from_s3
 
 class DocmentDb(object):
   CA_BUMDLE = "rds-combined-ca-bundle.pem"
   DOWNLOAD_TARGET = "/tmp/" + CA_BUMDLE
   
   def __init__(self, s3config, db_name, collection_name):
-    s3 = s3utils.S3()
-    
     f = json.load(open(s3config, 'r'))
-    url = s3.read_json_from_s3(f["bucket"], f["config"])["db_url"]
-    s3.download_from_s3(f["bucket"], DocmentDb.CA_BUMDLE, DocmentDb.DOWNLOAD_TARGET)
+    url = read_json_from_s3(f["bucket"], f["config"])["db_url"]
+    download_from_s3(f["bucket"], DocmentDb.CA_BUMDLE, DocmentDb.DOWNLOAD_TARGET)
     
     self.client = pymongo.MongoClient(url + "?ssl=true&ssl_ca_certs=" + DocmentDb.DOWNLOAD_TARGET + "&replicaSet=rs0")
     self.db = self.client[db_name]
