@@ -1,14 +1,14 @@
 # vmc-demo
 
 ## Abstract
-SDDC.py will back up VMware Cloud on AWS configurations like following information to AWS DocumentDB and S3.
+SDDC.py will back up VMware Cloud on AWS configurations like following information to mongoDB on EC2 and S3.
 * VMware Cloud on AWS SDDC's id and name.
 * Number of hosts
 * Management CIDR block
 * SDDC version
 * Resource Pools, Folders, Content Libraries
 
-network.py will back up VMware Cloud on AWS's network configurations like following information to AWS DocumentDB and S3.
+network.py will back up VMware Cloud on AWS's network configurations like following information to mongoDB on EC2 and S3.
 * Connected customer AWS VPC
 * Security Groups (user created groups)
 * Firewall Rules (user created fws)
@@ -40,6 +40,15 @@ Default region name [None]: (your region id, like us-west-2)
 Default output format [None]: (Enter)
 # aws s3 ls
 ```
+
+Install mongoDB on EC2 instance and configure /etc/mongod.conf.
+Start mongoDB and add user/password.
+Check if you can access mongoDB from other EC2 instance using mongo command
+
+```cmd
+# mongo hostname:27017 -u username -p password --authenticationDatabase username 
+```
+
 ### Clone vmc-demo to local
 ```cmd
 # git clone https://github.com/norikuro/vmc-demo.git
