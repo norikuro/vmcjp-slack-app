@@ -55,7 +55,7 @@ def lambda_handler(event, context):
     body = event["body-json"]
     params = parse_qs(body)
 
-    logging.info(params)
+#    logging.info(params)
 
     if not is_token_valid(params):
         return {"statusCode": 400}
