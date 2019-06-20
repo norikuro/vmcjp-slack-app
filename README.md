@@ -1,1 +1,1 @@
-# vmcjp-event-subscriptions
+# vmcjp-post_log_to_slack
