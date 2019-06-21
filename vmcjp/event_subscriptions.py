@@ -6,7 +6,7 @@ import logging
 from vmcjp.utils.slack_post import post
 
 EXPECTED_TOKEN = os.environ["token"]
-#BOT_OAUTH_TOKEN = os.environ["bot_token"]
+BOT_OAUTH_TOKEN = os.environ["bot_token"]
 BOT_USER = os.environ["bot_user"]
 
 url = "https://slack.com/api/chat.postMessage"
@@ -32,7 +32,7 @@ def event_handler(event):
     
 #    data["text"] = do_something(event)
     data["text"] = event
-    response = post(url, data)
+    response = post(url, data, BOT_OAUTH_TOKEN)
 #    logging.info(response.read())
         
 def is_token_valid(event):
