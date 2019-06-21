@@ -47,9 +47,9 @@ def check_event(event):
 
 def check_user(event):
     if event["event"].has_key("subtype"):
-        if not "bot_message" in event["event"]["subtype"]:
-            return True
-    return False
+        if "bot_message" in event["event"]["subtype"]:
+            return False
+    return True
 
 
 def lambda_handler(event, context):
