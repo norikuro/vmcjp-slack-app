@@ -6,7 +6,7 @@ from vmcjp.utils.slack_post import post
 
 EXPECTED_TOKEN = os.environ["token"]
 BOT_OAUTH_TOKEN = os.environ["bot_token"]
-BOT_USER = os.environ["bot_user"]
+#BOT_USER = os.environ["bot_user"]
 
 url = "https://slack.com/api/chat.postMessage"
 
