@@ -45,6 +45,8 @@ def event_handler(event):
         data["text"] = text
         response = post(url, data, BOT_OAUTH_TOKEN)
     else:
+        data["text"] = "Single host or Multi host?"
+        response = post(url, data, BOT_OAUTH_TOKEN)
         call_lambda("slack_session", le)
 #    logging.info(response.read())
 
