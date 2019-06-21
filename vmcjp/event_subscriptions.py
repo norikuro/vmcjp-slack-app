@@ -14,12 +14,16 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
     
 def event_handler(event):
+    text = event["text"]
     data = {
         "token": event["token"],
         "channel": event["event"]["channel"]
     }
     
-    data["text"] = event
+    if "create sddc" in text:
+        data["text"] = "OK, start create sddc wizard."
+    else:
+        data["text"] = event
     response = post(url, data, BOT_OAUTH_TOKEN)
 #    logging.info(response.read())
         
