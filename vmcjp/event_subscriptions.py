@@ -60,5 +60,6 @@ def lambda_handler(event, context):
     if "challenge" in event:
         return {"challenge": event["challenge"]}
     if check_event(event):
+        logging.info("!!!check event: " + check_event(event))
         event_handler(event)
         return "ok"
