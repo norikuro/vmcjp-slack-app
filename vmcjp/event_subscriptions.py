@@ -33,9 +33,14 @@ def event_handler(event):
             "event_type": "sddc_name"
         }
         call_lambda("slack_session", data)
-    else:
+    elif text.find(" ") != -1:
         data["text"] = event
         response = post(url, data, BOT_OAUTH_TOKEN)
+    else:
+        data = {
+            "user": event["event"]["user"],
+        }
+        call_lambda("slack_session", data)
 #    logging.info(response.read())
         
 def is_token_valid(event):
