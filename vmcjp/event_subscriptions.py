@@ -21,15 +21,15 @@ def event_handler(event):
     }
     
     if "create sddc" in text:
-#        data["text"] = "OK, starting create sddc wizard."
-#        response = post(url, data, BOT_OAUTH_TOKEN)
+        data["text"] = "OK, starting create sddc wizard."
+        response = post(url, data, BOT_OAUTH_TOKEN)
         data["text"] = "You can cancel this session with typing 'cancel' or after 5 minutes without doing anything"
         response = post(url, data, BOT_OAUTH_TOKEN)
         data["text"] = "Please enter SDDC name"
         response = post(url, data, BOT_OAUTH_TOKEN)
     else:
         data["text"] = event
-    response = post(url, data, BOT_OAUTH_TOKEN)
+#    response = post(url, data, BOT_OAUTH_TOKEN)
 #    logging.info(response.read())
         
 def is_token_valid(event):
