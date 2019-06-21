@@ -33,7 +33,7 @@ def event_handler(event):
 #    data["text"] = do_something(event)
     data["text"] = event
     response = post(url, data)
-    logging.info(response.read())
+#    logging.info(response.read())
         
 def is_token_valid(event):
     if "token" in event:
