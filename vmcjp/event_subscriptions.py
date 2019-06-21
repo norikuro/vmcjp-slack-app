@@ -1,8 +1,7 @@
 import json
 import os
 import logging
-#import urllib2
-#from urlparse import parse_qs
+
 from vmcjp.utils.slack_post import post
 
 EXPECTED_TOKEN = os.environ["token"]
