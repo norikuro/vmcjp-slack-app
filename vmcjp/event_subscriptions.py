@@ -20,6 +20,8 @@ def event_handler(event):
         "token": event["token"],
         "channel": event["event"]["channel"]
     }
+    le = {"user": event["event"]["user"]}
+    le.update(data)
     
     if "create sddc" in text:
         data["text"] = "OK, starting create sddc wizard."
@@ -28,21 +30,18 @@ def event_handler(event):
         response = post(url, data, BOT_OAUTH_TOKEN)
         data["text"] = "Please enter SDDC name"
         response = post(url, data, BOT_OAUTH_TOKEN)
-        data = {
-            "user": event["event"]["user"],
-            "event_type": "sddc_name"
-        }
-        call_lambda("slack_session", data)
+        le.update({"event_type": "sddc_name"})
+        call_lambda("slack_session", le)
     elif "cancel" in text:
-        
+        data["text"] = "OK, create SDDC has cenceled."
+        response = post(url, data, BOT_OAUTH_TOKEN)
+        le.update({"event_type": "cancel"})
+        call_lambda("slack_session", le)
     elif text.find(" ") != -1:
         data["text"] = event
         response = post(url, data, BOT_OAUTH_TOKEN)
     else:
-        data = {
-            "user": event["event"]["user"],
-        }
-        call_lambda("slack_session", data)
+        call_lambda("slack_session", le)
 #    logging.info(response.read())
         
 def is_token_valid(event):
