@@ -28,6 +28,11 @@ def event_handler(event):
         response = post(url, data, BOT_OAUTH_TOKEN)
         data["text"] = "Please enter SDDC name"
         response = post(url, data, BOT_OAUTH_TOKEN)
+        data = {
+            "user": event["event"]["user"],
+            "event_type": "sddc_name"
+        }
+        call_lambda("slack_session", data)
     else:
         data["text"] = event
         response = post(url, data, BOT_OAUTH_TOKEN)
