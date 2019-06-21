@@ -64,3 +64,4 @@ def lambda_handler(event, context):
         logging.info("!!!check event: " + str(check_event(event)))
         event_handler(event)
         return "ok"
+    return "ok"
