@@ -12,11 +12,6 @@ url = "https://slack.com/api/chat.postMessage"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-def do_something(event):
-    return "hello!"
-#    return event
-
     
 def event_handler(event):
     data = {
@@ -24,12 +19,6 @@ def event_handler(event):
         "channel": event["event"]["channel"]
     }
     
-#    if not "thread_ts" in event["event"] and "ts" in event["event"]:
-#        data["thread_ts"] = event["event"]["ts"]
-#    elif "thread_ts" in event["event"]:
-#        data["thread_ts"] = event["event"]["thread_ts"]
-    
-#    data["text"] = do_something(event)
     data["text"] = event
     response = post(url, data, BOT_OAUTH_TOKEN)
 #    logging.info(response.read())
@@ -51,10 +40,7 @@ def check_event(event):
 
 def check_user(event):
     if "user" in event["event"]:
-        if event["event"]["type"] == "app_mention":
-            if BOT_USER in event["event"]["text"] and not BOT_USER in event["event"]["user"]:
-                return True
-        elif event["event"]["type"] == "message":
+        if event["event"]["channel_type"] == "im":
             if not BOT_USER in event["event"]["user"]:
                 return True
     return False
@@ -70,4 +56,3 @@ def lambda_handler(event, context):
     if check_event(event):
         event_handler(event)
         return "ok"
-    return
