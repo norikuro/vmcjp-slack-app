@@ -40,18 +40,15 @@ def is_token_valid(event):
         return False
 
 def check_event(event):
-    if event["event"]["type"] == "message":
-        return check_user(event)
-    elif event["event"]["type"] == "app_mention":
+    if event["event"]["type"] == "message" and event["event"]["channel_type"] == "im":
         return check_user(event)
     else:
         return False
 
 def check_user(event):
     if "user" in event["event"]:
-        if event["event"]["channel_type"] == "im":
-            if not BOT_USER in event["event"]["user"]:
-                return True
+        if not BOT_USER in event["event"]["user"]:
+            return True
     return False
 
 
