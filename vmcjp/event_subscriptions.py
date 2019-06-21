@@ -21,7 +21,7 @@ def event_handler(event):
     }
     
     if "create sddc" in text:
-        data["text"] = "OK, start create sddc wizard."
+        data["text"] = "OK, starting create sddc wizard."
     else:
         data["text"] = event
     response = post(url, data, BOT_OAUTH_TOKEN)
