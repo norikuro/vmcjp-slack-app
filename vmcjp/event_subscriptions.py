@@ -29,7 +29,7 @@ def event_handler(event):
         response = post(url, data, BOT_OAUTH_TOKEN)
     else:
         data["text"] = event
-#    response = post(url, data, BOT_OAUTH_TOKEN)
+        response = post(url, data, BOT_OAUTH_TOKEN)
 #    logging.info(response.read())
         
 def is_token_valid(event):
@@ -48,7 +48,6 @@ def check_event(event):
 def check_user(event):
     if event["event"].has_key("subtype"):
         if "bot_message" in event["event"]["subtype"]:
-            logging.info("!!!check user: false")
             return False
     return True
 
@@ -64,4 +63,4 @@ def lambda_handler(event, context):
         logging.info("!!!check event: " + str(check_event(event)))
         event_handler(event)
         return "ok"
-    return "ok"
+    return
