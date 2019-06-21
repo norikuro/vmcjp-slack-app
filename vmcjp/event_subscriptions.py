@@ -48,6 +48,7 @@ def check_event(event):
 def check_user(event):
     if event["event"].has_key("subtype"):
         if "bot_message" in event["event"]["subtype"]:
+            logging.info("!!!check user: false")
             return False
     return True
 
