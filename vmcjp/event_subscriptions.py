@@ -1,6 +1,7 @@
 import json
 import os
 import logging
+import ipaddress
 
 from vmcjp.utils.slack_post import post
 from vmcjp.utils.lambdautils import call_lambda
@@ -40,10 +41,20 @@ def event_handler(event):
     elif text.find(" ") != -1:
         data["text"] = event
         response = post(url, data, BOT_OAUTH_TOKEN)
+    elif is_valid_network(text):
+        data["text"] = text
+        response = post(url, data, BOT_OAUTH_TOKEN)
     else:
         call_lambda("slack_session", le)
 #    logging.info(response.read())
-        
+
+def is_valid_network(address):
+    try:
+        ipaddress.ip_network(address)
+        return True
+    except ValueError:
+        return False
+
 def is_token_valid(event):
     if "token" in event:
         if event["token"] == EXPECTED_TOKEN:
