@@ -31,7 +31,7 @@ def event_handler(event):
         response = post(url, data, BOT_OAUTH_TOKEN)
         data["text"] = "Please enter SDDC name"
         response = post(url, data, BOT_OAUTH_TOKEN)
-        le.update({"event_type": "sddc_name"})
+        le.update({"event_type": "create_sddc"})
         call_lambda("slack_session", le)
     elif "cancel" in text:
         data["text"] = "OK, create SDDC has cenceled."
