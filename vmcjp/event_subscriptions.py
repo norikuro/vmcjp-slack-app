@@ -14,7 +14,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
     
 def event_handler(event):
-    text = event["text"]
+    text = event["event"]["text"]
     data = {
         "token": event["token"],
         "channel": event["event"]["channel"]
