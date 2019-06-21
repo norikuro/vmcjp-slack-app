@@ -33,6 +33,8 @@ def event_handler(event):
             "event_type": "sddc_name"
         }
         call_lambda("slack_session", data)
+    elif "cancel" in text:
+        
     elif text.find(" ") != -1:
         data["text"] = event
         response = post(url, data, BOT_OAUTH_TOKEN)
