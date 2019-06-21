@@ -46,8 +46,8 @@ def check_event(event):
         return False
 
 def check_user(event):
-    if "user" in event["event"]:
-        if not BOT_USER in event["event"]["user"]:
+    if event["event"].has_key("subtype"):
+        if not "bot_message" in event["event"]["subtype"]:
             return True
     return False
 
