@@ -14,13 +14,6 @@ url = "https://slack.com/api/chat.postMessage"
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def is_valid_network(address):
-    try:
-        ipaddress.ip_network(address)
-        return True
-    except ValueError:
-        return False
-
 def is_token_valid(event):
     if "token" in event:
         if event["token"] == EXPECTED_TOKEN:
