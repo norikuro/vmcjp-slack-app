@@ -3,7 +3,6 @@ import os
 import logging
 import ipaddress
 
-from vmcjp.utils.slack_post import post
 from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
