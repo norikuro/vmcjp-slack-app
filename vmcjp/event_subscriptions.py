@@ -16,14 +16,6 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
     
 def event_handler(event):
-    text = event["event"]["text"]
-    data = {
-        "token": event["token"],
-        "channel": event["event"]["channel"]
-    }
-    le = {"user": event["event"]["user"]}
-    le.update(data)
-    
     if "create sddc" in text:
         data["text"] = "OK, starting create sddc wizard."
         response = post(url, data, BOT_OAUTH_TOKEN)
@@ -80,12 +72,20 @@ def check_user(event):
 
 def lambda_handler(event, context):
 #    logging.info(event)
+    data = {
+        "token": event["token"],
+        "channel": event["event"]["channel"],
+        "text": event["event"]["text"],
+        "user": event["event"]["user"],
+        "bot_token" :BOT_OAUTH_TOKEN,
+        "response_url": url
+    }
 
     if not is_token_valid(event):
         return
     if "challenge" in event:
         return {"challenge": event["challenge"]}
     if check_event(event) == True:
-        event_handler(event)
+        call_lambda("slack_session", data)
         return "ok"
     return "ok"
