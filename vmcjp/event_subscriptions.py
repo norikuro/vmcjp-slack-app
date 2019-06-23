@@ -30,7 +30,7 @@ def is_token_valid(event):
         return False
 
 def check_event(event):
-    # We only support Direct Message to Slack App currentlry.
+    # We only support Direct Message to Slack App currently.
     if event["event"]["type"] == "message" and event["event"]["channel_type"] == "im":
         return check_user(event)
     else:
