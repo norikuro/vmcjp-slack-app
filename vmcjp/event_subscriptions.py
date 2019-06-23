@@ -1,7 +1,6 @@
 import json
 import os
 import logging
-import ipaddress
 
 from vmcjp.utils.lambdautils import call_lambda
 
