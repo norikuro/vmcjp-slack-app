@@ -22,6 +22,7 @@ def command_handler(params):
     if callback_id == "create_sddc":
         if response == "yes":
             data = {
+                "callback_id": callback_id,
                 "token": params["token"],
                 "channel": params["channel"]["id"],
                 "user": params["user"]["id"],
