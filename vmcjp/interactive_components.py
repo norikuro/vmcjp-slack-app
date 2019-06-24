@@ -24,7 +24,7 @@ def command_handler(params):
                 "callback_id": callback_id,
                 "token": params["token"],
                 "channel": params["channel"]["id"],
-                "user": params["user"]["id"],
+                "user_id": params["user"]["id"],
                 "bot_token" :BOT_OAUTH_TOKEN,
                 "response_url": url
             }
