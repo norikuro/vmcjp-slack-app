@@ -46,7 +46,7 @@ def lambda_handler(event, context):
             "token": event["token"],
             "channel": event["event"]["channel"],
             "text": event["event"]["text"],
-            "user": event["event"]["user"],
+            "user_id": event["event"]["user"],
             "bot_token" :BOT_OAUTH_TOKEN,
             "response_url": url
         }
