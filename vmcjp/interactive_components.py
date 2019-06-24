@@ -5,7 +5,8 @@ import logging
 from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
-EXPECTED_TOKEN = os.environ["token"]
+#EXPECTED_TOKEN = os.environ["token"]
+EXPECTED_TOKEN = os.environ["token2"] #for test
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
