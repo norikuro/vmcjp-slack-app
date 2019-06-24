@@ -22,7 +22,7 @@ def command_handler(params):
         if response == "yes":
             return {"text": "Creating sddc"}
         elif response == "no":
-            return {"text": "How many hosts do you want to deploy?"}
+            return {"text": "OK, create SDDC has cenceled."}
     elif callback_id == "restore_sddc":
         if response == "yes":
             
