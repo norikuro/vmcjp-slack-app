@@ -39,14 +39,14 @@ def check_user(event):
     return True
 
 def lambda_handler(event, context):
-    logging.info(event)
+#    logging.info(event)
 
     if not is_token_valid(event):
         return
     if "challenge" in event:
         return {"challenge": event["challenge"]}
     if check_event(event):
-        logging.info(event)
+#        logging.info(event)
         data = {
             "token": event["token"],
             "channel": event["event"]["channel"],
