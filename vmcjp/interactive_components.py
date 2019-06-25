@@ -29,15 +29,12 @@ def command_handler(params):
                 "response_url": url
             }
 #            call_lambda("slack_session", data)
-#            return {"text": "OK, starting create sddc wizard."}
             return format_response(200, None)
-#            return {"statusCode": 200}
         elif response == "no":
             return format_response(
                 200, 
                 {"text": "OK, create SDDC has cenceled."}
             )
-#            return {"text": "OK, create SDDC has cenceled."}
     elif callback_id == "restore_sddc":
         if response == "yes":
             data = {
@@ -51,19 +48,16 @@ def command_handler(params):
                 200,
                 {"text": "Checking current resoures..."}
             )
-#            return {"text": "Checking current resoures..."}
         elif response == "no":
             return format_response(
                 200,
                 {"text": "OK, restoring sddc is canceled."}
             )
-#            return {"text": "OK, restoring sddc is canceled."}
     else:
         return format_response(
             200,
             {"text": "other response"}
         )
-#        return {"text": "other response"}
 
 def format_response(status, text):
     if text is None:
@@ -87,7 +81,6 @@ def is_token_valid(params):
 
 def lambda_handler(event, context):
 #    body = event["body-json"]
-#    params = json.loads(parse_qs(body)["payload"][0])
     params = json.loads(
         parse_qs(event.get("body"))["payload"][0]
     )
@@ -95,5 +88,8 @@ def lambda_handler(event, context):
     
     token = params.get("token")
     if not is_token_valid(params):
-        return {"text": "token is invalid"}
+        return format_response(
+            200, 
+            {"text": "token is invalid"}
+        )
     return command_handler(params)
