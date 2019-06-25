@@ -16,25 +16,24 @@ logger.setLevel(logging.INFO)
 
 def command_handler(params):
     callback_id = params["callback_id"]
-    response = params["actions"][0]["name"]
     
     if callback_id == "create_sddc":
-        if response == "yes":
-            data = {
-                "callback_id": callback_id,
-                "token": params["token"],
-                "channel": params["channel"]["id"],
-                "user_id": params["user"]["id"],
-                "bot_token" :BOT_OAUTH_TOKEN,
-                "response_url": url
-            }
-#            call_lambda("slack_session", data)
-            return format_response(200, None)
-        elif response == "no":
-            return format_response(
-                200, 
-                "OK, create SDDC has cenceled."
-            )
+        data = {
+            "callback_id": params["callback_id"],
+            "token": params["token"],
+            "channel": params["channel"]["id"],
+            "user_id": params["user"]["id"],
+            "bot_token" :BOT_OAUTH_TOKEN,
+            "response_url": params["response_url"],
+            "response": params["actions"][0]["name"]
+        }
+        call_lambda("slack_session", data)
+        return format_response(200, None)
+#        elif response == "no":
+#            return format_response(
+#                200, 
+#                "OK, create SDDC has cenceled."
+#            )
     elif callback_id == "restore_sddc":
         if response == "yes":
             data = {
