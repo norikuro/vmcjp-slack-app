@@ -32,9 +32,14 @@ def command_handler(params):
             }
 #            call_lambda("slack_session", data)
 #            return {"text": "OK, starting create sddc wizard."}
-            return {"statusCode": 200}
+            return format_response(200, None)
+#            return {"statusCode": 200}
         elif response == "no":
-            return {"text": "OK, create SDDC has cenceled."}
+            return format_response(
+                200, 
+                {"text": "OK, create SDDC has cenceled."}
+            )
+#            return {"text": "OK, create SDDC has cenceled."}
     elif callback_id == "restore_sddc":
         if response == "yes":
             data = {
@@ -44,11 +49,37 @@ def command_handler(params):
                 "channel_id": params["channel"]["id"]
             }
             call_lambda("check_resources", data)
-            return {"text": "Checking current resoures..."}
+            return format_response(
+                200,
+                {"text": "Checking current resoures..."}
+            )
+#            return {"text": "Checking current resoures..."}
         elif response == "no":
-            return {"text": "OK, restoring sddc is canceled."}
+            return format_response(
+                200,
+                {"text": "OK, restoring sddc is canceled."}
+            )
+#            return {"text": "OK, restoring sddc is canceled."}
     else:
-        return {"text": "other response"}
+        return format_response(
+            200,
+            {"text": "other response"}
+        )
+#        return {"text": "other response"}
+
+def format_response(status, text):
+    if text is None:
+        return {
+        "statusCode": status,
+        "body": ""
+        }
+    else:
+        return {
+            "statusCode": status,
+            "body": json.dumps(
+                {"text": text}
+            )
+        }
 
 def is_token_valid(params):
     if "token" in params:
@@ -71,5 +102,7 @@ def lambda_handler(event, context):
 #    return command_handler(params)
     return {
         "statusCode": 200,
-        "body": json.dumps({"text": "aaa"})
+        "body": json.dumps(
+            {"text": command_handler(params)}
+        )
     }
