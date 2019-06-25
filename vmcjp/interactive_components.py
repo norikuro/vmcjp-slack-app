@@ -62,7 +62,7 @@ def lambda_handler(event, context):
     params = parse_qs(event.get("body"))["payload"][0]
     logging.info(params)
     
-    token = params["token"]
+    token = params.get("token")
     if not is_token_valid(params):
         return
     return command_handler(params)
