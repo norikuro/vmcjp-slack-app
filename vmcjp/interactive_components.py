@@ -69,4 +69,7 @@ def lambda_handler(event, context):
     if not is_token_valid(params):
         return {"text": "token is invalid"}
 #    return command_handler(params)
-    return {"text": "aaa"}
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"text": "aaa"})
+    }
