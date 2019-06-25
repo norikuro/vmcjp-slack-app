@@ -2,8 +2,7 @@ import json
 import os
 import logging
 
-#from urlparse import parse_qs
-from urllib.parse import parse_qs
+from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
 #EXPECTED_TOKEN = os.environ["token"]
@@ -60,9 +59,9 @@ def is_token_valid(params):
 def lambda_handler(event, context):
 #    body = event["body-json"]
 #    params = json.loads(parse_qs(body)["payload"][0])
-    query = parse_qs(event.get["body"] or "")
+#    query = parse_qs(event.get["body"] or "")
 #    logging.info(params)
-    logging.info(query)
+    logging.info(event)
     
 #    token = params["token"]
 #    if not is_token_valid(params):
