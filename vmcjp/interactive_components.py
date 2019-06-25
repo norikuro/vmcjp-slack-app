@@ -69,7 +69,7 @@ def format_response(status, text):
         return {
             "statusCode": status,
             "body": json.dumps(
-                "text": text
+                {"text": text}
             )
         }
 
