@@ -17,6 +17,8 @@ logger.setLevel(logging.INFO)
 def command_handler(params):
     callback_id = params["callback_id"]
     response = params["actions"][0]["name"]
+    logging.info(callback_id)
+    logging.info(response)
     
     if callback_id == "create_sddc":
         if response == "yes":
