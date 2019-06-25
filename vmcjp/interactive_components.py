@@ -17,8 +17,6 @@ logger.setLevel(logging.INFO)
 def command_handler(params):
     callback_id = params["callback_id"]
     response = params["actions"][0]["name"]
-    logging.info(callback_id)
-    logging.info(response)
     
     if callback_id == "create_sddc":
         if response == "yes":
@@ -90,17 +88,12 @@ def is_token_valid(params):
 def lambda_handler(event, context):
 #    body = event["body-json"]
 #    params = json.loads(parse_qs(body)["payload"][0])
-    aa = parse_qs(event.get("body"))["payload"][0]
-    params = json.loads(aa)
-    logging.info(params)
+    params = json.loads(
+        parse_qs(event.get("body"))["payload"][0]
+    )
+#    logging.info(params)
     
     token = params.get("token")
     if not is_token_valid(params):
         return {"text": "token is invalid"}
     return command_handler(params)
-#    return {
-#        "statusCode": 200,
-#        "body": json.dumps(
-#            {"text": command_handler(params)}
-#        )
-#    }
