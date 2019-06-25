@@ -28,8 +28,9 @@ def command_handler(params):
                 "bot_token" :BOT_OAUTH_TOKEN,
                 "response_url": url
             }
-            call_lambda("slack_session", data)
-            return {"text": "OK, starting create sddc wizard."}
+#            call_lambda("slack_session", data)
+#            return {"text": "OK, starting create sddc wizard."}
+            return {"statusCode": 200}
         elif response == "no":
             return {"text": "OK, create SDDC has cenceled."}
     elif callback_id == "restore_sddc":
