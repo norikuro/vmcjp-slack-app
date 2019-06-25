@@ -33,7 +33,7 @@ def command_handler(params):
         elif response == "no":
             return format_response(
                 200, 
-                {"text": "OK, create SDDC has cenceled."}
+                "OK, create SDDC has cenceled."
             )
     elif callback_id == "restore_sddc":
         if response == "yes":
@@ -46,17 +46,17 @@ def command_handler(params):
             call_lambda("check_resources", data)
             return format_response(
                 200,
-                {"text": "Checking current resoures..."}
+                "Checking current resoures..."
             )
         elif response == "no":
             return format_response(
                 200,
-                {"text": "OK, restoring sddc is canceled."}
+                "OK, restoring sddc is canceled."
             )
     else:
         return format_response(
             200,
-            {"text": "other response"}
+            "other response"
         )
 
 def format_response(status, text):
@@ -68,7 +68,9 @@ def format_response(status, text):
     else:
         return {
             "statusCode": status,
-            "body": json.dumps(text)
+            "body": json.dumps(
+                "text": text
+            )
         }
 
 def is_token_valid(params):
@@ -90,6 +92,7 @@ def lambda_handler(event, context):
     if not is_token_valid(params):
         return format_response(
             200, 
-            {"text": "token is invalid"}
+            "token is invalid"
         )
+    
     return command_handler(params)
