@@ -22,8 +22,9 @@ def is_token_valid(event):
 
 def check_event(event):
     # We only support Direct Message to Slack App currently.
-    if event["event"]["type"] == "message" and event["event"]["channel_type"] == "im":
-        return check_user(event)
+    if event["type"] == "event_callback":
+        if event["event"]["type"] == "message" and event["event"]["channel_type"] == "im":
+            return check_user(event)
     else:
         return False
 
@@ -41,7 +42,7 @@ def lambda_handler(event, context):
         return
     if "challenge" in event:
         return {"challenge": event["challenge"]}
-    if check_event(event) == True:
+    if check_event(event):
         data = {
             "token": event["token"],
             "channel": event["event"]["channel"],
@@ -51,5 +52,5 @@ def lambda_handler(event, context):
             "response_url": url
         }
         call_lambda("slack_session", data)
-        return "ok"
-    return "ok"
+        return {"statusCode": 200}
+    return {"statusCode": 200}
