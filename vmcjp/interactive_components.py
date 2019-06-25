@@ -57,12 +57,13 @@ def is_token_valid(params):
         return False
 
 def lambda_handler(event, context):
-    body = event["body-json"]
-    params = json.loads(parse_qs(body)["payload"][0])
+#    body = event["body-json"]
+#    params = json.loads(parse_qs(body)["payload"][0])
+    query = parse_qs(event)
+#    logging.info(params)
+    logging.info(query)
     
-    logging.info(params)
-    
-    token = params["token"]
-    if not is_token_valid(params):
-        return
-    return command_handler(params)
+#    token = params["token"]
+#    if not is_token_valid(params):
+#        return
+#    return command_handler(params)
