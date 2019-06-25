@@ -35,7 +35,7 @@ def check_user(event):
 
 
 def lambda_handler(event, context):
-#    logging.info(event)
+    logging.info(event)
 
     if not is_token_valid(event):
         return
