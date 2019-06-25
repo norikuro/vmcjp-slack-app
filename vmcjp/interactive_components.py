@@ -76,9 +76,7 @@ def format_response(status, text):
     else:
         return {
             "statusCode": status,
-            "body": json.dumps(
-                {"text": text}
-            )
+            "body": json.dumps(text)
         }
 
 def is_token_valid(params):
