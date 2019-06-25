@@ -65,5 +65,5 @@ def lambda_handler(event, context):
     
     token = params.get("token")
     if not is_token_valid(params):
-        return
+        return {"text": "token is invalid"}
     return command_handler(params)
