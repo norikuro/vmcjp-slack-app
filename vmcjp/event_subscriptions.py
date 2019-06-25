@@ -30,10 +30,12 @@ def check_event(event):
 
 def check_user(event):
     if event["event"].has_key("subtype"):
-        if "bot_message" not in event["event"]["subtype"]:
-            return True
-        else:
+        if "bot_message" in event["event"]["subtype"]:
             return False
+        elif "message_changed" in event["event"]["subtype"]:
+            return False
+        else:
+            return True
     return True
 
 def lambda_handler(event, context):
