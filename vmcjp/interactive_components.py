@@ -17,24 +17,7 @@ logger.setLevel(logging.INFO)
 def command_handler(params):
     callback_id = params["callback_id"]
     
-    if callback_id == "create_sddc":
-        data = {
-            "callback_id": params["callback_id"],
-            "token": params["token"],
-            "channel": params["channel"]["id"],
-            "user_id": params["user"]["id"],
-            "bot_token" :BOT_OAUTH_TOKEN,
-            "response_url": params["response_url"],
-            "response": params["actions"][0]["name"]
-        }
-        call_lambda("slack_session", data)
-        return format_response(200, None)
-#        elif response == "no":
-#            return format_response(
-#                200, 
-#                "OK, create SDDC has cenceled."
-#            )
-    elif callback_id == "restore_sddc":
+    if callback_id == "restore_sddc":
         if response == "yes":
             data = {
                 "user": params["user"]["name"],
@@ -53,10 +36,17 @@ def command_handler(params):
                 "OK, restoring sddc is canceled."
             )
     else:
-        return format_response(
-            200,
-            "other response"
-        )
+        data = {
+            "callback_id": params["callback_id"],
+            "token": params["token"],
+            "channel": params["channel"]["id"],
+            "user_id": params["user"]["id"],
+            "bot_token" :BOT_OAUTH_TOKEN,
+            "response_url": params["response_url"],
+            "response": params["actions"][0]["name"]
+        }
+        call_lambda("slack_session", data)
+        return format_response(200, None)
 
 def format_response(status, text):
     if text is None:
