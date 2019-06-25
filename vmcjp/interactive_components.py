@@ -2,7 +2,8 @@ import json
 import os
 import logging
 
-from urlparse import parse_qs
+#from urlparse import parse_qs
+from urllib.parse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
 #EXPECTED_TOKEN = os.environ["token"]
