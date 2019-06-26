@@ -43,7 +43,7 @@ def command_handler(params):
             "user_id": params["user"]["id"],
             "bot_token" :BOT_OAUTH_TOKEN,
             "response_url": params["response_url"],
-            "response": params["actions"][0]["name"]
+            "response": params["actions"][0]["value"]
         }
         call_lambda("slack_session", data)
         return format_response(200, None)
