@@ -36,6 +36,7 @@ def command_handler(params):
                 "OK, restoring sddc is canceled."
             )
     else:
+        logging.info(params)
         data = {
             "callback_id": params["callback_id"],
             "token": params["token"],
