@@ -42,7 +42,7 @@ def command_handler(params):
             "user_id": params["user"]["id"],
             "bot_token" :BOT_OAUTH_TOKEN,
             "response_url": params["response_url"],
-            "post_url": POST_URL
+            "post_url": POST_URL,
             "response": params["actions"][0]["value"]
             if 
             params["actions"][0].has_key("value") 
