@@ -44,7 +44,8 @@ def command_handler(params):
             "user_id": params["user"]["id"],
             "bot_token" :BOT_OAUTH_TOKEN,
             "response_url": params["response_url"],
-            "response": params["actions"][0]["value"]
+            "response": params["actions"][0]["value"] if params["actions"][0].has_key("value") else params["actions"][0]["selected_options"][0]["value"]
+                
         }
         call_lambda("slack_session", data)
         return format_response(200, None)
