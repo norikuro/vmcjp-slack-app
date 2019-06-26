@@ -8,8 +8,7 @@ from vmcjp.utils.lambdautils import call_lambda
 #EXPECTED_TOKEN = os.environ["token"]
 EXPECTED_TOKEN = os.environ["token2"] #for test
 BOT_OAUTH_TOKEN = os.environ["bot_token"]
-
-url = "https://slack.com/api/chat.postMessage"
+POST_URL = "https://slack.com/api/chat.postMessage"
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -43,7 +42,8 @@ def command_handler(params):
             "user_id": params["user"]["id"],
             "bot_token" :BOT_OAUTH_TOKEN,
             "response_url": params["response_url"],
-            "response": params["actions"][0]["value"] 
+            "response": params["actions"][0]["value"],
+            "post_url": POST_URL
             if 
             params["actions"][0].has_key("value") 
             else 
