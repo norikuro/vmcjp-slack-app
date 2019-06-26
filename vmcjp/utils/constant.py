@@ -9,6 +9,9 @@ class _const:
   SDDC_COLLECTION = "sddc_collection"
   USER_DB = "user_db"
   USER_COLLECTION = "user_collection"
+  SDDC = "sddc"
+  USER = "user"
+  BUTTON_DIR = "vmcjp/button/"
   
 
   class ConstError(TypeError):
