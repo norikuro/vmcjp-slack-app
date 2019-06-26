@@ -49,7 +49,6 @@ def command_handler(params):
             else 
             params["actions"][0]["selected_options"][0]["value"]
         }
-        logging.info(data)
         call_lambda("slack_session", data)
         return format_response(200, None)
 
