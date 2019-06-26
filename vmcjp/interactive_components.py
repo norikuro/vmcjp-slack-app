@@ -36,7 +36,6 @@ def command_handler(params):
                 "OK, restoring sddc is canceled."
             )
     else:
-        logging.info(params)
         data = {
             "callback_id": params["callback_id"],
             "token": params["token"],
@@ -46,6 +45,7 @@ def command_handler(params):
             "response_url": params["response_url"],
             "response": params["actions"][0]["value"] if params["actions"][0].has_key("value") else params["actions"][0]["selected_options"][0]["value"]
         }
+        logging.info(data)
         call_lambda("slack_session", data)
         return format_response(200, None)
 
