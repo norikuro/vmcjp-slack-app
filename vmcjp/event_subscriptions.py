@@ -52,7 +52,7 @@ def lambda_handler(event, context):
             "text": event["event"]["text"],
             "user_id": event["event"]["user"],
             "bot_token" :BOT_OAUTH_TOKEN,
-            "response_url": POST_URL,
+#            "response_url": POST_URL,
             "post_url": POST_URL
         }
         call_lambda("slack_session", data)
