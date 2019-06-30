@@ -36,13 +36,12 @@ def lambda_handler(event, context):
     f = base64.b64decode(logdata)
     payload=json.loads(gzip.decompress(f))
     for logevent in payload["logEvents"]:
-        if "INFO" in logevent["message"] 
-        and not "RuntimeWarning: Parent module" in logevent["message"] 
-        and not " Found credentials in environment variables" in logevent["message"]:
-            str = payload["logEvents"][0]["message"]
-            i = payload["logEvents"][0]["message"].find("{")
-            text = "logGroup: "+ payload["logGroup"] + ",  " + "message: " + str[:i] + ",  " + str[i:]
-            post_log(text)
+        if "INFO" in logevent["message"]:
+            if "RuntimeWarning: Parent module" or " Found credentials in environment variables" not in logevent["message"]:
+                str = payload["logEvents"][0]["message"]
+                i = payload["logEvents"][0]["message"].find("{")
+                text = "logGroup: "+ payload["logGroup"] + ",  " + "message: " + str[:i] + ",  " + str[i:]
+                post_log(text)
         elif "error" in logevent["message"]:
             str = payload["logEvents"][0]["message"]
             post_log(str)
