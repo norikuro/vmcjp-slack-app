@@ -37,7 +37,7 @@ def command_handler(params):
     else:
         data = {
             "callback_id": params["callback_id"],
-            "token": params["token"],
+            "slack_token": params["token"],
             "channel": params["channel"]["id"],
             "user_id": params["user"]["id"],
             "bot_token" :BOT_OAUTH_TOKEN,
