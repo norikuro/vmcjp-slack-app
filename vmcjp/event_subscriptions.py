@@ -14,24 +14,24 @@ logger.setLevel(logging.INFO)
 
 def is_token_valid(event):
     if "token" in event:
-        if event["token"] == EXPECTED_TOKEN:
+        if event.get("token") == EXPECTED_TOKEN:
             return True
-        logger.error("Request token (%s) does not match expected", event["token"])
+        logger.error("Request token (%s) does not match expected", event.get("token"))
         return False
 
 def check_event(event):
     # We only support Direct Message to Slack App currently.
-    if event["type"] == "event_callback":
-        if event["event"]["type"] == "message" and event["event"]["channel_type"] == "im":
+    if event.get("type") == "event_callback":
+        if event.get("event").get("type") == "message" and event.get("event").get("channel_type") == "im":
             return check_user(event)
     else:
         return False
 
 def check_user(event):
     if event["event"].has_key("subtype"):
-        if "bot_message" in event["event"]["subtype"]:
+        if "bot_message" in event.get("event").get("subtype"):
             return False
-        elif "message_changed" in event["event"]["subtype"]:
+        elif "message_changed" in event.get("event").get("subtype"):
             return False
         else:
             return True
@@ -43,11 +43,11 @@ def lambda_handler(event, context):
     if not is_token_valid(event):
         return
     if "challenge" in event:
-        return {"challenge": event["challenge"]}
+        return {"challenge": event.get("challenge")}
     if check_event(event):
 #        logging.info(event)
         data = {
-            "token": event["token"],
+            "slack_token": event["token"],
             "channel": event["event"]["channel"],
             "text": event["event"]["text"],
             "user_id": event["event"]["user"],
