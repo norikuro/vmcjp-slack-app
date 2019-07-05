@@ -5,8 +5,7 @@ import logging
 from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
-#EXPECTED_TOKEN = os.environ["token"]
-EXPECTED_TOKEN = os.environ["token2"] #for test
+EXPECTED_TOKEN = os.environ["token"]
 BOT_OAUTH_TOKEN = os.environ["bot_token"]
 POST_URL = "https://slack.com/api/chat.postMessage"
 
