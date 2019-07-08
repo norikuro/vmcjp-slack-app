@@ -40,9 +40,10 @@ def check_user(event):
 
 def lambda_handler(event, context):
     params = event.get("body")
-    logging.info(params)
+    a = json.loads(params)
+    logging.info(a)
 
-    if not is_token_valid(params):
+    if not is_token_valid(a):
         return
 #    if "challenge" in event:
 #        return {"challenge": event.get("challenge")}
