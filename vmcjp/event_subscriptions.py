@@ -40,7 +40,7 @@ def check_user(event):
 
 def lambda_handler(event, context):
     params = json.loads(
-        parse_qs(event.get("body"))
+        event.get("body")
     )
     logging.info(params)
 
