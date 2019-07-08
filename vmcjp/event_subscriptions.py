@@ -20,6 +20,20 @@ def is_token_valid(event):
         logger.error("Request token (%s) does not match expected", event.get("token"))
         return False
 
+def format_response(status, text):
+    if text is None:
+        return {
+        "statusCode": status,
+        "body": ""
+        }
+    else:
+        return {
+            "statusCode": status,
+            "body": json.dumps(
+                {"text": text}
+            )
+        }
+
 def check_event(event):
     # We only support Direct Message to Slack App currently.
     if event.get("type") == "event_callback":
@@ -43,7 +57,10 @@ def lambda_handler(event, context):
 #    logging.info(params)
 
     if not is_token_valid(params):
-        return
+        return format_response(
+            200, 
+            "token is invalid"
+        )
     if "challenge" in params:
         return {"challenge": params.get("challenge")}
     if check_event(params):
@@ -58,5 +75,5 @@ def lambda_handler(event, context):
             "post_url": POST_URL
         }
         call_lambda("slack_session", data)
-        return {"statusCode": 200}
-    return {"statusCode": 200}
+        return format_response(200, None)
+    return format_response(200, None)
