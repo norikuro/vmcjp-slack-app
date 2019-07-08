@@ -40,23 +40,23 @@ def check_user(event):
 
 def lambda_handler(event, context):
     params = json.loads(event.get("body"))
-    logging.info(params)
+#    logging.info(params)
 
     if not is_token_valid(params):
         return
-#    if "challenge" in event:
-#        return {"challenge": event.get("challenge")}
-#    if check_event(event):
-##        logging.info(event)
-#        data = {
-#            "slack_token": event["token"],
-#            "channel": event["event"]["channel"],
-#            "text": event["event"]["text"],
-#            "user_id": event["event"]["user"],
-#            "bot_token" :BOT_OAUTH_TOKEN,
-##            "response_url": POST_URL,
-#            "post_url": POST_URL
-#        }
+    if "challenge" in params:
+        return {"challenge": params.get("challenge")}
+    if check_event(params):
+#        logging.info(params)
+        data = {
+            "slack_token": params["token"],
+            "channel": params["event"]["channel"],
+            "text": params["event"]["text"],
+            "user_id": params["event"]["user"],
+            "bot_token" :BOT_OAUTH_TOKEN,
+#            "response_url": POST_URL,
+            "post_url": POST_URL
+        }
 #        call_lambda("slack_session", data)
 #        return {"statusCode": 200}
     return {"statusCode": 200}
