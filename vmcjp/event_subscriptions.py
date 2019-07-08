@@ -39,10 +39,10 @@ def check_user(event):
     return True
 
 def lambda_handler(event, context):
-#    params = json.loads(
-#        parse_qs(event.get("body"))["payload"][0]
-#    )
-    logging.info(event)
+    params = json.loads(
+        parse_qs(event.get("body"))
+    )
+    logging.info(params)
 
 #    if not is_token_valid(event):
 #        return
