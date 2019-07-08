@@ -2,7 +2,7 @@ import json
 import os
 import logging
 
-from urlparse import parse_qs
+#from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
@@ -57,6 +57,6 @@ def lambda_handler(event, context):
 #            "response_url": POST_URL,
             "post_url": POST_URL
         }
-#        call_lambda("slack_session", data)
-#        return {"statusCode": 200}
+        call_lambda("slack_session", data)
+        return {"statusCode": 200}
     return {"statusCode": 200}
