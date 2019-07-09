@@ -58,7 +58,7 @@ def is_retry_request(headers):
         return False
 
 def lambda_handler(event, context):
-    headers = json.loads(event.get("headers"))
+    headers = json.load(event.get("headers"))
     if is_retry_request(headers):
         return format_response(200, None)
     
