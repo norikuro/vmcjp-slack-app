@@ -80,14 +80,14 @@ def is_retry_request(headers):
         return False
 
 def lambda_handler(event, context):
-    headers = json.loads(event.get("headers"))
+#    logging.info(params)
+    headers = event.get("headers")
     if is_retry_request(headers):
         return format_response(200, None)
     
     params = json.loads(
         parse_qs(event.get("body"))["payload"][0]
     )
-#    logging.info(params)
     
     token = params.get("token")
     if not is_token_valid(params):
