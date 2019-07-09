@@ -63,7 +63,7 @@ def lambda_handler(event, context):
         return format_response(200, None)
     
     params = json.loads(event.get("body"))
-    logging.info(event)
+#    logging.info(event)
 
     if not is_token_valid(params):
         return format_response(
