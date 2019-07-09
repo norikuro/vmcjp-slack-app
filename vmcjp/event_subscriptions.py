@@ -58,13 +58,12 @@ def is_retry_request(headers):
         return False
 
 def lambda_handler(event, context):
+#    logging.info(event)
     headers = event.get("headers")
     if is_retry_request(headers):
         return format_response(200, None)
     
     params = json.loads(event.get("body"))
-    logging.info(headers.get("X-Slack-Request-Timestamp"))
-
     if not is_token_valid(params):
         return format_response(
             200, 
