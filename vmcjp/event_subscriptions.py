@@ -53,7 +53,7 @@ def check_user(event):
 
 def lambda_handler(event, context):
     params = json.loads(event.get("body"))
-#    logging.info(params)
+    logging.info(event)
 
     if not is_token_valid(params):
         return format_response(
