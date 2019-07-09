@@ -51,7 +51,17 @@ def check_user(event):
             return True
     return True
 
+def is_retry_request(headers):
+    if "X-Slack-Retry-Reason" in headers:
+        return True
+    else:
+        return False
+
 def lambda_handler(event, context):
+    headers = json.loads(event.get("headers"))
+    if is_retry_request(headers):
+        return format_response(200, None)
+    
     params = json.loads(event.get("body"))
     logging.info(event)
 
