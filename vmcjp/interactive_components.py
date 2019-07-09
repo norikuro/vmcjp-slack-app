@@ -73,7 +73,17 @@ def is_token_valid(params):
         logger.error("Request token (%s) does not match expected", params["token"])
         return False
 
+def is_retry_request(headers):
+    if "X-Slack-Retry-Reason" in headers:
+        return True
+    else:
+        return False
+
 def lambda_handler(event, context):
+    headers = json.loads(event.get("headers"))
+    if is_retry_request(headers):
+        return format_response(200, None)
+    
     params = json.loads(
         parse_qs(event.get("body"))["payload"][0]
     )
