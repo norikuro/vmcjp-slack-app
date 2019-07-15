@@ -35,8 +35,8 @@ def format_response(status, text):
 
 def check_event(event):
     # We only support Direct Message to Slack App currently.
-    if event.get("type") == "event_callback":
-        if event.get("event").get("type") == "message" and event.get("event").get("channel_type") == "im":
+    if "event_callback" in event.get("type"):
+        if "message" in event.get("event").get("type") and "im" in event.get("event").get("channel_type"):
             return check_user(event)
     else:
         return False
