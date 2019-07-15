@@ -14,7 +14,7 @@ logger.setLevel(logging.INFO)
 
 def is_token_valid(event):
     if "token" in event:
-        if event.get("token") == EXPECTED_TOKEN:
+        if EXPECTED_TOKEN in event.get("token"):
             return True
     logger.error("Request token (%s) does not match expected", event.get("token"))
     return False
