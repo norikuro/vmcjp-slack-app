@@ -16,8 +16,8 @@ def is_token_valid(event):
     if "token" in event:
         if event.get("token") == EXPECTED_TOKEN:
             return True
-        logger.error("Request token (%s) does not match expected", event.get("token"))
-        return False
+    logger.error("Request token (%s) does not match expected", event.get("token"))
+    return False
 
 def format_response(status, text):
     if text is None:
