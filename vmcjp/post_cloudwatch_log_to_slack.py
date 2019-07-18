@@ -39,13 +39,8 @@ def lambda_handler(event, context):
         if "INFO" in logevent["message"]:
             str = payload["logEvents"][0]["message"]
             logging.info("!!!: " + str)
-            if "RuntimeWarning: Parent module" not in str:
-                logging.info("!! Runtime")
-                i = payload["logEvents"][0]["message"].find("{")
-                text = "logGroup: "+ payload["logGroup"] + ",  " + "message: " + str[:i] + ",  " + str[i:]
-                post_log(text)
-            elif "Found credentials in environment variables" not in str:
-                logging.info("!! Found")
+            if "RuntimeWarning: Parent module" not in str and "Found credentials in environment variables" not in str:
+                logging.info("!! aaaaa")
                 i = payload["logEvents"][0]["message"].find("{")
                 text = "logGroup: "+ payload["logGroup"] + ",  " + "message: " + str[:i] + ",  " + str[i:]
                 post_log(text)
