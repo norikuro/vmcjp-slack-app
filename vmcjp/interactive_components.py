@@ -7,7 +7,6 @@ from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
 BOT_OAUTH_TOKEN = os.environ["bot_token"]
-#POST_URL = "https://slack.com/api/chat.postMessage"
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -61,6 +60,7 @@ def is_retry_request(headers):
 def lambda_handler(event, context):
 #    logging.info(params)
     headers = event.get("headers")
+    
     if is_retry_request(headers):
         return format_response(200, None)
     
