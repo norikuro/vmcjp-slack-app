@@ -11,7 +11,7 @@ BOT_OAUTH_TOKEN = os.environ["bot_token"]
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
 
-def command_handler(params):
+def set_data_and_call_lambda(params):
     data = {
         "callback_id": params["callback_id"],
         "slack_token": params["token"],
@@ -75,4 +75,4 @@ def lambda_handler(event, context):
             "token is invalid"
         )
     
-    return command_handler(params)
+    return set_data_and_call_lambda(params)
