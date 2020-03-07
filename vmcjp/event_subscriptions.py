@@ -1,6 +1,6 @@
 import json
 import os
-import logging
+#import logging
 
 from vmcjp.utils.lambdautils import call_lambda
 
@@ -9,8 +9,8 @@ BOT_OAUTH_TOKEN = os.environ["bot_token"]
 #BOT_USER = os.environ["bot_user"]
 POST_URL = "https://slack.com/api/chat.postMessage"
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 def is_token_valid(event):
     if "token" in event:
