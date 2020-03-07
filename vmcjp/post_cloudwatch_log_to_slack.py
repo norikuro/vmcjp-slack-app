@@ -5,8 +5,8 @@ import urllib
 import gzip
 import base64
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+#logger = logging.getLogger()
+#logger.setLevel(logging.INFO)
 
 WEBHOOK_URL = os.environ["webhook_url"]
 
