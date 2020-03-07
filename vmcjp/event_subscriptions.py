@@ -62,13 +62,16 @@ def lambda_handler(event, context):
         return format_response(200, None)
     
     params = json.loads(event.get("body"))
+    
     if not is_token_valid(params):
         return format_response(
             200, 
             "token is invalid"
         )
+    
     if "challenge" in params:
         return {"challenge": params.get("challenge")}
+    
     if check_event(params):
 #        logging.info(params)
         data = {
@@ -82,4 +85,5 @@ def lambda_handler(event, context):
         }
         call_lambda("slack_session", data)
         return format_response(200, None)
+    
     return format_response(200, None)
