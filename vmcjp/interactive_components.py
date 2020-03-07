@@ -6,7 +6,7 @@ from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
-BOT_OAUTH_TOKEN = os.environ["bot_token"]
+#BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
