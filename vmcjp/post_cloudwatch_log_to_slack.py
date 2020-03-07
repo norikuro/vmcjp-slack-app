@@ -27,7 +27,6 @@ def post_log(text):
     )
     
     response = urllib.request.urlopen(request)
-#    response = post(url, data)
 #    logging.info(response.read())
 
 # Python 3.6 runtime is needed.
@@ -48,4 +47,3 @@ def lambda_handler(event, context):
             str = logevent["message"]
             post_log(str)
 #    logging.info(event)
-#    post_log(payload)
