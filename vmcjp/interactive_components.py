@@ -17,7 +17,7 @@ def set_data_and_call_lambda(params):
         "slack_token": params["token"],
         "channel": params["channel"]["id"],
         "user_id": params["user"]["id"],
-        "bot_token" :BOT_OAUTH_TOKEN,
+#        "bot_token" :BOT_OAUTH_TOKEN,
         "response_url": params["response_url"],
         "response": params["actions"][0]["value"]
         if 
