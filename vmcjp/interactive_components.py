@@ -6,7 +6,6 @@ from urlparse import parse_qs
 from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
-#BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -17,7 +16,6 @@ def set_data_and_call_lambda(params):
         "slack_token": params["token"],
         "channel": params["channel"]["id"],
         "user_id": params["user"]["id"],
-#        "bot_token" :BOT_OAUTH_TOKEN,
         "response_url": params["response_url"],
         "response": params["actions"][0]["value"]
         if 
