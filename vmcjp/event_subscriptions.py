@@ -5,7 +5,6 @@ import os
 from vmcjp.utils.lambdautils import call_lambda
 
 EXPECTED_TOKEN = os.environ["token"]
-#BOT_OAUTH_TOKEN = os.environ["bot_token"]
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -78,8 +77,7 @@ def lambda_handler(event, context):
             "slack_token": params["token"],
             "channel": params["event"]["channel"],
             "text": params["event"]["text"],
-            "user_id": params["event"]["user"],
-#            "bot_token": BOT_OAUTH_TOKEN,
+            "user_id": params["event"]["user"]
         }
         call_lambda("slack_session", data)
         return format_response(200, None)
