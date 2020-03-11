@@ -79,7 +79,7 @@ def lambda_handler(event, context):
             "text": params["event"]["text"],
             "user_id": params["event"]["user"]
         }
-        call_lambda("slack_session", data)
+#        call_lambda("slack_session", data)
         return format_response(200, None)
     
     return format_response(200, None)
