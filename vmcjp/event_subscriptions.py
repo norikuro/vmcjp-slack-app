@@ -5,7 +5,6 @@ import os
 from vmcjp.utils import constant
 from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils.lambdautils import call_lambda
-from vmcjp.slack_session import session_handler
 
 EXPECTED_TOKEN = os.environ["token"]
 
