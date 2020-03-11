@@ -74,14 +74,24 @@ def lambda_handler(event, context):
     
     if check_event(params):
 #        logging.info(params)
+        
+        f = json.load(open(constant.S3_CONFIG, 'r'))
+        j = read_json_from_s3(f["bucket"], f["config"])
+        
         data = {
             "slack_token": params["token"],
             "channel": params["event"]["channel"],
             "text": params["event"]["text"],
-            "user_id": params["event"]["user"]
+            "user_id": params["event"]["user"],
+            "db_url": j.get("db_url"),
+            "aws_internal_account": os.environ["aws_account"], #for internal use
+            "aws_internal_id": os.environ["aws_id"], #for internal use
+            "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
+            "webhook_url": j.get("webhook_url"),
+            "bot_token": j.get("bot_token")
         }
 #        call_lambda("slack_session", data)
-        session_handler(data)
+        call_lambda("event_handler", event)
         return format_response(200, None)
     
     return format_response(200, None)
