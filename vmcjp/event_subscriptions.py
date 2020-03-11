@@ -3,6 +3,7 @@ import os
 #import logging
 
 from vmcjp.utils.lambdautils import call_lambda
+from vmcjp.slack_session import session_handler
 
 EXPECTED_TOKEN = os.environ["token"]
 
@@ -80,6 +81,7 @@ def lambda_handler(event, context):
             "user_id": params["event"]["user"]
         }
 #        call_lambda("slack_session", data)
+        session_handler(data)
         return format_response(200, None)
     
     return format_response(200, None)
