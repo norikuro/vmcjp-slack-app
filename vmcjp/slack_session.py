@@ -12,7 +12,8 @@ from vmcjp.slack.interactive2 import interactive_handler
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
 
-def lambda_handler(event, context):
+#def lambda_handler(event, context):
+def session_handler(event, context):
 #    logging.info(event)
     f = json.load(open(constant.S3_CONFIG, 'r'))
     j = read_json_from_s3(f["bucket"], f["config"])
