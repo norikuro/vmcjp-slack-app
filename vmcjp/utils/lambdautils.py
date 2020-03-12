@@ -13,3 +13,27 @@ def call_lambda(function, data):
         InvocationType="Event",
         Payload=json.dumps(data)
     )
+
+def call_lambda_async(function, data):
+    s = Session()
+    clientLambda = s.create_client(
+        "lambda", 
+        config=Config(retries={'max_attempts': 0})
+    )
+    clientLambda.invoke(
+        FunctionName=function,
+        InvocationType="Event",
+        Payload=json.dumps(data)
+    )
+
+def call_lambda_sync(function, data):
+    s = Session()
+    clientLambda = s.create_client(
+        "lambda", 
+        config=Config(retries={'max_attempts': 0})
+    )
+    clientLambda.invoke(
+        FunctionName=function,
+        InvocationType="RequestResponse",
+        Payload=json.dumps(data)
+    )
