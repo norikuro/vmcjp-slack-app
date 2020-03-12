@@ -41,10 +41,11 @@ def check_event(event):
         return False
 
 def check_user(event):
-    if event["event"].has_key("subtype"):
-        if "bot_message" in event.get("event").get("subtype"):
+    data = event.get("event")
+    if "subtype" in data:
+        if "bot_message" in data.get("subtype"):
             return False
-        elif "message_changed" in event.get("event").get("subtype"):
+        elif "message_changed" in data.get("subtype"):
             return False
         else:
             return True
