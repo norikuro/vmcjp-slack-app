@@ -92,7 +92,7 @@ def lambda_handler(event, context):
             "bot_token": j.get("bot_token")
         }
 #        call_lambda_async("slack_session", data)
-        call_lambda_async("event_handler", data)
+        call_lambda_async("slack_event", data)
         return format_response(200, None)
     
     return format_response(200, None)
