@@ -1,6 +1,6 @@
 import json
 import os
-#import logging
+import logging
 
 from vmcjp.utils import constant
 from vmcjp.utils.s3utils import read_json_from_s3
@@ -8,8 +8,8 @@ from vmcjp.utils.lambdautils import call_lambda_async
 
 EXPECTED_TOKEN = os.environ["token"]
 
-#logger = logging.getLogger()
-#logger.setLevel(logging.INFO)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def is_token_valid(event):
     if "token" in event:
@@ -57,7 +57,7 @@ def is_retry_request(headers):
         return False
 
 def lambda_handler(event, context):
-#    logging.info(event)
+    logging.info(event)
     headers = event.get("headers")
     if is_retry_request(headers):
         return format_response(200, None)
