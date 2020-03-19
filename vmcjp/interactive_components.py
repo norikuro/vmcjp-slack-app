@@ -3,6 +3,8 @@ import os
 #import logging
 
 from urlparse import parse_qs
+from vmcjp.utils import constant
+from vmcjp.utils.s3utils import read_json_from_s3
 from vmcjp.utils.lambdautils import call_lambda_async
 
 EXPECTED_TOKEN = os.environ["token"]
@@ -11,6 +13,9 @@ EXPECTED_TOKEN = os.environ["token"]
 #logger.setLevel(logging.INFO)
 
 def set_data_and_call_lambda(params):
+    f = json.load(open(constant.S3_CONFIG, 'r'))
+    j = read_json_from_s3(f["bucket"], f["config"])
+    
     data = {
         "callback_id": params["callback_id"],
         "slack_token": params["token"],
