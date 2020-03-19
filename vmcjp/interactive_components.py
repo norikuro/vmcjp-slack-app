@@ -3,7 +3,7 @@ import os
 #import logging
 
 from urlparse import parse_qs
-from vmcjp.utils.lambdautils import call_lambda
+from vmcjp.utils.lambdautils import call_lambda_async
 
 EXPECTED_TOKEN = os.environ["token"]
 
