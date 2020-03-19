@@ -23,7 +23,8 @@ def set_data_and_call_lambda(params):
         else 
         params["actions"][0]["selected_options"][0]["value"]
     }
-    call_lambda("slack_session", data)
+#    call_lambda("slack_session", data)
+    call_lambda_async("slack_interactive", data)
     return format_response(200, None)
 
 def format_response(status, text):
