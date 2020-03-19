@@ -17,6 +17,7 @@ def set_data_and_call_lambda(params):
     j = read_json_from_s3(f["bucket"], f["config"])
     
     data = {
+        "db_url": j.get("db_url"),
         "callback_id": params["callback_id"],
         "slack_token": params["token"],
         "channel": params["channel"]["id"],
