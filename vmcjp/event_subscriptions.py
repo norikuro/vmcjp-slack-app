@@ -87,10 +87,10 @@ def lambda_handler(event, context):
             "user_id": params["event"]["user"],
             "db_url": j.get("db_url"),
             "bot_token": j.get("bot_token"),
-            "aws_internal_account": os.environ["aws_account"], #for internal use
-            "aws_internal_id": os.environ["aws_id"], #for internal use
+            "webhook_url": j.get("webhook_url"),
             "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
-            "webhook_url": j.get("webhook_url")
+            "aws_internal_account": os.environ["aws_account"], #for internal use
+            "aws_internal_id": os.environ["aws_id"] #for internal use
         }
 #        call_lambda_async("slack_session", data)
         call_lambda_async("slack_event", data)
