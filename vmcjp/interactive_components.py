@@ -17,14 +17,14 @@ def set_data_and_call_lambda(params):
     j = read_json_from_s3(f["bucket"], f["config"])
     
     data = {
-        "aws_internal_account": os.environ["aws_account"], #for internal use
-        "aws_internal_id": os.environ["aws_id"], #for internal use
-#        "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
-        "db_url": j.get("db_url"),
-        "callback_id": params["callback_id"],
         "slack_token": params["token"],
         "channel": params["channel"]["id"],
         "user_id": params["user"]["id"],
+        "db_url": j.get("db_url"),
+        "aws_internal_account": os.environ["aws_account"], #for internal use
+        "aws_internal_id": os.environ["aws_id"], #for internal use
+#        "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
+        "callback_id": params["callback_id"],
         "response_url": params["response_url"],
         "response": params["actions"][0]["value"]
         if 
