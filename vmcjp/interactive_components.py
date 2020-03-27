@@ -22,9 +22,9 @@ def set_data_and_call_lambda(params):
         "user_id": params["user"]["id"],
         "db_url": j.get("db_url"),
         "bot_token": j.get("bot_token"),
+        "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
         "aws_internal_account": os.environ["aws_account"], #for internal use
         "aws_internal_id": os.environ["aws_id"], #for internal use
-        "cloudwatch_account": j.get("cloudwatch_account"), #for internal use
         "callback_id": params["callback_id"],
         "response_url": params["response_url"],
         "response": params["actions"][0]["value"]
